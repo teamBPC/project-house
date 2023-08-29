@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "Pretendard";
+    font-style: normal;
+    font-weight: 400;
+    src: url("./assets/font/url/Pretendard-Regular.woff2") format("woff2"),
+      url("./assets/font/url/Pretendard-Regular.woff") format("woff"),
+      url("./assets/font/url/Pretendard-Regular.otf") format("opentype");
+}
+@layer base {
+  html {
+    font-family: 'Pretendard', sans-serif;
+  }
+  /* 스크롤바 트랙 색상 */
+  ::-webkit-scrollbar {
+    width: 0.3rem;
+  }
+
+  /* 스크롤바 트랙 색상 */
+  ::-webkit-scrollbar-track {
+    display: none;
+  }
+
+  /* 스크롤바 썸네일 색상 */
+  ::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+  }
+
+  /* 스크롤바 버튼 색상 */
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+}

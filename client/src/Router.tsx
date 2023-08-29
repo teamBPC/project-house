@@ -17,19 +17,21 @@ function Router() {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Header />
-      <SideBar />
-      <Suspense fallback={<></>}>
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/projects" element={<Projects />}></Route>
-          <Route path="/profile" element={<Profile />}></Route>
-          <Route path="/login-id" element={<LoginID />}></Route>
-          <Route path="/login-pw" element={<LoginPW />}></Route>
-          <Route path="/join-id" element={<JoinID />}></Route>
-          <Route path="/join-name" element={<JoinName />}></Route>
-          <Route path="/join-pw" element={<JoinPW />}></Route>
-        </Routes>
-      </Suspense>
+      <div className="flex">
+        <SideBar />
+        <Suspense fallback={<></>}>
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="projects" element={<Projects />}></Route>
+            <Route path="profile" element={<Profile />}></Route>
+            <Route path="login-id" element={<LoginID />}></Route>
+            <Route path="login-pw" element={<LoginPW />}></Route>
+            <Route path="join-id" element={<JoinID />}></Route>
+            <Route path="join-name" element={<JoinName />}></Route>
+            <Route path="join-pw" element={<JoinPW />}></Route>
+          </Routes>
+        </Suspense>
+      </div>
     </BrowserRouter>
   );
 }
