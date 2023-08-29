@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { cls } from "../libs/utils";
 
@@ -10,12 +10,12 @@ function SideBar() {
   };
 
   const { pathname } = useLocation();
-  if (pathname.includes("join") || pathname.includes("login")) return null;
+  if (!pathname.includes("projects")) return null;
 
   return (
     <aside
       id="logo-sidebar"
-      className="fixed left-0 z-40 flex flex-col w-64 h-full transition-transform -translate-x-full bg-white border-t border-r border-gray-200 top-12 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+      className="flex flex-col h-full min-h-[calc(100vh-3.1rem)] transition-transform -translate-x-full bg-white border-r border-gray-200 w-96 top-12 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
       aria-label="Sidebar"
     >
       <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
@@ -48,14 +48,16 @@ function SideBar() {
           </li>
         </ul>
       </div>
-      {activeTab ? (
-        <div>
-          프로젝트 별로 누가 언제 어던 프로젝트 수정했는지 (ex. 구글 공유
-          드라이브)
-        </div>
-      ) : (
-        <div>프로젝트 구조 (ex. vscode 탐색기)</div>
-      )}
+      <div>
+        {activeTab ? (
+          <div>
+            프로젝트 별로 누가 언제 어던 프로젝트 수정했는지 (ex. 구글 공유
+            드라이브)
+          </div>
+        ) : (
+          <div>프로젝트 구조 (ex. vscode 탐색기)</div>
+        )}
+      </div>
     </aside>
   );
 }
