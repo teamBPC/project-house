@@ -1,7 +1,17 @@
-import { Draggable, Droppable } from "react-beautiful-dnd";
+import { Draggable, DraggingStyle, Droppable, NotDraggingStyle } from "react-beautiful-dnd";
 import Cards from "./Cards";
 import { IBoardProps } from "../../interface/kanban";
 
+function getStyle(style: DraggingStyle | NotDraggingStyle) {
+	if (style?.transform) {
+		const axisLockX = `${style.transform.split(",").shift()}, 0px)`;
+		return {
+			...style,
+			transform: axisLockX,
+		};
+	}
+	return style;
+}
 function Boards({ board, index }: IBoardProps) {
   return (
     <Draggable draggableId={board.id + "-board"} index={index} key={board.id}>
@@ -9,6 +19,7 @@ function Boards({ board, index }: IBoardProps) {
         <div
           ref={provided.innerRef}
           {...provided.draggableProps}
+          style={getStyle(provided.draggableProps.style!)}
           className="border hover:border-gray-200 bg-gray-100 w-80 max-h-[calc(100vh-6.1rem)] overflow-x-hidden rounded-lg shadow-md p-1"
         >
           <div
@@ -22,7 +33,7 @@ function Boards({ board, index }: IBoardProps) {
               <ul
                 ref={provided.innerRef}
                 {...provided.droppableProps}
-                className="flex flex-col w-full h-full p-1 overflow-y-scroll"
+                className="flex flex-col w-full h-full p-1"
               >
                 {board.todos.length === 0 ? (
                   <span>Board가 비어있습니다.</span>
