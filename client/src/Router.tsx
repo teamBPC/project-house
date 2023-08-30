@@ -11,7 +11,6 @@ import Profile from "./pages/profile/Profile";
 import SideBar from "./components/SideBar";
 import Projects from "./pages/projects/Projects";
 
-// const Header = lazy(() => import("./components/header/Header"));
 
 function Router() {
   return (
