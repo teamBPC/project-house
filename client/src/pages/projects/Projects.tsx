@@ -1,3 +1,4 @@
+import React from "react";
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -86,4 +87,4 @@ function Projects() {
   );
 }
 
-export default Projects;
+export default React.memo(Projects);
