@@ -13,6 +13,14 @@ import { boardsRedux } from "../../redux/boardsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Tasks from "./Task";
 import CreateBoardModal from "./CreateBoardModal";
+import CreateTaskModal from "./CreateTaskModal";
+import BoardBtns from "../../components/BoardBtns";
+import DeleteBoardModal from "./DeleteBoardModal";
+
+export interface ModalState {
+  createModalOpen: boolean;
+  deleteModalOpen: boolean;
+}
 
 function getStyle(style: DraggingStyle | NotDraggingStyle) {
   if (style?.transform) {
@@ -27,6 +35,12 @@ function getStyle(style: DraggingStyle | NotDraggingStyle) {
 function Boards() {
   const boardRef = useRef<HTMLElement | null>(null);
   const [scrollPosition, setScrollPosition] = useState(true);
+  const craeteTaskBtnRef = useRef<HTMLButtonElement | null>(null);
+  const deleteBoardBtnRef = useRef<HTMLButtonElement | null>(null);
+  const [modalState, setModalState] = useState<ModalState>({
+    createModalOpen: false,
+    deleteModalOpen: false,
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,7 +65,6 @@ function Boards() {
   });
   const dispatch = useDispatch();
   const onDragEnd = ({ draggableId, destination, source }: DropResult) => {
-    console.log(draggableId, destination, source);
     if (destination) {
       if (source.droppableId.includes("board")) {
         if (source.index === destination.index) return;
@@ -103,11 +116,12 @@ function Boards() {
       return;
     }
   };
+
   return (
     <>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="board" direction="horizontal" type="board">
-          {(provided, snapshot) => (
+          {(provided) => (
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
@@ -119,7 +133,7 @@ function Boards() {
                   index={index}
                   key={board.id}
                 >
-                  {(provided, snapshot) => (
+                  {(provided) => (
                     <div
                       ref={(element) => {
                         provided.innerRef(element);
@@ -141,24 +155,10 @@ function Boards() {
                           <span className="text-xl font-semibold ">
                             {board.title}
                           </span>
-                          <div className="flex items-center gap-1">
-                            <button className="flex">
-                              <span className="p-1 transition duration-100 ease-in-out rounded-md material-symbols-outlined hover:bg-gray-300">
-                                add
-                              </span>
-                            </button>
-                            <span
-                              className="p-1 transition duration-100 ease-in-out rounded-md material-symbols-outlined hover:bg-gray-300"
-                              {...provided.dragHandleProps}
-                            >
-                              drag_pan
-                            </span>
-                            <button className="flex">
-                              <span className="p-1 transition duration-100 ease-in-out rounded-md material-symbols-outlined hover:bg-gray-300">
-                                delete
-                              </span>
-                            </button>
-                          </div>
+                          <BoardBtns
+                            setModalState={setModalState}
+                            provided={provided}
+                          />
                         </div>
                         <div className="flex flex-col text-sm">
                           <span>생성: 2023년 9월 10일</span>
@@ -175,7 +175,17 @@ function Boards() {
           )}
         </Droppable>
       </DragDropContext>
+      <CreateTaskModal
+        modalState={modalState}
+        setModalState={setModalState}
+        createTaskBtnRef={craeteTaskBtnRef}
+      />
       <CreateBoardModal />
+      <DeleteBoardModal
+        modalState={modalState}
+        setModalState={setModalState}
+        deleteBoardBtnRef={deleteBoardBtnRef}
+      />
     </>
   );
 }

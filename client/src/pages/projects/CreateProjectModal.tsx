@@ -12,7 +12,7 @@ function CreateProjectModal() {
     setIsModalOpen(() => false);
   };
   useEffect(() => {
-    const handleOutsideClick = (event: MouseEvent) => {
+    const outsideClickHandle = (event: MouseEvent) => {
       if (
         modalRef.current &&
         !modalRef.current.contains(event.target as Node) &&
@@ -23,12 +23,13 @@ function CreateProjectModal() {
       }
     };
     if (isModalOpen) {
-      document.addEventListener("mousedown", handleOutsideClick);
+      document.addEventListener("mousedown", outsideClickHandle);
     }
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("mousedown", outsideClickHandle);
     };
   }, [isModalOpen]);
+  
   return (
     <>
       <div className="fixed z-50 bottom-4 right-4">
@@ -71,7 +72,7 @@ function CreateProjectModal() {
             </button>
             <div className="px-6 py-6 lg:px-8">
               <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-                Sign in to our platform
+                새 프로젝트 생성하기
               </h3>
               <form className="space-y-6" action="#">
                 <div>
