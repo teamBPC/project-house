@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id     String    @id
+  user_pw     String
+  user_nm     String
+  user_email  String
+  user_status String
+  createdDt   DateTime  @default(now())
+  updateDt    DateTime? @updatedAt
+}
+
+model Projects {
+  project_idx  Int       @id @default(autoincrement())
+  project_nm   String
+  project_desc String?
+  createdDt    DateTime  @default(now())
+  updateDt     DateTime? @updatedAt
+}
+
+model ProjectUser {
+  project_uidx Int    @id @default(autoincrement())
+  user_id      String
+  project_idx  Int
+  user_auth    String
+}
+
+model Table {
+  table_idx   Int       @id @default(autoincrement())
+  project_idx Int
+  table_nm    String
+  table_desc  String?
+  createdDt   DateTime  @default(now())
+  updateDt    DateTime? @updatedAt
+}
+
+model Task {
+  task_idx    Int       @id @default(autoincrement())
+  table_idx   Int
+  project_idx Int
+  task_nm     String
+  task_desc   String?
+  task_sdate  DateTime?
+  task_edate  DateTime?
+  task_status String?
+  task_user   String
+  task_prior  String?
+  createdDt   DateTime  @default(now())
+  updateDt    DateTime? @updatedAt
+}
+
+model Attachment {
+  att_idx    Int      @id @default(autoincrement())
+  task_idx   Int
+  att_path   String
+  att_orgin  String
+  att_sys    String
+  att_size   String
+  createUser String
+  createDt   DateTime @default(now())
+}
+
+model TaskReply {
+  treply_idx  Int      @id @default(autoincrement())
+  task_idx    Int
+  treply_cont String?
+  createUser  String
+  createDt    DateTime @default(now())
+}
