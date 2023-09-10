@@ -1,11 +1,8 @@
-import ProfileEdit from "./ProfileEdit";
+import EditProfileModal from "./EditProfileModal";
 import { useState } from "react";
 
 function Profile() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const modalHandle = () => {
-    setIsModalOpen(true);
-  };
+
   return (
     <div className="w-screen">
       <div className="flex flex-col items-center ">
@@ -27,14 +24,7 @@ function Profile() {
         <div>이름</div>
         <div>웹사이트</div>
         <div>참여한 프로젝트</div>
-        <button
-          onClick={() => modalHandle()}
-          className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          type="button"
-        >
-          Toggle modal
-        </button>
-        <ProfileEdit setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen}/>
+        <EditProfileModal />
       </div>
     </div>
   );

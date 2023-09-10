@@ -18,7 +18,11 @@ function Header() {
   if (pathname.includes("join") || pathname.includes("login")) return null;
 
   return (
+<<<<<<< HEAD
     <div className="w-full bg-white border-b border-gray-200  dark:bg-gray-900">
+=======
+    <div className="w-full bg-white border-b border-gray-200 dark:bg-gray-900">
+>>>>>>> 1350edb04dfe94cde0353e792bb3df2944aa32c3
       <div className="flex flex-wrap items-center justify-between px-4 py-2">
         <a href="#" className="flex items-center">
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
