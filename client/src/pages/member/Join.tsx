@@ -1,14 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { FieldErrors, useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { cls } from "../../libs/utils";
-
-interface JoinForm {
-  email: string;
-  name: string;
-  website: string;
-  password: string;
-}
+import { JoinForm } from "../../interface/porfile";
 
 function Join() {
   const { register, handleSubmit } = useForm<JoinForm>();

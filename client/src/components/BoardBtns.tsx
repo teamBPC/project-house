@@ -1,11 +1,6 @@
-import { useRef, Dispatch, SetStateAction } from "react";
-import { ModalState } from "../pages/projects/Boards";
-import { DraggableProvided } from "react-beautiful-dnd";
+import { useRef } from "react";
+import { BoardBtnsProps, ModalState } from "../interface/kanban";
 
-interface BoardBtnsProps {
-  setModalState: Dispatch<SetStateAction<ModalState>>;
-  provided: DraggableProvided;
-}
 function BoardBtns({ setModalState, provided }: BoardBtnsProps) {
   const craeteTaskBtnRef = useRef<HTMLButtonElement | null>(null);
   const deleteBoardBtnRef = useRef<HTMLButtonElement | null>(null);

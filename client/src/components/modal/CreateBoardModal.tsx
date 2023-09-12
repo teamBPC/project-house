@@ -2,10 +2,9 @@ import { useRef, useEffect, useState } from "react";
 import { cls } from "../../libs/utils";
 import { FieldErrors, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { CreateBoardForm } from "../../interface/modal";
 
-interface CreateBoardForm {
-  boardName: string;
-}
+
 
 function CreateBoardModal() {
   const { register, handleSubmit, reset } = useForm<CreateBoardForm>();

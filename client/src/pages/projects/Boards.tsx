@@ -7,21 +7,15 @@ import {
   Droppable,
   NotDraggingStyle,
 } from "react-beautiful-dnd";
-import { IBoards } from "../../interface/kanban";
+import { IBoards, ModalState } from "../../interface/kanban";
 import { cls } from "../../libs/utils";
 import { boardsRedux } from "../../redux/boardsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Tasks from "./Task";
-import CreateBoardModal from "./CreateBoardModal";
-import CreateTaskModal from "./CreateTaskModal";
 import BoardBtns from "../../components/BoardBtns";
-import DeleteBoardModal from "./DeleteBoardModal";
-import SideBar from "../../components/SideBar";
-
-export interface ModalState {
-  createModalOpen: boolean;
-  deleteModalOpen: boolean;
-}
+import CreateTaskModal from "../../components/modal/CreateTaskModal";
+import CreateBoardModal from "../../components/modal/CreateBoardModal";
+import DeleteBoardModal from "../../components/modal/DeleteBoardModal";
 
 function getStyle(style: DraggingStyle | NotDraggingStyle) {
   if (style?.transform) {
@@ -179,13 +173,13 @@ function Boards() {
       <CreateTaskModal
         modalState={modalState}
         setModalState={setModalState}
-        createTaskBtnRef={craeteTaskBtnRef}
+        btnRef={craeteTaskBtnRef}
       />
       <CreateBoardModal />
       <DeleteBoardModal
         modalState={modalState}
         setModalState={setModalState}
-        deleteBoardBtnRef={deleteBoardBtnRef}
+        btnRef={deleteBoardBtnRef}
       />
     </>
   );

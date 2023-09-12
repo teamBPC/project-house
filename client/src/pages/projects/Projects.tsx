@@ -1,6 +1,5 @@
 import React from "react";
-import CreateProjectModal from "./CreateProjectModal";
-import SideBar from "../../components/SideBar";
+import CreateProjectModal from "../../components/modal/CreateProjectModal";
 
 function Projects() {
   return (
