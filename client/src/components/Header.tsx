@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import { cls } from "../libs/utils";
 import { useState } from "react";
@@ -18,17 +18,13 @@ function Header() {
   if (pathname.includes("join") || pathname.includes("login")) return null;
 
   return (
-<<<<<<< HEAD
-    <div className="w-full bg-white border-b border-gray-200  dark:bg-gray-900">
-=======
     <div className="w-full bg-white border-b border-gray-200 dark:bg-gray-900">
->>>>>>> 1350edb04dfe94cde0353e792bb3df2944aa32c3
       <div className="flex flex-wrap items-center justify-between px-4 py-2">
-        <a href="#" className="flex items-center">
+        <Link to="/" className="flex items-center">
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             ProjectHouse
           </span>
-        </a>
+        </Link>
         <div className="relative flex items-center md:order-2">
           <div
             onMouseEnter={() => handleHover()}
@@ -75,12 +71,12 @@ function Header() {
               </div>
               <ul className="py-2" aria-labelledby="user-menu-button">
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to="profile"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
                     Dashboard
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a

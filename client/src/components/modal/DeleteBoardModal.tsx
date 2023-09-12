@@ -1,30 +1,10 @@
 import { FieldErrors, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import {
-  useState,
-  useRef,
-  useEffect,
-  Dispatch,
-  SetStateAction,
-  MutableRefObject,
-} from "react";
+import { useState, useRef, useEffect } from "react";
 import { cls } from "../../libs/utils";
-import { ModalState } from "./Boards";
+import { DeleteBoardForm, ModalProps } from "../../interface/modal";
 
-interface DeleteBoardForm {
-  boardName: string;
-}
-
-interface DeleteBoardModalProps {
-  modalState: ModalState;
-  setModalState: Dispatch<SetStateAction<ModalState>>;
-  deleteBoardBtnRef: MutableRefObject<HTMLButtonElement | null>;
-}
-function DeleteBoardModal({
-  modalState,
-  setModalState,
-  deleteBoardBtnRef,
-}: DeleteBoardModalProps) {
+function DeleteBoardModal({ modalState, setModalState, btnRef }: ModalProps) {
   const { register, handleSubmit, reset } = useForm<DeleteBoardForm>();
   const navigate = useNavigate();
   const onValid = (data: DeleteBoardForm) => {
@@ -48,8 +28,8 @@ function DeleteBoardModal({
       if (
         modalRef.current &&
         !modalRef.current.contains(event.target as Node) &&
-        deleteBoardBtnRef.current &&
-        !deleteBoardBtnRef.current.contains(event.target as Node)
+        btnRef.current &&
+        !btnRef.current.contains(event.target as Node)
       ) {
         cloesModalHandle();
       }

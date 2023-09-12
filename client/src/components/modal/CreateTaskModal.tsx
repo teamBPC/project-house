@@ -1,35 +1,11 @@
 import { FieldErrors, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import {
-  useState,
-  useRef,
-  useEffect,
-  Dispatch,
-  SetStateAction,
-  MutableRefObject,
-} from "react";
+import { useState, useRef, useEffect } from "react";
 import { cls } from "../../libs/utils";
-import { ModalState } from "./Boards";
 import DatePicker from "../../components/Datepicker";
+import { CreateTaskForm, ModalProps } from "../../interface/modal";
 
-export interface CreateTaskForm {
-  taskName: string;
-  manager: string;
-  priority: string;
-  start: string;
-  end: string;
-  description: string;
-}
-interface CreateTaskModalProps {
-  modalState: ModalState;
-  setModalState: Dispatch<SetStateAction<ModalState>>;
-  createTaskBtnRef: MutableRefObject<HTMLButtonElement | null>;
-}
-function CreateTaskModal({
-  modalState,
-  setModalState,
-  createTaskBtnRef,
-}: CreateTaskModalProps) {
+function CreateTaskModal({ modalState, setModalState, btnRef }: ModalProps) {
   const { register, handleSubmit, reset } = useForm<CreateTaskForm>();
   const navigate = useNavigate();
   const onValid = (data: CreateTaskForm) => {
@@ -53,8 +29,8 @@ function CreateTaskModal({
       if (
         modalRef.current &&
         !modalRef.current.contains(event.target as Node) &&
-        createTaskBtnRef.current &&
-        !createTaskBtnRef.current.contains(event.target as Node)
+        btnRef.current &&
+        !btnRef.current.contains(event.target as Node)
       ) {
         cloesModalHandle();
       }
