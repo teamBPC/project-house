@@ -1,10 +1,11 @@
 import React from "react";
 import CreateProjectModal from "./CreateProjectModal";
+import SideBar from "../../components/SideBar";
 
 function Projects() {
   return (
     <>
-      <div className="grid grid-cols-3 gap-4 ">
+      <div className="grid grid-cols-3 gap-4 p-4">
         <div>
           <a
             href="#"

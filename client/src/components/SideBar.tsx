@@ -17,8 +17,7 @@ function SideBar() {
   return (
     <div
       id="logo-sidebar"
-      className=" min-h-[calc(100vh-3.1rem)]  bg-white  border-r border-gray-200  dark:bg-gray-800 dark:border-gray-700"
-      style={{ width: "308px !important" }}
+      className="bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 min-w-[308px] min-h-[calc(100vh-3.1rem)]"
       aria-label="Sidebar"
     >
       <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">

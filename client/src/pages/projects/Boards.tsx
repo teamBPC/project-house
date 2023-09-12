@@ -16,6 +16,7 @@ import CreateBoardModal from "./CreateBoardModal";
 import CreateTaskModal from "./CreateTaskModal";
 import BoardBtns from "../../components/BoardBtns";
 import DeleteBoardModal from "./DeleteBoardModal";
+import SideBar from "../../components/SideBar";
 
 export interface ModalState {
   createModalOpen: boolean;
@@ -125,7 +126,7 @@ function Boards() {
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
-              className="flex items-start justify-start gap-2 min-w-max"
+              className="flex items-start justify-start gap-2 p-4 overflow-x-auto max-w"
             >
               {boards.map((board, index) => (
                 <Draggable
@@ -141,7 +142,7 @@ function Boards() {
                       }}
                       {...provided.draggableProps}
                       style={getStyle(provided.draggableProps.style!)}
-                      className="border hover:border-gray-200 bg-gray-100 w-96 max-h-[calc(100vh-6.1rem)] overflow-x-hidden rounded-lg shadow-md"
+                      className="border hover:border-gray-200 bg-gray-100 max-h-[calc(100vh-6.1rem)] overflow-x-hidden rounded-lg shadow-md min-w-[24rem] max-w-[24rem]"
                     >
                       <div
                         className={cls(
