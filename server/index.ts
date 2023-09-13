@@ -1,6 +1,6 @@
-const express = require('express');
-const cors = require('cors');
-const { Request, Response } = require('express');
+import express, { Request, Response } from "express";
+import cors from 'cors';
+import loginRouter from "./routes/login";
 //import dotenv from 'dotenv';
 
 //const config = dotenv.config();
@@ -17,6 +17,5 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use("/login", loginRouter);
-app.use("/", mainRouter);
 
-app.listen(8066)
+app.listen(3000)

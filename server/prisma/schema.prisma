@@ -13,6 +13,7 @@ datasource db {
 model User {
   user_id     String    @id
   user_pw     String
+  user_pwHash String
   user_nm     String
   user_email  String
   user_status String
