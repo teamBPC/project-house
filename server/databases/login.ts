@@ -3,19 +3,30 @@ import { User } from "../model/userVO";
 import util from "util";
 import crypto from "crypto";
 
-// 사용자 로그인 
-export async function loginCheck(importUser: User) {
+// 사용자 로그인 ID
+export async function loginCheckId(importUser: User) {
     const prisma = new PrismaClient();
     const user = await prisma.user.findMany({
         where: {
-            user_id: importUser.userId
+            user_email: importUser.userEmail
         }
     });
-
-    if (!user) {
+    console.log(user)
+    if (user.length == 0) {
         console.log("존재하지 않는 아이디입니다.");
         return false;
     }
+    return true;
+}
+
+// 사용자 로그인 PW
+export async function loginCheckPw(importUser: User) {
+    const prisma = new PrismaClient();
+    const user = await prisma.user.findMany({
+        where: {
+            user_email: importUser.userEmail
+        }
+    });
 
     const vertified = await verifyPassword(importUser.userPw, user[0].user_pwHash, user[0].user_pw);
 
@@ -34,10 +45,9 @@ export async function joinUs(User: User) {
     const prisma = new PrismaClient();
     const result = await prisma.user.create({
         data: {
-            user_id: User.userId,
+            user_email: User.userEmail,
             user_pw: pwData.hashedPassword,
             user_pwHash: pwData.salt,
-            user_email: User.userEmail,
             user_nm: User.userNm,
             user_status: "4"
         },
@@ -52,7 +62,7 @@ export async function changePw(User: User) {
     const prisma = new PrismaClient();
     const result = await prisma.user.update({
         where: {
-            user_id: User.userId,
+            user_email: User.userEmail,
         },
         data: {
             user_pw: pwData.hashedPassword,
@@ -70,7 +80,7 @@ export async function changePwRan(User: User) {
     const prisma = new PrismaClient();
     const result = await prisma.user.update({
         where: {
-            user_id: User.userId,
+            user_email: User.userEmail,
         },
         data: {
             user_pw: pwData.hashedPassword,
@@ -85,7 +95,7 @@ export async function checkId(User: User) {
     const prisma = new PrismaClient();
     const result = await prisma.user.findMany({
         where: {
-            user_id: User.userId,
+            user_email: User.userEmail,
         }
     });
     if (result.length !== 0) return true;
