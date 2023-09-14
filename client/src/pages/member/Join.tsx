@@ -3,6 +3,7 @@ import { FieldErrors, useForm } from "react-hook-form";
 import { useState } from "react";
 import { cls } from "../../libs/utils";
 import { JoinForm } from "../../interface/porfile";
+import sendData from "../../libs/sendData";
 
 function Join() {
   const { register, handleSubmit } = useForm<JoinForm>();
@@ -12,9 +13,26 @@ function Join() {
   const handleTogglePassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
-  const onValid = (data: JoinForm) => {
-    console.log(data);
-    navigate("/");
+  const onValid = async (data: JoinForm) => {
+    const userData = {
+      userId: data.email,
+      userPw: data.email,
+      userNm: data.name,
+      userEmail: data.email,
+      userStatus: "4",
+    };
+    // await sendData(
+    //       "http://localhost:3001/login/joinTo",
+    //       userData
+    //     );
+    await fetch("http://localhost:3001/login/join", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+    // navigate("/");
   };
   const [emailError, setEmailError] = useState<string | null>(null);
   const [nameError, setNameError] = useState<string | null>(null);
@@ -33,12 +51,12 @@ function Join() {
     }
     if (error.name) {
       if (error.name.type === "maxLength") {
-        setPasswordError("이름은 10글자 이하이어야 합니다.");
+        setNameError("이름은 10글자 이하이어야 합니다.");
       } else {
-        setPasswordError(null);
+        setNameError(null);
       }
     } else {
-      setPasswordError(null);
+      setNameError(null);
     }
     if (error.password) {
       if (error.password.type === "minLength") {
@@ -49,7 +67,7 @@ function Join() {
         setPasswordError(null);
       }
     } else {
-      setNameError(null);
+      setPasswordError(null);
     }
   };
   return (
@@ -84,8 +102,8 @@ function Join() {
               className={cls(
                 "bg-gray-50   border text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white",
                 emailError
-                  ? "border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500 focus:outline-red-500 focus:ring-red-500 focus:border-red-500"
-                  : "border-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-blue-500 focus:ring-blue-500 focus:border-blue-500"
+                  ? "border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500 focus:ring-red-500 focus:border-red-500"
+                  : "border-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:ring-blue-500 focus:border-blue-500"
               )}
               required
             />
@@ -115,8 +133,8 @@ function Join() {
                 className={cls(
                   "bg-gray-50   border text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white",
                   nameError
-                    ? "border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500 focus:outline-red-500 focus:ring-red-500 focus:border-red-500"
-                    : "border-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-blue-500 focus:ring-blue-500 focus:border-blue-500"
+                    ? "border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500 focus:ring-red-500 focus:border-red-500"
+                    : "border-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500  focus:ring-blue-500 focus:border-blue-500"
                 )}
                 required
               />
@@ -150,8 +168,8 @@ function Join() {
                   className={cls(
                     "bg-gray-50   border text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white",
                     passwordError
-                      ? "border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500 focus:outline-red-500 focus:ring-red-500 focus:border-red-500"
-                      : "border-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-blue-500 focus:ring-blue-500 focus:border-blue-500"
+                      ? "border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500 focus:ring-red-500 focus:border-red-500"
+                      : "border-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:ring-blue-500 focus:border-blue-500"
                   )}
                   required
                 />
@@ -189,12 +207,12 @@ function Join() {
               type="url"
               id="website"
               {...register("website", { required: false })}
-              className="bg-gray-50 border text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white border-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-blue-500 focus:ring-blue-500 focus:border-blue-500"
+              className="bg-gray-50 border text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white border-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500  focus:ring-blue-500 "
             />
           </div>
           <button
             type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4  focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Submit
           </button>
