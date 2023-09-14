@@ -5,7 +5,7 @@ export interface CreateBoardForm {
   boardName: string;
 }
 export interface CreateTaskForm {
-  taskName: string;
+  title: string;
   manager: string;
   priority: string;
   start: string;

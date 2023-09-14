@@ -14,24 +14,23 @@ function Join() {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
   const onValid = async (data: JoinForm) => {
-    const userData = {
-      userId: data.email,
-      userPw: data.email,
-      userNm: data.name,
-      userEmail: data.email,
-      userStatus: "4",
+    const dataCustomer = {
+      userId: data.userEmail,
+      userPw: data.userPw,
+      userNm: data.userNm,
+      userEmail: data.userEmail,
     };
-    // await sendData(
-    //       "http://localhost:3001/login/joinTo",
-    //       userData
-    //     );
-    await fetch("http://localhost:3001/login/join", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
+    await sendData(
+          "http://localhost:3001/login/join",
+          dataCustomer
+        );
+    // await fetch("http://localhost:3001/login/join", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(userData),
+    // });
     // navigate("/");
   };
   const [emailError, setEmailError] = useState<string | null>(null);
@@ -81,7 +80,7 @@ function Join() {
         <form onSubmit={handleSubmit(onValid, onInvalid)} className="w-full">
           <div className="mb-6">
             <label
-              htmlFor="email"
+              htmlFor="userEmail"
               className={cls(
                 "block mb-2 text-sm font-semibold",
                 emailError
@@ -92,9 +91,9 @@ function Join() {
               이메일
             </label>
             <input
-              id="email"
+              id="userEmail"
               type="text"
-              {...register("email", {
+              {...register("userEmail", {
                 required: true,
                 minLength: 15,
                 maxLength: 50,
@@ -116,7 +115,7 @@ function Join() {
           <div className="grid gap-6 md:grid-cols-2">
             <div>
               <label
-                htmlFor="name"
+                htmlFor="userNm"
                 className={cls(
                   "block mb-2 text-sm font-semibold",
                   nameError
@@ -127,9 +126,9 @@ function Join() {
                 이름
               </label>
               <input
-                id="name"
+                id="userNm"
                 type="text"
-                {...register("name", { required: true, maxLength: 10 })}
+                {...register("userNm", { required: true, maxLength: 10 })}
                 className={cls(
                   "bg-gray-50   border text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white",
                   nameError
@@ -146,7 +145,7 @@ function Join() {
             </div>
             <div className="mb-6 ">
               <label
-                htmlFor="password"
+                htmlFor="userPw"
                 className={cls(
                   "block mb-2 text-sm font-semibold",
                   passwordError
@@ -158,9 +157,9 @@ function Join() {
               </label>
               <div className="relative">
                 <input
-                  id="password"
+                  id="userPw"
                   type={showPassword ? "text" : "password"}
-                  {...register("password", {
+                  {...register("userPw", {
                     required: true,
                     minLength: 3,
                     maxLength: 30,

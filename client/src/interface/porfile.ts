@@ -1,8 +1,12 @@
+export interface LoginIdForm {
+  userId: string;
+}
+
 export interface JoinForm {
-  email: string;
-  name: string;
+  userEmail: string;
+  userNm: string;
+  userPw: string;
   website?: string;
-  password: string;
 }
 
 export interface ProfileForm {
