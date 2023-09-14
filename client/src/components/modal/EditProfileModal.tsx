@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { cls } from "../../libs/utils";
+import { ProfileForm } from "../../interface/porfile";
+import { useForm } from "react-hook-form";
 
 function ProfileEditModal() {
+  const { register, handleSubmit } = useForm<ProfileForm>();
+  const onValid = (data: ProfileForm) => {
+    console.log(data);
+    // navigate("/");
+  };
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModalHandle = () => {
     setIsModalOpen(() => true);
@@ -9,6 +16,13 @@ function ProfileEditModal() {
   const closeModalHandle = () => {
     setIsModalOpen(() => false);
   };
+
+  const [showPassword, setShowPassword] = useState(false);
+  const handleTogglePassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
+  const [passwordError, setPasswordError] = useState<string | null>(null);
   return (
     <>
       <button
@@ -53,7 +67,11 @@ function ProfileEditModal() {
                 프로필 편집
               </h3>
               <div className="flex items-center gap-4">
-                <span className="w-16 h-16 bg-black rounded-full" />
+                <img
+                  className="w-16 h-16 rounded-full"
+                  src={`https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/f7fa91bd-bd76-4274-5220-e796e1565100/avatar`}
+                  alt="avartar"
+                />
                 <label
                   htmlFor="picture"
                   className="px-3 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md shadow-sm cursor-pointer hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
@@ -117,14 +135,14 @@ function ProfileEditModal() {
                       required
                     />
                   </div>
-                  <div className="grid gap-6 mb-6 md:grid-cols-2">
-                    <div>
-                      <label
-                        htmlFor="password"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        비밀번호
-                      </label>
+                  <div className="pb-6">
+                    <label
+                      htmlFor="password"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      비밀번호
+                    </label>
+                    <div className="relative">
                       <input
                         type="password"
                         id="password"
@@ -132,24 +150,28 @@ function ProfileEditModal() {
                         placeholder="•••••••••"
                         required
                       />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="confirm_password"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      <button
+                        type="button"
+                        onClick={handleTogglePassword}
+                        className="absolute top-1 right-3"
                       >
-                        비밀번호 확인
-                      </label>
-                      <input
-                        type="password"
-                        id="confirm_password"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-blue-500"
-                        placeholder="•••••••••"
-                        required
-                      />
+                        {showPassword ? (
+                          <span className="mt-1.5 text-gray-400 material-symbols-outlined">
+                            visibility
+                          </span>
+                        ) : (
+                          <span className="mt-1.5 text-gray-400 material-symbols-outlined">
+                            visibility_off
+                          </span>
+                        )}
+                      </button>
+                      {passwordError && (
+                        <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                          <span className="font-medium">{passwordError}</span>
+                        </p>
+                      )}
                     </div>
                   </div>
-
                   <div className="flex justify-end">
                     <button
                       type="submit"
