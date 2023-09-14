@@ -31,23 +31,16 @@ function Header() {
             onMouseLeave={() => handleHoverOut()}
             className="flex mr-3 text-sm md:mr-0 "
           >
-            <svg
+            <img
               className={cls(
                 "w-8 h-8 bg-gray-200 rounded-full",
                 isModalOpen
                   ? "ring-offset-2 ring-2 dark:ring-gray-600 ring-blue-500"
                   : ""
               )}
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
+              src={`https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/f7fa91bd-bd76-4274-5220-e796e1565100/avatar`}
+              alt="avatar"
+            />
           </div>
           <div
             className="absolute right-0 z-50 pt-4 top-4"
