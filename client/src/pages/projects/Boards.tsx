@@ -27,9 +27,12 @@ function getStyle(style: DraggingStyle | NotDraggingStyle) {
   }
   return style;
 }
+
 function Boards() {
-  const boardRef = useRef<HTMLElement | null>(null);
-  const [scrollPosition, setScrollPosition] = useState(true);
+  const boardRefs = useRef<(HTMLElement | null)[]>([]);
+  const [scrollPosition, setScrollPosition] = useState([
+    { index: 0, toTop: false },
+  ]);
   const craeteTaskBtnRef = useRef<HTMLButtonElement | null>(null);
   const deleteBoardBtnRef = useRef<HTMLButtonElement | null>(null);
   const [modalState, setModalState] = useState<ModalState>({
@@ -38,23 +41,32 @@ function Boards() {
   });
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (boardRef.current) {
-        const newScrollPosition = boardRef.current.scrollTop;
-        const setScrollTop = newScrollPosition !== 0;
-        setScrollPosition(setScrollTop);
+    console.log(boardRefs.current);
+    const handleScroll = (index: number) => (event: Event) => {
+      if (boardRefs.current[index]) {
+        const newScrollPosition = boardRefs.current[index]?.scrollTop;
+        const setScrollTop = (newScrollPosition !== 0);
+        const toTop = { index: index, toTop: setScrollTop };
+        setScrollPosition((scrollPosition) => {
+          return { ...scrollPosition, toTop };
+        });
       }
     };
-    if (boardRef.current) {
-      boardRef.current.addEventListener("scroll", handleScroll);
-    }
-    return () => {
-      if (boardRef.current) {
-        boardRef.current.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, []);
 
+    boardRefs.current.forEach((element, index) => {
+      if (element) {
+        element.addEventListener("scroll", handleScroll(index));
+      }
+    });
+
+    return () => {
+      boardRefs.current.forEach((element, index) => {
+        if (element) {
+          element.removeEventListener("scroll", handleScroll(index));
+        }
+      });
+    };
+  }, [boardRefs]);
   const boards = useSelector(({ boardsSlice }: { boardsSlice: IBoards }) => {
     return boardsSlice.boards;
   });
@@ -132,7 +144,7 @@ function Boards() {
                     <div
                       ref={(element) => {
                         provided.innerRef(element);
-                        boardRef.current = element;
+                        boardRefs.current[index] = element;
                       }}
                       {...provided.draggableProps}
                       style={getStyle(provided.draggableProps.style!)}
