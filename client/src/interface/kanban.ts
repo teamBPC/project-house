@@ -2,8 +2,13 @@ import { Dispatch, SetStateAction } from "react";
 import { DraggableProvided } from "react-beautiful-dnd";
 
 export interface IToDo {
-  id: number;
-  text: string;
+  id:number
+  title: string;
+  manager: string;
+  priority: string;
+  start: string;
+  end: string;
+  description: string;
 }
 
 export interface IBoards {

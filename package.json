@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "cd client && npm start",
-    "restart": "cd server && npm start"
+    "backend": "cd server && npm start"
   },
   "author": "",
   "license": "ISC",
