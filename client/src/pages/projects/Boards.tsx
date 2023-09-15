@@ -158,8 +158,8 @@ function Boards() {
                             : "bg-opacity-100"
                         )}
                       >
-                        <div className="flex items-center justify-between">
-                          <span className="text-xl font-semibold ">
+                        <div className="flex items-start justify-between">
+                          <span className="text-xl font-semibold break-all whitespace-pre-wrap text-clip">
                             {board.title}
                           </span>
                           <BoardBtns

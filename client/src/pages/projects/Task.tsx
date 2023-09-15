@@ -38,13 +38,15 @@ function Tasks({ board, index }: IBoardProps) {
                   >
                     <div className="flex flex-col">
                       <div className="flex flex-col gap-4">
-                        <div className="flex items-end justify-between">
-                          <span className="text-lg font-bold">
+                        <div className="grid items-start justify-between max-w-full grid-cols-4">
+                          <span className="w-full col-span-3 text-lg font-bold break-all whitespace-pre-wrap text-clip">
                             {todo.title}
                           </span>
-                          <span className="text-sm font-light">{todo.end}</span>
+                          <span className="col-span-1 text-sm font-light text-end">
+                            {todo.end}
+                          </span>
                         </div>
-                        <span className="w-full break-words whitespace-pre-wrap">
+                        <span className="w-full truncate hover:whitespace-pre-wrap hover:break-words">
                           {todo.description}
                         </span>
                         <div className="flex items-end justify-between font-bold">
