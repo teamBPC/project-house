@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const boardSlice = createSlice({
-  name: "boardSlice",
+const boardItemSlice = createSlice({
+  name: "boardItemSlice",
   initialState: {
-    board: [
+    boardItem: [
       {
         id: 0,
         title: "프론트엔드",
@@ -215,10 +215,10 @@ const boardSlice = createSlice({
     ],
   },
   reducers: {
-    boardRedux: (state, action) => {
-      state.board = action.payload;
+    boardItemRedux: (state, action) => {
+      state.boardItem = action.payload;
     },
   },
 });
-export default boardSlice;
-export const { boardRedux } = boardSlice.actions;
+export default boardItemSlice;
+export const { boardItemRedux } = boardItemSlice.actions;

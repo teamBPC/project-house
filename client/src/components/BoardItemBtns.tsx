@@ -1,31 +1,27 @@
 import { useRef, useEffect } from "react";
-import { IBoardItemBtnsProps } from "../interface/kanban";
-import { boardsItemModalHandle } from "./modal/boardItem/common";
+import { IBtnsProps } from "../interface/kanban";
+import { modalHandle } from "./modal/common";
+import { useDispatch, useSelector } from "react-redux";
+import { IModalState } from "../interface/modal";
 
 function BoardBtns({
-  setBoardItemModal,
-  setBoardItemModalBtnRef,
+  setModalBtnRef,
   provided,
-}: IBoardItemBtnsProps) {
+}: IBtnsProps) {
+  const dispatch = useDispatch();
   const deleteBoardItemBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    setBoardItemModalBtnRef({
+    setModalBtnRef({
       deleteBoardItemBtnRef: deleteBoardItemBtnRef,
     });
-  }, [setBoardItemModalBtnRef]);
+  }, [setModalBtnRef]);
 
   return (
     <div className="flex items-center gap-1">
       <div>
         <button
-          onClick={() =>
-            boardsItemModalHandle(
-              setBoardItemModal,
-              "createTaskModalOpen",
-              true
-            )
-          }
+          onClick={() => modalHandle(dispatch, "createTaskModalOpen", true)}
           className="flex"
         >
           <span className="p-1 transition duration-100 ease-in-out rounded-md material-symbols-outlined hover:bg-gray-300">
@@ -35,7 +31,7 @@ function BoardBtns({
       </div>
       <span
         className="p-1 transition duration-100 ease-in-out rounded-md material-symbols-outlined hover:bg-gray-300"
-        {...provided.dragHandleProps}
+        {...provided?.dragHandleProps}
       >
         drag_pan
       </span>
@@ -43,11 +39,7 @@ function BoardBtns({
         <button
           ref={deleteBoardItemBtnRef}
           onClick={() =>
-            boardsItemModalHandle(
-              setBoardItemModal,
-              "deleteBoardItemModalOpen",
-              true
-            )
+            modalHandle(dispatch, "deleteBoardItemModalOpen", true)
           }
           className="flex"
         >

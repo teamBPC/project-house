@@ -1,67 +1,52 @@
-import { FieldErrors, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { cls } from "../../../libs/utils";
-import {
-  DeleteBoardItemForm,
-  IBoardsModalProps,
-} from "../../../interface/modal";
+import { IModalProps } from "../../../interface/modal";
+import { useModalForm, modalHandle } from "../common";
+import { useDispatch } from "react-redux";
 
 function DeleteBoardsModal({
-  boardsModal,
-  setBoardsModal,
-  boardsModalBtnRef,
-}: IBoardsModalProps) {
-  const { register, handleSubmit, reset } = useForm<DeleteBoardItemForm>();
-  const navigate = useNavigate();
-
-  const onValid = (data: DeleteBoardItemForm) => {
-    console.log(data);
-    // reset();
-    // navigate("/boards");
-  };
-
-  const onInvalid = (error: FieldErrors) => {};
+  modalState,
+  modalBtnRef,
+}: IModalProps) {
+  const dispatch = useDispatch();
+  const { register, handleSubmit, reset, onValid, onInvalid } = useModalForm();
 
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  const cloesModalHandle = () => {
-    setBoardsModal((prevState) => ({
-      ...prevState,
-      deleteBoardsModalOpen: false,
-    }));
-  };
-
-  // useEffect(() => {
-  //   const outsideClickHandle = (event: MouseEvent) => {
-  //     if (
-  //       modalRef.current &&
-  //       !modalRef.current.contains(event.target as Node) &&
-  //       btnRef.current &&
-  //       !btnRef.current.contains(event.target as Node)
-  //     ) {
-  //       cloesModalHandle();
-  //     }
-  //   };
-  //   if (modalState.createModalOpen) {
-  //     document.addEventListener("mousedown", outsideClickHandle);
-  //   }
-  //   return () => {
-  //     document.removeEventListener("mousedown", outsideClickHandle);
-  //   };
-  // }, [modalState]);
+  useEffect(() => {
+    const outsideClickHandle = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node) &&
+        modalBtnRef.deleteBoardsBtnRef.current &&
+        !modalBtnRef.deleteBoardsBtnRef.current.contains(
+          event.target as Node
+        )
+      ) {
+        modalHandle(dispatch, "deleteBoardsModalOpen", false, reset);
+      }
+    };
+    if (modalState.deleteBoardsModalOpen) {
+      document.addEventListener("mousedown", outsideClickHandle);
+    }
+    return () => {
+      document.removeEventListener("mousedown", outsideClickHandle);
+    };
+  }, [modalState.deleteBoardsModalOpen, reset, dispatch, modalBtnRef.deleteBoardsBtnRef]);
 
   return (
     <div
       className={cls(
         "fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen bg-black bg-opacity-50 flex justify-center items-center",
-        boardsModal.deleteBoardsModalOpen ? "" : "hidden"
+        modalState.deleteBoardsModalOpen ? "" : "hidden"
       )}
     >
       <div ref={modalRef} className="relative w-full max-w-md max-h-full">
         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <button
-            onClick={() => cloesModalHandle()}
+            onClick={() =>
+              modalHandle(dispatch, "deleteBoardsModalOpen", false, reset)
+            }
             type="button"
             className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
             data-modal-hide="authentication-modal"

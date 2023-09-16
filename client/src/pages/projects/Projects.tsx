@@ -1,6 +1,13 @@
+import { useSelector } from "react-redux";
 import CreateProjectModal from "../../components/modal/projects/CreateProjectModal";
+import { IModalState } from "../../interface/modal";
 
 function Projects() {
+  const modalState = useSelector(
+    ({ modalOpenSlice }: { modalOpenSlice: IModalState }) => {
+      return modalOpenSlice.modalOpen;
+    }
+  );
   return (
     <>
       <div className="grid grid-cols-3 gap-4 p-4">
@@ -89,7 +96,7 @@ function Projects() {
           </a>
         </div>
       </div>
-      <CreateProjectModal />
+      <CreateProjectModal modalState={modalState} />
     </>
   );
 }

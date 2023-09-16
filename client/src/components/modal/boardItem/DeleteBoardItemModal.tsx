@@ -1,20 +1,15 @@
 import { useRef, useEffect } from "react";
 import { cls } from "../../../libs/utils";
-import { IBoardItemModalProps } from "../../../interface/modal";
-import { boardsItemModalHandle, useBoardsItemForm } from "./common";
+import { IModalProps } from "../../../interface/modal";
+import { useModalForm, modalHandle } from "../common";
+import { useDispatch } from "react-redux";
 
 function DeleteBoardModal({
-  boardItemModal,
-  setBoardItemModal,
-  boardItemModalBtnRef,
-}: IBoardItemModalProps) {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    onValid,
-    onInvalid,
-  } = useBoardsItemForm();
+  modalState,
+  modalBtnRef,
+}: IModalProps) {
+  const dispatch = useDispatch();
+  const { register, handleSubmit, reset, onValid, onInvalid } = useModalForm();
 
   const modalRef = useRef<HTMLDivElement | null>(null);
 
@@ -23,48 +18,33 @@ function DeleteBoardModal({
       if (
         modalRef.current &&
         !modalRef.current.contains(event.target as Node) &&
-        boardItemModalBtnRef.deleteBoardItemBtnRef.current &&
-        !boardItemModalBtnRef.deleteBoardItemBtnRef.current.contains(
+        modalBtnRef.deleteBoardItemBtnRef.current &&
+        !modalBtnRef.deleteBoardItemBtnRef.current.contains(
           event.target as Node
         )
       ) {
-        boardsItemModalHandle(
-          setBoardItemModal,
-          "deleteBoardItemModalOpen",
-          false,
-          reset
-        );
+        modalHandle(dispatch, "deleteBoardItemModalOpen", false, reset);
       }
     };
-    if (boardItemModal.deleteBoardItemModalOpen) {
+    if (modalState.deleteBoardItemModalOpen) {
       document.addEventListener("mousedown", outsideClickHandle);
     }
     return () => {
       document.removeEventListener("mousedown", outsideClickHandle);
     };
-  }, [
-    boardItemModal.deleteBoardItemModalOpen,
-    boardItemModalBtnRef.deleteBoardItemBtnRef,
-    setBoardItemModal,
-    reset,
-  ]);
+  }, [modalState.deleteBoardItemModalOpen, reset, dispatch, modalBtnRef.deleteBoardItemBtnRef]);
   return (
     <div
       className={cls(
         "fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen bg-black bg-opacity-50 flex justify-center items-center",
-        boardItemModal.deleteBoardItemModalOpen ? "" : "hidden"
+        modalState.deleteBoardItemModalOpen ? "" : "hidden"
       )}
     >
       <div ref={modalRef} className="relative w-full max-w-md max-h-full">
         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <button
             onClick={() =>
-              boardsItemModalHandle(
-                setBoardItemModal,
-                "deleteBoardItemModalOpen",
-                false,
-                reset
-              )
+              modalHandle(dispatch, "deleteBoardItemModalOpen", false, reset)
             }
             type="button"
             className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
