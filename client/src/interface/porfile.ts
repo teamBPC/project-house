@@ -2,6 +2,10 @@ export interface LoginIdForm {
   userId: string;
 }
 
+export interface LoginPwForm {
+  userPw: string;
+}
+
 export interface JoinForm {
   userEmail: string;
   userNm: string;

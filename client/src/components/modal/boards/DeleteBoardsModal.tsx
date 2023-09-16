@@ -1,52 +1,61 @@
 import { FieldErrors, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-import { cls } from "../../libs/utils";
-import { DeleteBoardForm, ModalProps } from "../../interface/modal";
+import { cls } from "../../../libs/utils";
+import {
+  DeleteBoardItemForm,
+  IBoardsModalProps,
+} from "../../../interface/modal";
 
-function DeleteBoardModal({ modalState, setModalState, btnRef }: ModalProps) {
-  const { register, handleSubmit, reset } = useForm<DeleteBoardForm>();
+function DeleteBoardsModal({
+  boardsModal,
+  setBoardsModal,
+  boardsModalBtnRef,
+}: IBoardsModalProps) {
+  const { register, handleSubmit, reset } = useForm<DeleteBoardItemForm>();
   const navigate = useNavigate();
-  const onValid = (data: DeleteBoardForm) => {
+
+  const onValid = (data: DeleteBoardItemForm) => {
     console.log(data);
     // reset();
-    navigate("/boards");
+    // navigate("/boards");
   };
-  const [createBoardError, setCreateBoardError] = useState<string | null>(null);
+
   const onInvalid = (error: FieldErrors) => {};
+
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const cloesModalHandle = () => {
-    setModalState((prevState) => ({
+    setBoardsModal((prevState) => ({
       ...prevState,
-      deleteModalOpen: false,
+      deleteBoardsModalOpen: false,
     }));
   };
 
-  useEffect(() => {
-    const outsideClickHandle = (event: MouseEvent) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target as Node) &&
-        btnRef.current &&
-        !btnRef.current.contains(event.target as Node)
-      ) {
-        cloesModalHandle();
-      }
-    };
-    if (modalState.createModalOpen) {
-      document.addEventListener("mousedown", outsideClickHandle);
-    }
-    return () => {
-      document.removeEventListener("mousedown", outsideClickHandle);
-    };
-  }, [modalState]);
+  // useEffect(() => {
+  //   const outsideClickHandle = (event: MouseEvent) => {
+  //     if (
+  //       modalRef.current &&
+  //       !modalRef.current.contains(event.target as Node) &&
+  //       btnRef.current &&
+  //       !btnRef.current.contains(event.target as Node)
+  //     ) {
+  //       cloesModalHandle();
+  //     }
+  //   };
+  //   if (modalState.createModalOpen) {
+  //     document.addEventListener("mousedown", outsideClickHandle);
+  //   }
+  //   return () => {
+  //     document.removeEventListener("mousedown", outsideClickHandle);
+  //   };
+  // }, [modalState]);
 
   return (
     <div
       className={cls(
-        "fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-50 flex justify-center items-center",
-        modalState.deleteModalOpen ? "" : "hidden"
+        "fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen bg-black bg-opacity-50 flex justify-center items-center",
+        boardsModal.deleteBoardsModalOpen ? "" : "hidden"
       )}
     >
       <div ref={modalRef} className="relative w-full max-w-md max-h-full">
@@ -76,7 +85,7 @@ function DeleteBoardModal({ modalState, setModalState, btnRef }: ModalProps) {
           </button>
           <div className="px-6 py-6 lg:px-8">
             <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-              보드 삭세하기
+              보드 삭제하기
             </h3>
             <form
               onSubmit={handleSubmit(onValid, onInvalid)}
@@ -105,4 +114,4 @@ function DeleteBoardModal({ modalState, setModalState, btnRef }: ModalProps) {
     </div>
   );
 }
-export default DeleteBoardModal;
+export default DeleteBoardsModal;

@@ -1,5 +1,4 @@
 export default async function sendData(url: string, data: any) {
-  console.log(data);
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -10,11 +9,11 @@ export default async function sendData(url: string, data: any) {
     });
 
     const responseData = await response.json();
-    console.log(responseData)
+    console.log(responseData);
     return responseData;
   } catch (error) {
     console.log(error);
   }
-  console.log(sendData)
+  console.log(sendData);
   return sendData;
 }

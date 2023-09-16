@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { cls } from "../../libs/utils";
+import { cls } from "../../../libs/utils";
 
 function CreateProjectModal() {
   const modalRef = useRef<HTMLDivElement | null>(null);
@@ -11,25 +11,7 @@ function CreateProjectModal() {
   const closeModalHandle = () => {
     setIsModalOpen(() => false);
   };
-  useEffect(() => {
-    const outsideClickHandle = (event: MouseEvent) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target as Node) &&
-        btnRef.current &&
-        !btnRef.current.contains(event.target as Node)
-      ) {
-        closeModalHandle();
-      }
-    };
-    if (isModalOpen) {
-      document.addEventListener("mousedown", outsideClickHandle);
-    }
-    return () => {
-      document.removeEventListener("mousedown", outsideClickHandle);
-    };
-  }, [isModalOpen]);
-  
+
   return (
     <>
       <div className="fixed z-50 bottom-4 right-4">
@@ -41,7 +23,7 @@ function CreateProjectModal() {
       </div>
       <div
         className={cls(
-          "fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-50 flex justify-center items-center",
+          "fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen bg-black bg-opacity-50 flex justify-center items-center",
           isModalOpen ? "" : "hidden"
         )}
       >

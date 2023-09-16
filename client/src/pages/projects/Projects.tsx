@@ -1,5 +1,4 @@
-import React from "react";
-import CreateProjectModal from "../../components/modal/CreateProjectModal";
+import CreateProjectModal from "../../components/modal/projects/CreateProjectModal";
 
 function Projects() {
   return (
@@ -95,4 +94,4 @@ function Projects() {
   );
 }
 
-export default React.memo(Projects);
+export default Projects;
