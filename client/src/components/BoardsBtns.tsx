@@ -1,34 +1,26 @@
-import { useRef,useEffect } from "react";
-import { IBoardsBtnsProps } from "../interface/kanban";
-import { IBoardsModalState } from "../interface/modal";
+import { useRef, useEffect } from "react";
+import { IBtnsProps } from "../interface/kanban";
+import { modalHandle } from "./modal/common";
+import { useDispatch } from "react-redux";
 
-function BoardsBtns({
-  setBoardsModal,
-  setBoardsModalBtnRef,
-}: IBoardsBtnsProps) {
-  const editBoardsBtnRef = useRef<HTMLButtonElement | null>(null);
-  const deleteBoardsBtnRef = useRef<HTMLButtonElement | null>(null);
-
-  const openModalHandle = (modalType: keyof IBoardsModalState) => {
-    setBoardsModal((prevState) => ({
-      ...prevState,
-      [modalType]: true,
-    }));
-  };
+function BoardsBtns({ setModalBtnRef }: IBtnsProps) {
+  const dispatch = useDispatch();
+  const editBoardsBtnRef = useRef<HTMLButtonElement>(null);
+  const deleteBoardsBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    setBoardsModalBtnRef({
+    setModalBtnRef({
       editBoardsBtnRef: editBoardsBtnRef,
       deleteBoardsBtnRef: deleteBoardsBtnRef,
     });
-  }, []);
-  
+  }, [setModalBtnRef]);
+
   return (
     <div className="flex items-center gap-1">
       <div>
         <button
           ref={editBoardsBtnRef}
-          onClick={() => openModalHandle("editBoardsModalOpen")}
+          onClick={() => modalHandle(dispatch, "editBoardsModalOpen", true)}
           className="flex"
         >
           <span className="p-1 transition duration-100 ease-in-out rounded-md material-symbols-outlined hover:bg-gray-300">
@@ -39,7 +31,7 @@ function BoardsBtns({
       <div>
         <button
           ref={deleteBoardsBtnRef}
-          onClick={() => openModalHandle("deleteBoardsModalOpen")}
+          onClick={() => modalHandle(dispatch, "deleteBoardsModalOpen", true)}
           className="flex"
         >
           <span className="p-1 transition duration-100 ease-in-out rounded-md material-symbols-outlined hover:bg-gray-300">

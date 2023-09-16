@@ -20,35 +20,26 @@ export interface CreateTaskForm {
 export interface DeleteBoardItemForm {
   boardName: string;
 }
-
-//BoardItem
-export interface IBoardItemModalState {
-  createTaskModalOpen: boolean;
-  createBoardItemModalOpen: boolean;
-  deleteBoardItemModalOpen: boolean;
-}
-export interface IBoardItemBtnRefState {
-  deleteBoardItemBtnRef: MutableRefObject<HTMLButtonElement | null> | null;
-}
-export interface IBoardItemModalProps {
-  boardItemModal: IBoardItemModalState;
-  setBoardItemModal: Dispatch<SetStateAction<IBoardItemModalState>>;
-  boardItemModalBtnRef?: any;
-}
-
-//Boards
-export interface IBoardsBtnRefState {
-  editBoardsBtnRef: MutableRefObject<HTMLButtonElement | null>;
-  deleteBoardsBtnRef: MutableRefObject<HTMLButtonElement | null>;
-}
-
-export interface IBoardsModalState {
+//Modal
+export interface IModalStateItem {
+  createTaskModalOpen?: boolean;
+  createBoardItemModalOpen?: boolean;
+  deleteBoardItemModalOpen?: boolean;
+  createBoardsModalOpen?: boolean;
   editBoardsModalOpen?: boolean;
   deleteBoardsModalOpen?: boolean;
+  editProfileModalOpen?: boolean;
+  createProjectModalOpen?: boolean;
 }
-
-export interface IBoardsModalProps {
-  boardsModal: IBoardsModalState;
-  setBoardsModal: Dispatch<SetStateAction<IBoardsModalState>>;
-  boardsModalBtnRef: any;
+export interface IModalState {
+  modalOpen: IModalStateItem;
+}
+export interface IModalProps {
+  modalState: IModalStateItem;
+  modalBtnRef?: any;
+}
+export interface IBtnRefState {
+  deleteBoardItemBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
+  editBoardsBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
+  deleteBoardsBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
 }

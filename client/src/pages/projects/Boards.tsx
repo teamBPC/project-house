@@ -1,8 +1,8 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { IBoards } from "../../interface/kanban";
 import { Link } from "react-router-dom";
-import { IBoardsBtnRefState, IBoardsModalState } from "../../interface/modal";
+import { IBtnRefState, IModalState } from "../../interface/modal";
 import BoardsBtns from "../../components/BoardsBtns";
 import DeleteBoardsModal from "../../components/modal/boards/DeleteBoardsModal";
 import CreateBoardsModal from "../../components/modal/boards/CraeteBoardsModal";
@@ -12,13 +12,15 @@ function Boards() {
   const boards = useSelector(({ boardsSlice }: { boardsSlice: IBoards }) => {
     return boardsSlice.boards;
   });
-  const [boardsModal, setBoardsModal] = useState<IBoardsModalState>({
-    editBoardsModalOpen: false,
-    deleteBoardsModalOpen: false,
+  const modalState = useSelector(
+    ({ modalOpenSlice }: { modalOpenSlice: IModalState }) => {
+      return modalOpenSlice.modalOpen;
+    }
+  );
+  const [modalBtnRef, setModalBtnRef] = useState<IBtnRefState>({
+    editBoardsBtnRef: null,
+    deleteBoardsBtnRef: null,
   });
-  const [boardsModalBtnRef, setBoardsModalBtnRef] = useState<
-    IBoardsBtnRefState
-  >();
 
   return (
     <>
@@ -35,10 +37,7 @@ function Boards() {
                   <span className="w-full mb-2 text-2xl font-bold tracking-tight text-gray-900 truncate dark:text-white">
                     {item.title}
                   </span>
-                  <BoardsBtns
-                    setBoardsModal={setBoardsModal}
-                    setBoardsModalBtnRef={setBoardsModalBtnRef}
-                  />
+                  <BoardsBtns setModalBtnRef={setModalBtnRef} />
                 </div>
                 <div className="flex">
                   <span className="flex-1 font-normal text-gray-700 truncate dark:text-gray-400">
@@ -51,17 +50,9 @@ function Boards() {
           ))}
         </ul>
       </div>
-      <CreateBoardsModal />
-      <EditBoardsModal
-        boardsModal={boardsModal}
-        setBoardsModal={setBoardsModal}
-        boardsModalBtnRef={boardsModalBtnRef}
-      />
-      <DeleteBoardsModal
-        boardsModal={boardsModal}
-        setBoardsModal={setBoardsModal}
-        boardsModalBtnRef={boardsModalBtnRef}
-      />
+      <CreateBoardsModal modalState={modalState} />
+      <EditBoardsModal modalState={modalState} modalBtnRef={modalBtnRef} />
+      <DeleteBoardsModal modalState={modalState} modalBtnRef={modalBtnRef} />
     </>
   );
 }

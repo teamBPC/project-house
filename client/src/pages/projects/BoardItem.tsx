@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, MutableRefObject } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   DragDropContext,
   Draggable,
@@ -9,17 +9,14 @@ import {
 } from "react-beautiful-dnd";
 import { IBoard } from "../../interface/kanban";
 import { cls } from "../../libs/utils";
-import { boardRedux } from "../../redux/boardSlice";
+import { boardItemRedux } from "../../redux/boardItemSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Tasks from "./Task";
 import BoardItemBtns from "../../components/BoardItemBtns";
 import CreateTaskModal from "../../components/modal/boardItem/CreateTaskModal";
 import CreateBoardItemModal from "../../components/modal/boardItem/CreateBoardItemModal";
 import DeleteBoardItemModal from "../../components/modal/boardItem/DeleteBoardItemModal";
-import {
-  IBoardItemBtnRefState,
-  IBoardItemModalState,
-} from "../../interface/modal";
+import { IBtnRefState, IModalState } from "../../interface/modal";
 
 function getStyle(style: DraggingStyle | NotDraggingStyle) {
   if (style?.transform) {
@@ -37,12 +34,12 @@ function Boards() {
   const [scrollPosition, setScrollPosition] = useState([
     { index: 0, toTop: false },
   ]);
-  const [boardItemModal, setBoardItemModal] = useState<IBoardItemModalState>({
-    createTaskModalOpen: false,
-    createBoardItemModalOpen: false,
-    deleteBoardItemModalOpen: false,
-  });
-  const [boardItemModalBtnRef, setBoardItemModalBtnRef] = useState<IBoardItemBtnRefState>({
+  const modalState = useSelector(
+    ({ modalOpenSlice }: { modalOpenSlice: IModalState }) => {
+      return modalOpenSlice.modalOpen;
+    }
+  );
+  const [modalBtnRef, setModalBtnRef] = useState<IBtnRefState>({
     deleteBoardItemBtnRef: null,
   });
 
@@ -72,9 +69,11 @@ function Boards() {
       });
     };
   }, [boardRefs]);
-  const board = useSelector(({ boardSlice }: { boardSlice: IBoard }) => {
-    return boardSlice.board;
-  });
+  const board = useSelector(
+    ({ boardItemSlice }: { boardItemSlice: IBoard }) => {
+      return boardItemSlice.boardItem;
+    }
+  );
   const dispatch = useDispatch();
   const onDragEnd = ({ draggableId, destination, source }: DropResult) => {
     if (destination) {
@@ -85,7 +84,7 @@ function Boards() {
           const taskObj = boardCopy[source.index];
           boardCopy.splice(source.index, 1);
           boardCopy.splice(destination?.index, 0, taskObj);
-          dispatch(boardRedux(boardCopy));
+          dispatch(boardItemRedux(boardCopy));
         }
       } else if (source.droppableId.includes("card")) {
         if (source.droppableId === destination.droppableId) {
@@ -100,7 +99,7 @@ function Boards() {
           listCopy.splice(destination?.index, 0, prevToDo);
           boardCopy.todos = listCopy;
           boardsCopy.splice(boardIndex, 1, boardCopy);
-          dispatch(boardRedux(boardsCopy));
+          dispatch(boardItemRedux(boardsCopy));
         }
         if (source.droppableId !== destination.droppableId) {
           const boardsCopy = [...board];
@@ -121,7 +120,7 @@ function Boards() {
           destinationBoardCopy.todos = destinationListCopy;
           boardsCopy.splice(sourceBoardIndex, 1, sourceBoardCopy);
           boardsCopy.splice(destinationBoardIndex, 1, destinationBoardCopy);
-          dispatch(boardRedux(boardsCopy));
+          dispatch(boardItemRedux(boardsCopy));
         }
       }
     } else {
@@ -168,8 +167,7 @@ function Boards() {
                             {item.title}
                           </span>
                           <BoardItemBtns
-                            setBoardItemModal={setBoardItemModal}
-                            setBoardItemModalBtnRef={setBoardItemModalBtnRef}
+                            setModalBtnRef={setModalBtnRef}
                             provided={provided}
                           />
                         </div>
@@ -188,19 +186,9 @@ function Boards() {
           )}
         </Droppable>
       </DragDropContext>
-      <CreateTaskModal
-        boardItemModal={boardItemModal}
-        setBoardItemModal={setBoardItemModal}
-      />
-      <CreateBoardItemModal
-        boardItemModal={boardItemModal}
-        setBoardItemModal={setBoardItemModal}
-      />
-      <DeleteBoardItemModal
-        boardItemModal={boardItemModal}
-        setBoardItemModal={setBoardItemModal}
-        boardItemModalBtnRef={boardItemModalBtnRef}
-      />
+      <CreateTaskModal modalState={modalState} />
+      <CreateBoardItemModal modalState={modalState} />
+      <DeleteBoardItemModal modalState={modalState} modalBtnRef={modalBtnRef} />
     </>
   );
 }

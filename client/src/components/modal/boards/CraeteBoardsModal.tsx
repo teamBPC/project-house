@@ -1,32 +1,15 @@
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect } from "react";
 import { cls } from "../../../libs/utils";
-import { FieldErrors, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { CreateBoardsForm } from "../../../interface/modal";
+import { useModalForm, modalHandle } from "../common";
+import { IModalProps } from "../../../interface/modal";
+import { useDispatch } from "react-redux";
 
-function CreateBoardsModal() {
-  const { register, handleSubmit, reset } = useForm<CreateBoardsForm>();
-  const navigate = useNavigate();
-
-  const onValid = (data: CreateBoardsForm) => {
-    reset();
-    // navigate("/boards");
-  };
-
-  const onInvalid = (error: FieldErrors) => {};
+function CreateBoardsModal({ modalState }: IModalProps) {
+  const dispatch = useDispatch();
+  const { register, handleSubmit, reset, onValid, onInvalid } = useModalForm();
 
   const modalRef = useRef<HTMLDivElement | null>(null);
   const btnRef = useRef<HTMLButtonElement | null>(null);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModalHandle = () => {
-    setIsModalOpen(() => true);
-  };
-
-  const closeModalHandle = useCallback(() => {
-    setIsModalOpen(() => false);
-    reset();
-  }, [reset]);
 
   useEffect(() => {
     const outsideClickHandle = (event: MouseEvent) => {
@@ -36,21 +19,27 @@ function CreateBoardsModal() {
         btnRef.current &&
         !btnRef.current.contains(event.target as Node)
       ) {
-        closeModalHandle();
+        modalHandle(dispatch, "createBoardsModalOpen", false, reset);
       }
     };
-    if (isModalOpen) {
+    if (modalState.createBoardsModalOpen) {
       document.addEventListener("mousedown", outsideClickHandle);
     }
     return () => {
       document.removeEventListener("mousedown", outsideClickHandle);
     };
-  }, [closeModalHandle, isModalOpen]);
+  }, [dispatch, modalState.createBoardsModalOpen, reset]);
 
   return (
     <>
       <div className="fixed z-40 bottom-4 right-4">
-        <button type="button" ref={btnRef} onClick={() => openModalHandle()}>
+        <button
+          type="button"
+          ref={btnRef}
+          onClick={() =>
+            modalHandle(dispatch, "createBoardsModalOpen", true)
+          }
+        >
           <span className="p-4 text-white bg-blue-600 rounded-full material-symbols-outlined">
             add
           </span>
@@ -59,13 +48,20 @@ function CreateBoardsModal() {
       <div
         className={cls(
           "fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen bg-black bg-opacity-50 flex justify-center items-center",
-          isModalOpen ? "" : "hidden"
+          modalState.createBoardsModalOpen ? "" : "hidden"
         )}
       >
         <div ref={modalRef} className="relative w-full max-w-md max-h-full">
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <button
-              onClick={() => closeModalHandle()}
+              onClick={() =>
+                modalHandle(
+                  dispatch,
+                  "createBoardsModalOpen",
+                  false,
+                  reset
+                )
+              }
               type="button"
               className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
               data-modal-hide="authentication-modal"

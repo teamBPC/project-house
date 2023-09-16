@@ -1,7 +1,13 @@
+import { useSelector } from "react-redux";
 import EditProfileModal from "../../components/modal/profile/EditProfileModal";
-import { useState } from "react";
+import { IModalState } from "../../interface/modal";
 
 function Profile() {
+  const modalState = useSelector(
+    ({ modalOpenSlice }: { modalOpenSlice: IModalState }) => {
+      return modalOpenSlice.modalOpen;
+    }
+  );
   return (
     <div className="w-screen">
       <div className="flex flex-col items-center ">
@@ -16,7 +22,7 @@ function Profile() {
         <div>이름</div>
         <div>웹사이트</div>
         <div>참여한 프로젝트</div>
-        <EditProfileModal />
+        <EditProfileModal modalState={modalState} />
       </div>
     </div>
   );
