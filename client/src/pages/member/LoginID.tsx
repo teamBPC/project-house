@@ -11,7 +11,8 @@ function LoginID() {
     const dataCustomer = {
       userId: data.userId,
     };
-    await sendData("http://localhost:3001/login", dataCustomer);
+    const res = await sendData("http://localhost:4000/login/id", dataCustomer);
+    console.log(res);
     // navigate("/login-pw");
   };
   const onInvalid = (error: FieldErrors) => {};

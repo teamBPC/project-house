@@ -21,7 +21,7 @@ function Join() {
       userEmail: data.userEmail,
     };
     await sendData(
-          "http://localhost:3001/login/join",
+          "http://localhost:4000/login/join",
           dataCustomer
         );
     // await fetch("http://localhost:3001/login/join", {

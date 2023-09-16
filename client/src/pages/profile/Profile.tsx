@@ -1,4 +1,4 @@
-import EditProfileModal from "../../components/modal/EditProfileModal";
+import EditProfileModal from "../../components/modal/profile/EditProfileModal";
 import { useState } from "react";
 
 function Profile() {

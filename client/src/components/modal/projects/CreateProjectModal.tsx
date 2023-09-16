@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { cls } from "../../libs/utils";
+import { cls } from "../../../libs/utils";
 
 function CreateProjectModal() {
   const modalRef = useRef<HTMLDivElement | null>(null);
@@ -11,25 +11,7 @@ function CreateProjectModal() {
   const closeModalHandle = () => {
     setIsModalOpen(() => false);
   };
-  useEffect(() => {
-    const outsideClickHandle = (event: MouseEvent) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target as Node) &&
-        btnRef.current &&
-        !btnRef.current.contains(event.target as Node)
-      ) {
-        closeModalHandle();
-      }
-    };
-    if (isModalOpen) {
-      document.addEventListener("mousedown", outsideClickHandle);
-    }
-    return () => {
-      document.removeEventListener("mousedown", outsideClickHandle);
-    };
-  }, [isModalOpen]);
-  
+
   return (
     <>
       <div className="fixed z-50 bottom-4 right-4">

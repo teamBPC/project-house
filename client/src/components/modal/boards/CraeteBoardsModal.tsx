@@ -1,30 +1,33 @@
-import { useRef, useEffect, useState } from "react";
-import { cls } from "../../libs/utils";
+import { useRef, useEffect, useState, useCallback } from "react";
+import { cls } from "../../../libs/utils";
 import { FieldErrors, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { CreateBoardForm } from "../../interface/modal";
+import { CreateBoardsForm } from "../../../interface/modal";
 
-
-
-function CreateBoardModal() {
-  const { register, handleSubmit, reset } = useForm<CreateBoardForm>();
+function CreateBoardsModal() {
+  const { register, handleSubmit, reset } = useForm<CreateBoardsForm>();
   const navigate = useNavigate();
-  const onValid = (data: CreateBoardForm) => {
+
+  const onValid = (data: CreateBoardsForm) => {
     reset();
-    navigate("/boards");
+    // navigate("/boards");
   };
-  const [createBoardError, setCreateBoardError] = useState<string | null>(null);
+
   const onInvalid = (error: FieldErrors) => {};
+
   const modalRef = useRef<HTMLDivElement | null>(null);
   const btnRef = useRef<HTMLButtonElement | null>(null);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModalHandle = () => {
     setIsModalOpen(() => true);
   };
-  const closeModalHandle = () => {
+
+  const closeModalHandle = useCallback(() => {
     setIsModalOpen(() => false);
     reset();
-  };
+  }, [reset]);
+
   useEffect(() => {
     const outsideClickHandle = (event: MouseEvent) => {
       if (
@@ -42,7 +45,7 @@ function CreateBoardModal() {
     return () => {
       document.removeEventListener("mousedown", outsideClickHandle);
     };
-  }, [isModalOpen]);
+  }, [closeModalHandle, isModalOpen]);
 
   return (
     <>
@@ -94,12 +97,31 @@ function CreateBoardModal() {
                 action="#"
               >
                 <div>
+                  <label
+                    htmlFor="title"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    제목
+                  </label>
                   <input
                     type="text"
-                    id="boardName"
-                    {...register("boardName", { required: true })}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
-                    required
+                    id="title"
+                    {...register("title", { required: true })}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-blue-500"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="description"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    간단한 설명
+                  </label>
+                  <input
+                    type="text"
+                    id="description"
+                    {...register("description", { required: true })}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-blue-500"
                   />
                 </div>
                 <button
@@ -116,4 +138,4 @@ function CreateBoardModal() {
     </>
   );
 }
-export default CreateBoardModal;
+export default CreateBoardsModal;

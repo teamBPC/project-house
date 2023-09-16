@@ -1,21 +1,48 @@
-import { useState } from "react";
-import { cls } from "../../libs/utils";
-import { ProfileForm } from "../../interface/porfile";
-import { useForm } from "react-hook-form";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { cls } from "../../../libs/utils";
+import { ProfileForm } from "../../../interface/porfile";
+import { FieldErrors, useForm } from "react-hook-form";
 
 function ProfileEditModal() {
-  const { register, handleSubmit } = useForm<ProfileForm>();
+  const { register, handleSubmit, reset } = useForm<ProfileForm>();
   const onValid = (data: ProfileForm) => {
-    console.log(data);
-    // navigate("/");
+    reset();
+    // navigate("/boards");
   };
+
+  const onInvalid = (error: FieldErrors) => {};
+
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  const btnRef = useRef<HTMLButtonElement | null>(null);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModalHandle = () => {
     setIsModalOpen(() => true);
   };
-  const closeModalHandle = () => {
+
+  const closeModalHandle = useCallback(() => {
     setIsModalOpen(() => false);
-  };
+    reset();
+  }, [reset]);
+
+  useEffect(() => {
+    const outsideClickHandle = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node) &&
+        btnRef.current &&
+        !btnRef.current.contains(event.target as Node)
+      ) {
+        closeModalHandle();
+      }
+    };
+    if (isModalOpen) {
+      document.addEventListener("mousedown", outsideClickHandle);
+    }
+    return () => {
+      document.removeEventListener("mousedown", outsideClickHandle);
+    };
+  }, [closeModalHandle, isModalOpen]);
 
   const [showPassword, setShowPassword] = useState(false);
   const handleTogglePassword = () => {
@@ -26,6 +53,7 @@ function ProfileEditModal() {
   return (
     <>
       <button
+        ref={btnRef}
         onClick={() => openModalHandle()}
         className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         type="button"
@@ -38,7 +66,7 @@ function ProfileEditModal() {
           isModalOpen ? "" : "hidden"
         )}
       >
-        <div className="relative w-full max-w-md max-h-full">
+        <div ref={modalRef} className="relative w-full max-w-md max-h-full">
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <button
               type="button"

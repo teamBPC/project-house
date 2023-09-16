@@ -11,7 +11,7 @@ function SideBar() {
 
   const { pathname } = useLocation();
 
-  if (!(pathname.includes("projects") || pathname.includes("boards")))
+  if (!(pathname.includes("projects") || pathname.includes("boards") || pathname.includes("board")))
     return null;
 
   return (
