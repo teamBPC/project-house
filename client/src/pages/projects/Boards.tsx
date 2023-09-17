@@ -13,8 +13,8 @@ function Boards() {
     return boardsSlice.boards;
   });
   const modalState = useSelector(
-    ({ modalOpenSlice }: { modalOpenSlice: IModalState }) => {
-      return modalOpenSlice.modalOpen;
+    ({ modalStateSlice }: { modalStateSlice: IModalState }) => {
+      return modalStateSlice.modalState;
     }
   );
   const [modalBtnRef, setModalBtnRef] = useState<IBtnRefState>({
@@ -29,23 +29,27 @@ function Boards() {
           {boards.map((item, index) => (
             <li
               key={item.id}
-              className="block p-4 bg-gray-100 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+              className="block p-2 bg-gray-100 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
             >
-              {/* <Link to="boards/:boardId" className="flex flex-col gap-4"> */}
               <div className="flex flex-col gap-4">
-                <div className="z-20 flex items-start justify-between">
-                  <span className="w-full mb-2 text-2xl font-bold tracking-tight text-gray-900 truncate dark:text-white">
-                    {item.title}
+                <div className="z-20 flex items-center justify-between p-1 transition duration-100 ease-in-out rounded-md hover:bg-gray-300 ">
+                  <span className="flex w-full truncate">
+                    <Link
+                      to="boards/:boardId"
+                      className="flex-1 pl-1 text-2xl font-bold tracking-tight text-gray-900 truncate dark:text-white"
+                    >
+                      {item.title}
+                    </Link>
                   </span>
+
                   <BoardsBtns setModalBtnRef={setModalBtnRef} />
                 </div>
                 <div className="flex">
-                  <span className="flex-1 font-normal text-gray-700 truncate dark:text-gray-400">
+                  <span className="flex-1 p-2 font-normal text-gray-700 truncate dark:text-gray-400">
                     {item.description}
                   </span>
                 </div>
               </div>
-              {/* </Link> */}
             </li>
           ))}
         </ul>

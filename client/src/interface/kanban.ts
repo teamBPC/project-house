@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch } from "react";
 import { DraggableProvided } from "react-beautiful-dnd";
-import { IModalState, IBtnRefState } from "./modal";
+import { IBtnRefState } from "./modal";
 
 export interface IToDo {
   id: number;
@@ -19,14 +19,13 @@ export interface IBoardsItem {
 export interface IBoards {
   boards: IBoardsItem[];
 }
-export interface IBoard {
-  boardItem: IBoardItem[];
-}
-
 export interface IBoardItem {
   id: number;
   title: string;
   todos: IToDo[];
+}
+export interface IBoard {
+  boardItem: IBoardItem[];
 }
 
 export interface ICardProps {
@@ -42,4 +41,15 @@ export interface IBoardProps {
 export interface IBtnsProps {
   setModalBtnRef: Dispatch<React.SetStateAction<IBtnRefState>>;
   provided?: DraggableProvided;
+}
+
+export interface IProjectsItem {
+  id: number;
+  title: string;
+  description: string;
+  participants: string[];
+  updateAt: string;
+}
+export interface IProjects {
+  projects: IProjectsItem[];
 }

@@ -3,7 +3,8 @@ import toggleModeSlice from "./toggleModeSlice";
 import viewWidthSlice from "./viewWidthSlice";
 import boardItemSlice from "./boardItemSlice";
 import boardsSlice from "./boardsSlice";
-import modalOpenSlice from "./modalOpenSlice";
+import modalStateSlice from "./modalStateSlice";
+import projectsSlice from "./projectsSlice";
 
 const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
     viewWidthSlice: viewWidthSlice.reducer,
     boardItemSlice: boardItemSlice.reducer,
     boardsSlice: boardsSlice.reducer,
-    modalOpenSlice: modalOpenSlice.reducer,
+    projectsSlice: projectsSlice.reducer,
+    modalStateSlice: modalStateSlice.reducer,
   },
 });
 export default store;
