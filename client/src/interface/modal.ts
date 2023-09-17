@@ -30,6 +30,8 @@ export interface IModalStateItem {
   deleteBoardsModalOpen?: boolean;
   editProfileModalOpen?: boolean;
   createProjectModalOpen?: boolean;
+  editProjectsModalOpen?: boolean;
+  deleteProjectsModalOpen?: boolean;
 }
 export interface IModalState {
   modalState: IModalStateItem;
@@ -42,4 +44,6 @@ export interface IBtnRefState {
   deleteBoardItemBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
   editBoardsBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
   deleteBoardsBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
+  editProjectsBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
+  deleteProjectsBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
 }

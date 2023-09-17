@@ -3,15 +3,15 @@ import { IBtnsProps } from "../interface/kanban";
 import { modalHandle } from "./modal/common";
 import { useDispatch } from "react-redux";
 
-function BoardsBtns({ setModalBtnRef }: IBtnsProps) {
+function ProjectsBtns({ setModalBtnRef }: IBtnsProps) {
   const dispatch = useDispatch();
-  const editBoardsBtnRef = useRef<HTMLButtonElement>(null);
-  const deleteBoardsBtnRef = useRef<HTMLButtonElement>(null);
+  const editProjectsBtnRef = useRef<HTMLButtonElement>(null);
+  const deleteProjectsBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setModalBtnRef({
-      editBoardsBtnRef: editBoardsBtnRef,
-      deleteBoardsBtnRef: deleteBoardsBtnRef,
+      editProjectsBtnRef: editProjectsBtnRef,
+      deleteProjectsBtnRef: deleteProjectsBtnRef,
     });
   }, [setModalBtnRef]);
 
@@ -19,11 +19,8 @@ function BoardsBtns({ setModalBtnRef }: IBtnsProps) {
     <div className="flex items-center gap-1">
       <div>
         <button
-          ref={editBoardsBtnRef}
-          onClick={(e) => {
-            e.stopPropagation();
-            modalHandle(dispatch, "editBoardsModalOpen", true);
-          }}
+          ref={editProjectsBtnRef}
+          onClick={() => modalHandle(dispatch, "editProjectsModalOpen", true)}
           className="flex"
         >
           <span className="p-1 transition duration-100 ease-in-out rounded-md material-symbols-outlined hover:bg-gray-100">
@@ -33,8 +30,8 @@ function BoardsBtns({ setModalBtnRef }: IBtnsProps) {
       </div>
       <div>
         <button
-          ref={deleteBoardsBtnRef}
-          onClick={() => modalHandle(dispatch, "deleteBoardsModalOpen", true)}
+          ref={deleteProjectsBtnRef}
+          onClick={() => modalHandle(dispatch, "deleteProjectsModalOpen", true)}
           className="flex"
         >
           <span className="p-1 transition duration-100 ease-in-out rounded-md material-symbols-outlined hover:bg-gray-100">
@@ -46,4 +43,4 @@ function BoardsBtns({ setModalBtnRef }: IBtnsProps) {
   );
 }
 
-export default BoardsBtns;
+export default ProjectsBtns;

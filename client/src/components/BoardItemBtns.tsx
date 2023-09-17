@@ -1,8 +1,7 @@
 import { useRef, useEffect } from "react";
 import { IBtnsProps } from "../interface/kanban";
 import { modalHandle } from "./modal/common";
-import { useDispatch, useSelector } from "react-redux";
-import { IModalState } from "../interface/modal";
+import { useDispatch } from "react-redux";
 
 function BoardBtns({
   setModalBtnRef,

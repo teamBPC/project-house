@@ -42,3 +42,14 @@ export interface IBtnsProps {
   setModalBtnRef: Dispatch<React.SetStateAction<IBtnRefState>>;
   provided?: DraggableProvided;
 }
+
+export interface IProjectsItem {
+  id: number;
+  title: string;
+  description: string;
+  participants: string[];
+  updateAt: string;
+}
+export interface IProjects {
+  projects: IProjectsItem[];
+}
