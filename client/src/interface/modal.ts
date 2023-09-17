@@ -32,7 +32,7 @@ export interface IModalStateItem {
   createProjectModalOpen?: boolean;
 }
 export interface IModalState {
-  modalOpen: IModalStateItem;
+  modalState: IModalStateItem;
 }
 export interface IModalProps {
   modalState: IModalStateItem;

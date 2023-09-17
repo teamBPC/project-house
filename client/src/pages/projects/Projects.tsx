@@ -4,8 +4,8 @@ import { IModalState } from "../../interface/modal";
 
 function Projects() {
   const modalState = useSelector(
-    ({ modalOpenSlice }: { modalOpenSlice: IModalState }) => {
-      return modalOpenSlice.modalOpen;
+    ({ modalStateSlice }: { modalStateSlice: IModalState }) => {
+      return modalStateSlice.modalState;
     }
   );
   return (

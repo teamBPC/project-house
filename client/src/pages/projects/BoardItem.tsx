@@ -35,8 +35,8 @@ function Boards() {
     { index: 0, toTop: false },
   ]);
   const modalState = useSelector(
-    ({ modalOpenSlice }: { modalOpenSlice: IModalState }) => {
-      return modalOpenSlice.modalOpen;
+    ({ modalStateSlice }: { modalStateSlice: IModalState }) => {
+      return modalStateSlice.modalState;
     }
   );
   const [modalBtnRef, setModalBtnRef] = useState<IBtnRefState>({

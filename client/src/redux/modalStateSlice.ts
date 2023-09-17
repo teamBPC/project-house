@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IModalState } from "../interface/modal";
 
-const modalOpenSlice = createSlice({
-  name: "modalOpenSlice",
+const modalStateSlice = createSlice({
+  name: "modalStateSlice",
   initialState: {
-    modalOpen: {
+    modalState: {
       createTaskModalOpen: false,
       createBoardItemModalOpen: false,
       deleteBoardItemModalOpen: false,
@@ -17,9 +17,9 @@ const modalOpenSlice = createSlice({
   },
   reducers: {
     modalRedux: (state, action) => {
-      state.modalOpen = action.payload;
+      state.modalState = action.payload;
     },
   },
 });
-export default modalOpenSlice;
-export const { modalRedux } = modalOpenSlice.actions;
+export default modalStateSlice;
+export const { modalRedux } = modalStateSlice.actions;

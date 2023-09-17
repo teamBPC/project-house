@@ -2,7 +2,7 @@ import { Dispatch } from "react";
 import { IModalStateItem } from "../../interface/modal";
 import { FieldErrors, useForm } from "react-hook-form";
 import { AnyAction } from "redux";
-import { modalRedux } from "../../redux/modalOpenSlice";
+import { modalRedux } from "../../redux/modalStateSlice";
 
 export const modalHandle = (
   dispatch: Dispatch<AnyAction>,
