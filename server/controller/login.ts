@@ -6,47 +6,71 @@ import { User } from "../model/userVO";
 export async function loginId(req: Request, res: Response) {
     const user = new User(req.body);
     const isCheck = await loginQuery.loginCheckId(user);
-    console.log(isCheck);
-    return isCheck;
+    if (isCheck.length > 0) {
+        res.status(200).json({ "result": true });
+    } else {
+        res.status(202).json({ "result": false });
+    }
+    return res;
 }
 
 export async function loginPw(req: Request, res: Response) {
     const user = new User(req.body);
     const isCheck = await loginQuery.loginCheckPw(user);
-    console.log(isCheck);
-    return isCheck;
+    if (isCheck) {
+        res.status(200);
+    } else {
+        res.status(202);
+    }
+    return res.json({ "result": isCheck });
 }
 
 // 회원가입
 export async function joinTo(req: Request, res: Response) {
     const user = new User(req.body);
     const result = await loginQuery.joinUs(user);
-    console.log(result);
-    return result;
+    if (result) {
+        res.status(200);
+    } else {
+        res.status(202);
+    }
+    return res.json({ "result": result });
 }
 
 // 비밀번호 변경
 export async function changePw(req: Request, res: Response) {
     const user = new User(req.body);
     const result = await loginQuery.changePw(user);
-    console.log(result);
-    return result;
+    if (result) {
+        res.status(200);
+    } else {
+        res.status(202);
+    }
+    return res.json({ "result": result });
 }
 
 // 비밀번호 임의 재설정 후 리턴
 export async function changePwRan(req: Request, res: Response) {
     const user = new User(req.body);
     const result = await loginQuery.changePwRan(user);
-    console.log(result);
-    return result;
+    if (result.result) {
+        res.status(200);
+    } else {
+        res.status(202);
+    }
+    return res.json({ "result": result });
 }
 
 // 아이디 중복확인 checkId
 export async function checkId(req: Request, res: Response) {
     const user = new User(req.body);
     const result = await loginQuery.checkId(user);
-    console.log(result);
-    return result;
+    if (result) {
+        res.status(200);
+    } else {
+        res.status(202);
+    }
+    return res.json({ "result": result });
 }
 
 /** 
@@ -55,7 +79,7 @@ export async function checkId(req: Request, res: Response) {
  *   userEmail: string;
  *   )
  *   
- *   return boolean
+ *   return json : { result : boolean }
 */
 
 /** 
@@ -64,7 +88,7 @@ export async function checkId(req: Request, res: Response) {
  *   userEmail: string;
  *   userPw: string )
  *   
- *   return boolean
+ *   return json : { result : boolean }
 */
 
 /** 
@@ -74,7 +98,7 @@ export async function checkId(req: Request, res: Response) {
  *   userEmail: string;
  *   userNm : string ) 
  * 
- *   return boolean
+ *   return json : { result : boolean }
 */
 
 /** 
@@ -83,7 +107,7 @@ export async function checkId(req: Request, res: Response) {
  *   userPw: string 
  *   userEmail: string;)
  * 
- *   return boolean
+ *   return json : { result : boolean }
 */
 
 /** 
@@ -91,7 +115,7 @@ export async function checkId(req: Request, res: Response) {
  *   parameter (
  *   userEmail: string; )
  * 
- *   return string; //비밀번호 재발급
+ *   return json : { result : {result : boolean, ranPw:string} } //비밀번호 재발급
 */
 
 /** 
@@ -99,5 +123,5 @@ export async function checkId(req: Request, res: Response) {
  *   parameter (
  *   userEmail: string; )
  * 
- *   return boolean
+ *   return json : { result : boolean }
 */
