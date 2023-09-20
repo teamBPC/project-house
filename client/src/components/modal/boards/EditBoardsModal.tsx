@@ -1,13 +1,11 @@
 import { useRef, useEffect } from "react";
 import { cls } from "../../../libs/utils";
 import { IModalProps } from "../../../interface/modal";
-import { useModalForm, modalHandle } from "../common";
+import { modalHandle } from "../common";
+import { useModalForm } from "../../../libs/useModalForm";
 import { useDispatch } from "react-redux";
 
-function EditBoardsModal({
-  modalState,
-  modalBtnRef,
-}: IModalProps) {
+function EditBoardsModal({ modalState, modalBtnRef }: IModalProps) {
   const dispatch = useDispatch();
   const { register, handleSubmit, reset, onValid, onInvalid } = useModalForm();
 
@@ -19,9 +17,7 @@ function EditBoardsModal({
         modalRef.current &&
         !modalRef.current.contains(event.target as Node) &&
         modalBtnRef.editBoardsBtnRef.current &&
-        !modalBtnRef.editBoardsBtnRef.current.contains(
-          event.target as Node
-        )
+        !modalBtnRef.editBoardsBtnRef.current.contains(event.target as Node)
       ) {
         modalHandle(dispatch, "editBoardsModalOpen", false, reset);
       }

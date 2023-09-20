@@ -20,10 +20,7 @@ function BoardsBtns({ setModalBtnRef }: IBtnsProps) {
       <div>
         <button
           ref={editBoardsBtnRef}
-          onClick={(e) => {
-            e.stopPropagation();
-            modalHandle(dispatch, "editBoardsModalOpen", true);
-          }}
+          onClick={() => modalHandle(dispatch, "editBoardsModalOpen", true)}
           className="flex"
         >
           <span className="p-1 transition duration-100 ease-in-out rounded-md material-symbols-outlined hover:bg-gray-100">
