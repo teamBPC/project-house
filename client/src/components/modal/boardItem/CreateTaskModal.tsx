@@ -1,60 +1,32 @@
-import { FieldErrors, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { useState, useRef, useEffect } from "react";
-import { cls } from "../../libs/utils";
-import DatePicker from "../../components/Datepicker";
-import { CreateTaskForm, ModalProps } from "../../interface/modal";
+import { useRef } from "react";
+import { cls } from "../../../libs/utils";
+import DatePicker from "../../Datepicker";
+import { IModalProps } from "../../../interface/modal";
+import { useModalForm, modalHandle } from "../common";
+import { useDispatch } from "react-redux";
 
-function CreateTaskModal({ modalState, setModalState, btnRef }: ModalProps) {
-  const { register, handleSubmit, reset } = useForm<CreateTaskForm>();
-  const navigate = useNavigate();
-  const onValid = (data: CreateTaskForm) => {
-    console.log(data);
-    // reset();
-    navigate("/boards");
-  };
-  const [createBoardError, setCreateBoardError] = useState<string | null>(null);
-  const onInvalid = (error: FieldErrors) => {};
+function CreateTaskModal({
+  modalState
+}: IModalProps) {
+  const dispatch = useDispatch();
+  const { register, handleSubmit, reset, onValid, onInvalid } = useModalForm();
+
   const modalRef = useRef<HTMLDivElement | null>(null);
-
-  const cloesModalHandle = () => {
-    setModalState((prevState) => ({
-      ...prevState,
-      createModalOpen: false,
-    }));
-  };
-
-  useEffect(() => {
-    const outsideClickHandle = (event: MouseEvent) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target as Node) &&
-        btnRef.current &&
-        !btnRef.current.contains(event.target as Node)
-      ) {
-        cloesModalHandle();
-      }
-    };
-    if (modalState.createModalOpen) {
-      document.addEventListener("mousedown", outsideClickHandle);
-    }
-    return () => {
-      document.removeEventListener("mousedown", outsideClickHandle);
-    };
-  }, [modalState]);
 
   return (
     <>
       <div
         className={cls(
-          "fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-50 flex justify-center items-center",
-          modalState.createModalOpen ? "" : "hidden"
+          "fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen bg-black bg-opacity-50 flex justify-center items-center",
+          modalState.createTaskModalOpen ? "" : "hidden"
         )}
       >
         <div ref={modalRef} className="relative w-full max-w-2xl max-h-full">
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <button
-              onClick={() => cloesModalHandle()}
+              onClick={() =>
+                modalHandle(dispatch, "createTaskModalOpen", false, reset)
+              }
               type="button"
               className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
               data-modal-hide="authentication-modal"

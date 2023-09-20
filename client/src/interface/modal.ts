@@ -1,9 +1,14 @@
 import { Dispatch, SetStateAction, MutableRefObject } from "react";
-import { ModalState } from "./kanban";
 
-export interface CreateBoardForm {
-  boardName: string;
+export interface CreateBoardItemForm {
+  title: string;
 }
+
+export interface CreateBoardsForm {
+  title: string;
+  description: string;
+}
+
 export interface CreateTaskForm {
   title: string;
   manager: string;
@@ -12,12 +17,33 @@ export interface CreateTaskForm {
   end: string;
   description: string;
 }
-export interface ModalProps {
-  modalState: ModalState;
-  setModalState: Dispatch<SetStateAction<ModalState>>;
-  btnRef: MutableRefObject<HTMLButtonElement | null>;
-}
-
-export interface DeleteBoardForm {
+export interface DeleteBoardItemForm {
   boardName: string;
+}
+//Modal
+export interface IModalStateItem {
+  createTaskModalOpen?: boolean;
+  createBoardItemModalOpen?: boolean;
+  deleteBoardItemModalOpen?: boolean;
+  createBoardsModalOpen?: boolean;
+  editBoardsModalOpen?: boolean;
+  deleteBoardsModalOpen?: boolean;
+  editProfileModalOpen?: boolean;
+  createProjectModalOpen?: boolean;
+  editProjectsModalOpen?: boolean;
+  deleteProjectsModalOpen?: boolean;
+}
+export interface IModalState {
+  modalState: IModalStateItem;
+}
+export interface IModalProps {
+  modalState: IModalStateItem;
+  modalBtnRef?: any;
+}
+export interface IBtnRefState {
+  deleteBoardItemBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
+  editBoardsBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
+  deleteBoardsBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
+  editProjectsBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
+  deleteProjectsBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
 }

@@ -2,23 +2,23 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 import { IBoardProps } from "../../interface/kanban";
 import { cls } from "../../libs/utils";
 
-function Tasks({ board, index }: IBoardProps) {
+function Tasks({ boardItem, index }: IBoardProps) {
   return (
-    <Droppable droppableId={"card-" + board.id} type="card">
+    <Droppable droppableId={"card-" + boardItem.id} type="card">
       {(provided, snapshot) => (
         <ul
           ref={provided.innerRef}
           {...provided.droppableProps}
           className="flex flex-col gap-2 p-1"
         >
-          {board.todos.length === 0 ? (
+          {boardItem.todos.length === 0 ? (
             <span className="p-1">Board가 비어있습니다.</span>
           ) : (
-            board.todos.map((todo, index) => (
+            boardItem.todos.map((task, index) => (
               <Draggable
-                draggableId={todo.id + "-card"}
+                draggableId={task.id + "-card"}
                 index={index}
-                key={todo.id}
+                key={task.id}
               >
                 {(provided, snapshot) => (
                   <li
@@ -27,28 +27,30 @@ function Tasks({ board, index }: IBoardProps) {
                     {...provided.dragHandleProps}
                     className={cls(
                       "relative block p-2 overflow-hidden text-base bg-white border-l-4  rounded-md shadow-md cursor-pointer",
-                      todo.priority === "high"
+                      task.priority === "high"
                         ? "border-red-600"
-                        : todo.priority === "mid"
+                        : task.priority === "mid"
                         ? "border-yellow-500"
-                        : todo.priority === "low"
+                        : task.priority === "low"
                         ? "border-green-500"
                         : "border-slate-500"
                     )}
                   >
                     <div className="flex flex-col">
                       <div className="flex flex-col gap-4">
-                        <div className="flex items-end justify-between">
-                          <span className="text-lg font-bold">
-                            {todo.title}
+                        <div className="grid items-start justify-between max-w-full grid-cols-4">
+                          <span className="w-full col-span-3 text-lg font-bold break-all whitespace-pre-wrap text-clip">
+                            {task.title}
                           </span>
-                          <span className="text-sm font-light">{todo.end}</span>
+                          <span className="col-span-1 text-sm font-light text-end">
+                            {task.end}
+                          </span>
                         </div>
-                        <span className="w-full break-words whitespace-pre-wrap">
-                          {todo.description}
+                        <span className="w-full truncate hover:whitespace-pre-wrap hover:break-words">
+                          {task.description}
                         </span>
                         <div className="flex items-end justify-between font-bold">
-                          <span>{todo.manager}</span>
+                          <span>{task.manager}</span>
                           <div className="flex gap-2 text-gray-500">
                             <div className="flex items-center gap-1">
                               <span>

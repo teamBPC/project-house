@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import cors from 'cors';
 import loginRouter from "./routes/login";
+import userRouter from "./routes/user";
 //import dotenv from 'dotenv';
 
 //const config = dotenv.config();
@@ -17,5 +18,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use("/login", loginRouter);
+app.use("/user", userRouter);
 
-app.listen(3001)
+app.listen(20492)

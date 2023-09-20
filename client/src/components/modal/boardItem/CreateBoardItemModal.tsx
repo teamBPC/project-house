@@ -1,30 +1,16 @@
-import { useRef, useEffect, useState } from "react";
-import { cls } from "../../libs/utils";
-import { FieldErrors, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { CreateBoardForm } from "../../interface/modal";
+import { useRef, useEffect } from "react";
+import { cls } from "../../../libs/utils";
+import { IModalProps } from "../../../interface/modal";
+import { useModalForm, modalHandle } from "../common";
+import { useDispatch } from "react-redux";
 
+function CreateBoardModal({ modalState }: IModalProps) {
+  const dispatch = useDispatch();
+  const { register, handleSubmit, reset, onValid, onInvalid } = useModalForm();
 
+  const modalRef = useRef<HTMLDivElement>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
 
-function CreateBoardModal() {
-  const { register, handleSubmit, reset } = useForm<CreateBoardForm>();
-  const navigate = useNavigate();
-  const onValid = (data: CreateBoardForm) => {
-    reset();
-    navigate("/boards");
-  };
-  const [createBoardError, setCreateBoardError] = useState<string | null>(null);
-  const onInvalid = (error: FieldErrors) => {};
-  const modalRef = useRef<HTMLDivElement | null>(null);
-  const btnRef = useRef<HTMLButtonElement | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModalHandle = () => {
-    setIsModalOpen(() => true);
-  };
-  const closeModalHandle = () => {
-    setIsModalOpen(() => false);
-    reset();
-  };
   useEffect(() => {
     const outsideClickHandle = (event: MouseEvent) => {
       if (
@@ -33,21 +19,27 @@ function CreateBoardModal() {
         btnRef.current &&
         !btnRef.current.contains(event.target as Node)
       ) {
-        closeModalHandle();
+        modalHandle(dispatch, "createBoardItemModalOpen", false, reset);
       }
     };
-    if (isModalOpen) {
+    if (modalState.createBoardItemModalOpen) {
       document.addEventListener("mousedown", outsideClickHandle);
     }
     return () => {
       document.removeEventListener("mousedown", outsideClickHandle);
     };
-  }, [isModalOpen]);
+  }, [dispatch, modalState.createBoardItemModalOpen, reset]);
 
   return (
     <>
       <div className="fixed z-40 bottom-4 right-4">
-        <button type="button" ref={btnRef} onClick={() => openModalHandle()}>
+        <button
+          type="button"
+          ref={btnRef}
+          onClick={() =>
+            modalHandle(dispatch, "createBoardItemModalOpen", true)
+          }
+        >
           <span className="p-4 text-white bg-blue-600 rounded-full material-symbols-outlined">
             add
           </span>
@@ -55,14 +47,16 @@ function CreateBoardModal() {
       </div>
       <div
         className={cls(
-          "fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-50 flex justify-center items-center",
-          isModalOpen ? "" : "hidden"
+          "fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen bg-black bg-opacity-50 flex justify-center items-center",
+          modalState.createBoardItemModalOpen ? "" : "hidden"
         )}
       >
         <div ref={modalRef} className="relative w-full max-w-md max-h-full">
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <button
-              onClick={() => closeModalHandle()}
+              onClick={() =>
+                modalHandle(dispatch, "createBoardItemModalOpen", false, reset)
+              }
               type="button"
               className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
               data-modal-hide="authentication-modal"
@@ -86,7 +80,7 @@ function CreateBoardModal() {
             </button>
             <div className="px-6 py-6 lg:px-8">
               <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-                새 보드 생성하기
+                새 보드 아이템 생성하기
               </h3>
               <form
                 onSubmit={handleSubmit(onValid, onInvalid)}
@@ -96,8 +90,8 @@ function CreateBoardModal() {
                 <div>
                   <input
                     type="text"
-                    id="boardName"
-                    {...register("boardName", { required: true })}
+                    id="title"
+                    {...register("title", { required: true })}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
                     required
                   />

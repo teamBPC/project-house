@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/profile/Profile";
 import SideBar from "./components/SideBar";
 import Projects from "./pages/projects/Projects";
+import Board from "./pages/projects/BoardItem";
 import Boards from "./pages/projects/Boards";
 
 function Router() {
@@ -20,7 +21,8 @@ function Router() {
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="projects" element={<Projects />}></Route>
-            <Route path="boards" element={<Boards />}></Route>
+            <Route path="Boards" element={<Boards />}></Route>
+            <Route path="Board" element={<Board />}></Route>
             <Route path="profile" element={<Profile />}></Route>
             <Route path="login-id" element={<LoginID />}></Route>
             <Route path="login-pw" element={<LoginPW />}></Route>

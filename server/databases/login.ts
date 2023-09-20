@@ -11,12 +11,10 @@ export async function loginCheckId(importUser: User) {
             user_email: importUser.userEmail
         }
     });
-    console.log(user)
     if (user.length == 0) {
-        console.log("존재하지 않는 아이디입니다.");
-        return false;
+        return user;
     }
-    return true;
+    return user;
 }
 
 // 사용자 로그인 PW
@@ -31,10 +29,8 @@ export async function loginCheckPw(importUser: User) {
     const vertified = await verifyPassword(importUser.userPw, user[0].user_pwHash, user[0].user_pw);
 
     if (vertified) {
-        console.log("로그인 성공.");
         return true;
     } else {
-        console.log("비밀번호 실패.");
         return false;
     }
 }
@@ -52,6 +48,7 @@ export async function joinUs(User: User) {
             user_status: "4"
         },
     });
+
     if (result != null) return true;
     return false;
 }
@@ -87,8 +84,11 @@ export async function changePwRan(User: User) {
             user_pwHash: pwData.salt
         }
     });
-
-    return ranPw;
+    let data = {
+        result: result,
+        ranPw: ranPw
+    }
+    return data;
 }
 // 아이디 중복 확인
 export async function checkId(User: User) {
