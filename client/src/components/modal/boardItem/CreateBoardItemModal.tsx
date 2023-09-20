@@ -1,8 +1,9 @@
 import { useRef, useEffect } from "react";
 import { cls } from "../../../libs/utils";
 import { IModalProps } from "../../../interface/modal";
-import { useModalForm, modalHandle } from "../common";
+import { modalHandle } from "../common";
 import { useDispatch } from "react-redux";
+import { useModalForm } from "../../../libs/useModalForm";
 
 function CreateBoardModal({ modalState }: IModalProps) {
   const dispatch = useDispatch();

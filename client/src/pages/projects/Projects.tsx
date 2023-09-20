@@ -1,11 +1,16 @@
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import CreateProjectModal from "../../components/modal/projects/CreateProjectModal";
-import { IBtnRefState, IModalState } from "../../interface/modal";
+import {
+  IBtnRefState,
+  IHoverModalState,
+  IModalState,
+} from "../../interface/modal";
 import { IProjects } from "../../interface/kanban";
 import { Link } from "react-router-dom";
 import ProjectsBtns from "../../components/ProjectsBtns";
 import { cls } from "../../libs/utils";
+import { hoverModalHandle } from "./common";
 
 function Projects() {
   const projects = useSelector(
@@ -33,20 +38,9 @@ function Projects() {
     }
   };
 
-  const [isModalOpen, setIsModalOpen] = useState<boolean[]>(
+  const [isModalOpen, setIsModalOpen] = useState(
     Array(projects.length).fill(false)
   );
-  const handleHover = (index: number) => {
-    const newHoverStates = [...isModalOpen];
-    newHoverStates[index] = true;
-    setIsModalOpen(newHoverStates);
-  };
-
-  const handleHoverOut = (index: number) => {
-    const newHoverStates = [...isModalOpen];
-    newHoverStates[index] = false;
-    setIsModalOpen(newHoverStates);
-  };
 
   return (
     <>
@@ -74,40 +68,46 @@ function Projects() {
                 </span>
                 <div className="grid items-center justify-between w-full grid-cols-2 p-2 truncate">
                   <div
-                    onMouseEnter={() => handleHover(index)}
-                    onMouseLeave={() => handleHoverOut(index)}
+                    onMouseEnter={() =>
+                      hoverModalHandle(isModalOpen, setIsModalOpen, index, true)
+                    }
+                    onMouseLeave={() =>
+                      hoverModalHandle(
+                        isModalOpen,
+                        setIsModalOpen,
+                        index,
+                        false
+                      )
+                    }
                   >
                     {formatParticipants(item.participants)}
                   </div>
-                  <div
-                    className="absolute z-50 left-2 top-[140px]"
-                    onMouseEnter={() => handleHover(index)}
-                    onMouseLeave={() => handleHoverOut(index)}
-                  >
-                    <div
-                      className={cls(
-                        "my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 ",
-                        isModalOpen[index] ? "" : "hidden"
-                      )}
-                      id="user-dropdown"
-                    >
-                      <div className="px-4 py-3">
-                        <span className="block max-w-sm text-sm text-gray-900 break-words whitespace-pre-wrap dark:text-white ">
-                          {item.participants
-                            .map((member, index) =>
-                              item.participants.length === index + 1
-                                ? member
-                                : member + ", "
-                            )
-                            .join("")}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+
                   <span className="text-sm text-right whitespace-no-wrap">
                     <span className="text-gray-400 ">Update</span>{" "}
                     {item.updateAt}
                   </span>
+                </div>
+                <div className="absolute z-50 left-2 top-[160px]">
+                  <div
+                    className={cls(
+                      "text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 ",
+                      isModalOpen[index] ? "" : "hidden"
+                    )}
+                    id="user-dropdown"
+                  >
+                    <div className="px-4 py-3">
+                      <span className="block max-w-sm text-sm text-gray-900 break-words whitespace-pre-wrap dark:text-white ">
+                        {item.participants
+                          .map((member, index) =>
+                            item.participants.length === index + 1
+                              ? member
+                              : member + ", "
+                          )
+                          .join("")}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </li>
