@@ -1,6 +1,7 @@
 import { useRef, useEffect } from "react";
 import { cls } from "../../../libs/utils";
-import { useModalForm, modalHandle } from "../common";
+import { modalHandle } from "../common";
+import { useModalForm } from "../../../libs/useModalForm";
 import { IModalProps } from "../../../interface/modal";
 import { useDispatch } from "react-redux";
 
@@ -36,9 +37,7 @@ function CreateBoardsModal({ modalState }: IModalProps) {
         <button
           type="button"
           ref={btnRef}
-          onClick={() =>
-            modalHandle(dispatch, "createBoardsModalOpen", true)
-          }
+          onClick={() => modalHandle(dispatch, "createBoardsModalOpen", true)}
         >
           <span className="p-4 text-white bg-blue-600 rounded-full material-symbols-outlined">
             add
@@ -55,12 +54,7 @@ function CreateBoardsModal({ modalState }: IModalProps) {
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <button
               onClick={() =>
-                modalHandle(
-                  dispatch,
-                  "createBoardsModalOpen",
-                  false,
-                  reset
-                )
+                modalHandle(dispatch, "createBoardsModalOpen", false, reset)
               }
               type="button"
               className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"

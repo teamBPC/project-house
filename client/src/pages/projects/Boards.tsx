@@ -7,6 +7,8 @@ import BoardsBtns from "../../components/BoardsBtns";
 import DeleteBoardsModal from "../../components/modal/boards/DeleteBoardsModal";
 import CreateBoardsModal from "../../components/modal/boards/CraeteBoardsModal";
 import EditBoardsModal from "../../components/modal/boards/EditBoardsModal";
+import { hoverModalHandle } from "./common";
+import { cls } from "../../libs/utils";
 
 function Boards() {
   const boards = useSelector(({ boardsSlice }: { boardsSlice: IBoards }) => {
@@ -22,6 +24,10 @@ function Boards() {
     deleteBoardsBtnRef: null,
   });
 
+  const [isModalOpen, setIsModalOpen] = useState(
+    Array(boards.length).fill(false)
+  );
+
   return (
     <>
       <div className="w-full p-4">
@@ -29,13 +35,13 @@ function Boards() {
           {boards.map((item, index) => (
             <li
               key={item.id}
-              className="block p-2 bg-gray-100 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+              className="relative block p-2 bg-gray-100 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
             >
               <div className="flex flex-col gap-4">
                 <div className="z-20 flex items-center justify-between p-1 transition duration-100 ease-in-out rounded-md hover:bg-gray-300 ">
                   <span className="flex w-full truncate">
                     <Link
-                      to="boards/:boardId"
+                      to=":boardId"
                       className="flex-1 pl-1 text-2xl font-bold tracking-tight text-gray-900 truncate dark:text-white"
                     >
                       {item.title}
@@ -45,9 +51,37 @@ function Boards() {
                   <BoardsBtns setModalBtnRef={setModalBtnRef} />
                 </div>
                 <div className="flex">
-                  <span className="flex-1 p-2 font-normal text-gray-700 truncate dark:text-gray-400">
+                  <span
+                    className="flex-1 p-2 font-normal text-gray-700 truncate dark:text-gray-400"
+                    onMouseEnter={() =>
+                      hoverModalHandle(isModalOpen, setIsModalOpen, index, true)
+                    }
+                    onMouseLeave={() =>
+                      hoverModalHandle(
+                        isModalOpen,
+                        setIsModalOpen,
+                        index,
+                        false
+                      )
+                    }
+                  >
                     {item.description}
                   </span>
+                </div>
+                <div className="absolute z-50 left-2 top-[100px]">
+                  <div
+                    className={cls(
+                      " text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 ",
+                      isModalOpen[index] ? "" : "hidden"
+                    )}
+                    id="user-dropdown"
+                  >
+                    <div className="px-4 py-3">
+                      <span className="block max-w-sm text-sm text-gray-900 break-words whitespace-pre-wrap dark:text-white ">
+                        {item.description}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </li>

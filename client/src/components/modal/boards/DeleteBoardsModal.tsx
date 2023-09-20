@@ -1,13 +1,11 @@
 import { useRef, useEffect } from "react";
 import { cls } from "../../../libs/utils";
 import { IModalProps } from "../../../interface/modal";
-import { useModalForm, modalHandle } from "../common";
+import { modalHandle } from "../common";
+import { useModalForm } from "../../../libs/useModalForm";
 import { useDispatch } from "react-redux";
 
-function DeleteBoardsModal({
-  modalState,
-  modalBtnRef,
-}: IModalProps) {
+function DeleteBoardsModal({ modalState, modalBtnRef }: IModalProps) {
   const dispatch = useDispatch();
   const { register, handleSubmit, reset, onValid, onInvalid } = useModalForm();
 
@@ -19,9 +17,7 @@ function DeleteBoardsModal({
         modalRef.current &&
         !modalRef.current.contains(event.target as Node) &&
         modalBtnRef.deleteBoardsBtnRef.current &&
-        !modalBtnRef.deleteBoardsBtnRef.current.contains(
-          event.target as Node
-        )
+        !modalBtnRef.deleteBoardsBtnRef.current.contains(event.target as Node)
       ) {
         modalHandle(dispatch, "deleteBoardsModalOpen", false, reset);
       }
@@ -32,7 +28,12 @@ function DeleteBoardsModal({
     return () => {
       document.removeEventListener("mousedown", outsideClickHandle);
     };
-  }, [modalState.deleteBoardsModalOpen, reset, dispatch, modalBtnRef.deleteBoardsBtnRef]);
+  }, [
+    modalState.deleteBoardsModalOpen,
+    reset,
+    dispatch,
+    modalBtnRef.deleteBoardsBtnRef,
+  ]);
 
   return (
     <div

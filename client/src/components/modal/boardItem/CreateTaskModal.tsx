@@ -2,12 +2,11 @@ import { useRef } from "react";
 import { cls } from "../../../libs/utils";
 import DatePicker from "../../Datepicker";
 import { IModalProps } from "../../../interface/modal";
-import { useModalForm, modalHandle } from "../common";
+import { modalHandle } from "../common";
+import { useModalForm } from "../../../libs/useModalForm";
 import { useDispatch } from "react-redux";
 
-function CreateTaskModal({
-  modalState
-}: IModalProps) {
+function CreateTaskModal({ modalState }: IModalProps) {
   const dispatch = useDispatch();
   const { register, handleSubmit, reset, onValid, onInvalid } = useModalForm();
 

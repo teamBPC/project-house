@@ -20,7 +20,7 @@ export interface CreateTaskForm {
 export interface DeleteBoardItemForm {
   boardName: string;
 }
-//Modal
+
 export interface IModalStateItem {
   createTaskModalOpen?: boolean;
   createBoardItemModalOpen?: boolean;
@@ -46,4 +46,11 @@ export interface IBtnRefState {
   deleteBoardsBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
   editProjectsBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
   deleteProjectsBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
+}
+
+export interface IHoverModalState {
+  projectsHoverModalOpen?: boolean;
+  boardsHoverModalOpen?: boolean;
+  boardItemModalOpen?: boolean;
+  taskHoverModalOpen?: boolean;
 }

@@ -1,7 +1,8 @@
 import { useRef, useEffect } from "react";
 import { cls } from "../../../libs/utils";
 import { IModalProps } from "../../../interface/modal";
-import { modalHandle, useModalForm } from "../common";
+import { modalHandle } from "../common";
+import { useModalForm } from "../../../libs/useModalForm";
 import { useDispatch } from "react-redux";
 
 function CreateProjectModal({ modalState }: IModalProps) {

@@ -1,13 +1,11 @@
 import { useRef, useEffect } from "react";
 import { cls } from "../../../libs/utils";
 import { IModalProps } from "../../../interface/modal";
-import { useModalForm, modalHandle } from "../common";
+import { modalHandle } from "../common";
+import { useModalForm } from "../../../libs/useModalForm";
 import { useDispatch } from "react-redux";
 
-function DeleteBoardModal({
-  modalState,
-  modalBtnRef,
-}: IModalProps) {
+function DeleteBoardModal({ modalState, modalBtnRef }: IModalProps) {
   const dispatch = useDispatch();
   const { register, handleSubmit, reset, onValid, onInvalid } = useModalForm();
 
@@ -32,7 +30,12 @@ function DeleteBoardModal({
     return () => {
       document.removeEventListener("mousedown", outsideClickHandle);
     };
-  }, [modalState.deleteBoardItemModalOpen, reset, dispatch, modalBtnRef.deleteBoardItemBtnRef]);
+  }, [
+    modalState.deleteBoardItemModalOpen,
+    reset,
+    dispatch,
+    modalBtnRef.deleteBoardItemBtnRef,
+  ]);
   return (
     <div
       className={cls(

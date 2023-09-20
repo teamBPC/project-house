@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { modalHandle, useModalForm } from "../common";
+import { modalHandle } from "../common";
+import { useModalForm } from "../../../libs/useModalForm";
 import { cls } from "../../../libs/utils";
 import { useDispatch } from "react-redux";
 import { IModalProps } from "../../../interface/modal";

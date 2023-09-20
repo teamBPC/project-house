@@ -1,4 +1,4 @@
-import { Dispatch } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { DraggableProvided } from "react-beautiful-dnd";
 import { IBtnRefState } from "./modal";
 
@@ -39,7 +39,7 @@ export interface IBoardProps {
 }
 
 export interface IBtnsProps {
-  setModalBtnRef: Dispatch<React.SetStateAction<IBtnRefState>>;
+  setModalBtnRef: Dispatch<SetStateAction<IBtnRefState>>;
   provided?: DraggableProvided;
 }
 
