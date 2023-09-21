@@ -1,5 +1,4 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { FieldErrors } from "react-hook-form";
 import { useState } from "react";
 import { cls } from "../../libs/utils";
 import { JoinForm } from "../../interface/porfile";

@@ -83,6 +83,12 @@ function DeleteBoardModal({ modalState, modalBtnRef }: IModalProps) {
               action="#"
             >
               <div>
+                <label
+                  htmlFor="boardName"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  삭제하시려면 아래에 ""을/를 입력하세요.
+                </label>
                 <input
                   type="text"
                   id="boardName"
