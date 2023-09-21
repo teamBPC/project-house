@@ -1,72 +1,69 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { FieldErrors, useForm } from "react-hook-form";
+import { FieldErrors } from "react-hook-form";
 import { useState } from "react";
 import { cls } from "../../libs/utils";
 import { JoinForm } from "../../interface/porfile";
-import sendData from "../../libs/sendData";
 import { useCommonForm } from "../../libs/useCommonForm";
 
 function Join() {
   const [showPassword, setShowPassword] = useState(false);
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [nameError, setNameError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
 
   const { register, handleSubmit, reset, submitFormData } = useCommonForm();
   const navigate = useNavigate();
   const { state } = useLocation();
+  const userEmail = state?.userEmail || "";
 
   const handleTogglePassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
   const onValid = async (data: JoinForm) => {
+    const emailRegex = /^[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z]{2,}$/;
+    const koreanRegex = /[가-힣]/;
+    if (koreanRegex.test(data.userEmail)) {
+      setEmailError("이메일 주소에 한글이 포함되어 있습니다.");
+    } else if (!emailRegex.test(data.userEmail)) {
+      setEmailError("올바른 이메일 형식이 아닙니다.");
+    } else {
+      setEmailError(null);
+    }
+    const nameRegex = /^[A-Za-z가-힣]*$/;
+    if (!nameRegex.test(data.userNm)) {
+      setNameError("이름에는 특수 문자나 공백을 포함할 수 없습니다.");
+      return;
+    } else {
+      setNameError(null);
+    }
+    const passwordRegex = /^(?=.*[A-Za-z].*[A-Za-z])(?=.*\d.*\d.*\d.*\d)/;
+    if (!passwordRegex.test(data.userPw)) {
+      setPasswordError(
+        "비밀번호는 영문 2개 이상과 숫자 4개 이상을 포함해야 합니다."
+      );
+      return;
+    } else {
+      setPasswordError(null);
+    }
     const dataCustomer = {
-      userId: data.userEmail,
+      userEmail: data.userEmail,
       userPw: data.userPw,
       userNm: data.userNm,
-      userEmail: data.userEmail,
     };
     const res = await submitFormData(
       "http://localhost:20492/login/join",
       dataCustomer
     );
 
-    if (res) navigate("/");
+    if (res) {
+      alert("가입이 완료되었습니다.");
+      navigate("/login-id");
+    } else {
+      alert("형식이 잘못되었습니다.");
+      reset();
+    }
   };
 
-  const [emailError, setEmailError] = useState<string | null>(null);
-  const [nameError, setNameError] = useState<string | null>(null);
-  const [passwordError, setPasswordError] = useState<string | null>(null);
-  const onInvalid = (error: FieldErrors) => {
-    if (error.email) {
-      if (error.email.type === "minLength") {
-        setEmailError("이메일은 10글자 이상이어야 합니다.");
-      } else if (error.email.type === "maxLength") {
-        setEmailError("이메일은 50글자 이하이어야 합니다.");
-      } else {
-        setEmailError(null);
-      }
-    } else {
-      setEmailError(null);
-    }
-    if (error.name) {
-      if (error.name.type === "maxLength") {
-        setNameError("이름은 10글자 이하이어야 합니다.");
-      } else {
-        setNameError(null);
-      }
-    } else {
-      setNameError(null);
-    }
-    if (error.password) {
-      if (error.password.type === "minLength") {
-        setPasswordError("비밀번호는 3글자 이상이어야 합니다.");
-      } else if (error.password.type === "maxLength") {
-        setPasswordError("비밀번호는 30글자 이하이어야 합니다.");
-      } else {
-        setPasswordError(null);
-      }
-    } else {
-      setPasswordError(null);
-    }
-  };
   return (
     <div className="flex items-center justify-center w-screen h-screen">
       <div className="flex flex-col items-center">
@@ -75,7 +72,7 @@ function Join() {
             PROJECT HOUSE
           </span>
         </div>
-        <form onSubmit={handleSubmit(onValid, onInvalid)} className="w-full">
+        <form onSubmit={handleSubmit(onValid)} className="w-full">
           <div className="mb-6">
             <label
               htmlFor="userEmail"
@@ -93,10 +90,9 @@ function Join() {
               type="text"
               {...register("userEmail", {
                 required: true,
-                minLength: 15,
                 maxLength: 50,
               })}
-              defaultValue={state.userEmail || ""}
+              defaultValue={userEmail}
               className={cls(
                 "bg-gray-50   border text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white",
                 emailError
@@ -160,7 +156,6 @@ function Join() {
                   type={showPassword ? "text" : "password"}
                   {...register("userPw", {
                     required: true,
-                    minLength: 3,
                     maxLength: 30,
                   })}
                   className={cls(
