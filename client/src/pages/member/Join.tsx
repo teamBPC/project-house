@@ -1,14 +1,17 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FieldErrors, useForm } from "react-hook-form";
 import { useState } from "react";
 import { cls } from "../../libs/utils";
 import { JoinForm } from "../../interface/porfile";
 import sendData from "../../libs/sendData";
+import { useCommonForm } from "../../libs/useCommonForm";
 
 function Join() {
-  const { register, handleSubmit } = useForm<JoinForm>();
   const [showPassword, setShowPassword] = useState(false);
+
+  const { register, handleSubmit, reset, submitFormData } = useCommonForm();
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const handleTogglePassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -20,19 +23,14 @@ function Join() {
       userNm: data.userNm,
       userEmail: data.userEmail,
     };
-    await sendData(
-          "http://localhost:4000/login/join",
-          dataCustomer
-        );
-    // await fetch("http://localhost:3001/login/join", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(userData),
-    // });
-    // navigate("/");
+    const res = await submitFormData(
+      "http://localhost:20492/login/join",
+      dataCustomer
+    );
+
+    if (res) navigate("/");
   };
+
   const [emailError, setEmailError] = useState<string | null>(null);
   const [nameError, setNameError] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
@@ -98,6 +96,7 @@ function Join() {
                 minLength: 15,
                 maxLength: 50,
               })}
+              defaultValue={state.userEmail || ""}
               className={cls(
                 "bg-gray-50   border text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white",
                 emailError

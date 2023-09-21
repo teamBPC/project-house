@@ -1,20 +1,31 @@
-import { Link, useNavigate } from "react-router-dom";
-import { FieldErrors, useForm } from "react-hook-form";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FieldErrors } from "react-hook-form";
 import { LoginPwForm } from "../../interface/porfile";
-import sendData from "../../libs/sendData";
+import { useCommonForm } from "../../libs/useCommonForm";
 
 function LoginPW() {
-  const { register, handleSubmit } = useForm<LoginPwForm>();
+  const { register, handleSubmit, reset, submitFormData } = useCommonForm();
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const onValid = async (data: LoginPwForm) => {
     const dataCustomer = {
+      userEmail: state.userEmail,
       userPw: data.userPw,
     };
-    await sendData("http://localhost:4000/login/pw", dataCustomer);
-    // navigate("/");
+    const res = await submitFormData(
+      "http://localhost:20492/login/pw",
+      dataCustomer
+    );
+    if (res) navigate("/");
+    else {
+      alert("비밀번호가 일치하지 않습니다.");
+      reset();
+    }
   };
+  
   const onInvalid = (error: FieldErrors) => {};
+  
   return (
     <div className="flex items-center justify-center w-screen h-screen">
       <div className="flex flex-col items-center">

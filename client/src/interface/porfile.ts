@@ -1,5 +1,5 @@
 export interface LoginIdForm {
-  userId: string;
+  userEmail: string;
 }
 
 export interface LoginPwForm {

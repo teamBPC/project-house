@@ -10,7 +10,7 @@ export default async function sendData(url: string, data: any) {
     });
 
     const responseData = await response.json();
-    return responseData;
+    return responseData.result;
   } catch (error) {
     console.log(error);
   }

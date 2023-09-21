@@ -1,14 +1,17 @@
 import { useState, useEffect, useRef } from "react";
 import { modalHandle } from "../common";
-import { useModalForm } from "../../../libs/useModalForm";
 import { cls } from "../../../libs/utils";
 import { useDispatch } from "react-redux";
 import { IModalProps } from "../../../interface/modal";
+import { useCommonForm } from "../../../libs/useCommonForm";
+import { FieldErrors } from "react-hook-form";
 
 function EditProfileModal({ modalState }: IModalProps) {
   const dispatch = useDispatch();
-  const { register, handleSubmit, reset, onValid, onInvalid } = useModalForm();
-
+  const { register, handleSubmit, reset, submitFormData } = useCommonForm();
+  const onValid = async () => {};
+  const onInvalid = (error: FieldErrors) => {};
+  
   const modalRef = useRef<HTMLDivElement | null>(null);
   const btnRef = useRef<HTMLButtonElement | null>(null);
 

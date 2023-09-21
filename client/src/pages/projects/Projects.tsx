@@ -3,7 +3,6 @@ import { useState } from "react";
 import CreateProjectModal from "../../components/modal/projects/CreateProjectModal";
 import {
   IBtnRefState,
-  IHoverModalState,
   IModalState,
 } from "../../interface/modal";
 import { IProjects } from "../../interface/kanban";

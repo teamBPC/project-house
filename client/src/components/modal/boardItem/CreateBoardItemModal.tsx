@@ -3,11 +3,14 @@ import { cls } from "../../../libs/utils";
 import { IModalProps } from "../../../interface/modal";
 import { modalHandle } from "../common";
 import { useDispatch } from "react-redux";
-import { useModalForm } from "../../../libs/useModalForm";
+import { useCommonForm } from "../../../libs/useCommonForm";
+import { FieldErrors } from "react-hook-form";
 
 function CreateBoardModal({ modalState }: IModalProps) {
   const dispatch = useDispatch();
-  const { register, handleSubmit, reset, onValid, onInvalid } = useModalForm();
+  const { register, handleSubmit, reset, submitFormData } = useCommonForm();
+  const onValid = async () => {};
+  const onInvalid = (error: FieldErrors) => {};
 
   const modalRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);

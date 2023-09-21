@@ -2,12 +2,16 @@ import { useRef, useEffect } from "react";
 import { cls } from "../../../libs/utils";
 import { IModalProps } from "../../../interface/modal";
 import { modalHandle } from "../common";
-import { useModalForm } from "../../../libs/useModalForm";
 import { useDispatch } from "react-redux";
+import { useCommonForm } from "../../../libs/useCommonForm";
+import { FieldErrors } from "react-hook-form";
 
 function CreateProjectModal({ modalState }: IModalProps) {
   const dispatch = useDispatch();
-  const { register, handleSubmit, reset, onValid, onInvalid } = useModalForm();
+  const { register, handleSubmit, reset, submitFormData } = useCommonForm();
+  const onValid = async () => {};
+  const onInvalid = (error: FieldErrors) => {};
+
   const modalRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
 
