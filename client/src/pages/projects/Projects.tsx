@@ -1,15 +1,14 @@
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import CreateProjectModal from "../../components/modal/projects/CreateProjectModal";
-import {
-  IBtnRefState,
-  IModalState,
-} from "../../interface/modal";
+import { IBtnRefState, IModalState } from "../../interface/modal";
 import { IProjects } from "../../interface/kanban";
 import { Link } from "react-router-dom";
 import ProjectsBtns from "../../components/ProjectsBtns";
 import { cls } from "../../libs/utils";
 import { hoverModalHandle } from "./common";
+import EditProjectModal from "../../components/modal/projects/EditProjectModal";
+import DeleteProjectModal from "../../components/modal/projects/DeleteProjectModal";
 
 function Projects() {
   const projects = useSelector(
@@ -114,6 +113,8 @@ function Projects() {
         </ul>
       </div>
       <CreateProjectModal modalState={modalState} />
+      <EditProjectModal modalState={modalState} modalBtnRef={modalBtnRef} />
+      <DeleteProjectModal modalState={modalState} modalBtnRef={modalBtnRef} />
     </>
   );
 }
