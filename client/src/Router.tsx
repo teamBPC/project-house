@@ -1,5 +1,4 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import { Suspense, lazy } from "react";
 import LoginID from "./pages/member/LoginID";
 import LoginPW from "./pages/member/LoginPW";
 import Join from "./pages/member/Join";
@@ -17,18 +16,16 @@ function Router() {
       <Header />
       <div className="flex">
         <SideBar />
-        <Suspense fallback={<></>}>
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="projects" element={<Projects />}></Route>
-            <Route path="Boards" element={<Boards />}></Route>
-            <Route path="Board" element={<Board />}></Route>
-            <Route path="profile" element={<Profile />}></Route>
-            <Route path="login-id" element={<LoginID />}></Route>
-            <Route path="login-pw" element={<LoginPW />}></Route>
-            <Route path="join" element={<Join />}></Route>
-          </Routes>
-        </Suspense>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="projects" element={<Projects />}></Route>
+          <Route path="Boards" element={<Boards />}></Route>
+          <Route path="Board" element={<Board />}></Route>
+          <Route path="profile" element={<Profile />}></Route>
+          <Route path="login-id" element={<LoginID />}></Route>
+          <Route path="login-pw" element={<LoginPW />}></Route>
+          <Route path="join" element={<Join />}></Route>
+        </Routes>
       </div>
     </BrowserRouter>
   );
