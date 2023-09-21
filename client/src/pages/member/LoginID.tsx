@@ -2,18 +2,28 @@ import { Link, useNavigate } from "react-router-dom";
 import { FieldErrors, useForm } from "react-hook-form";
 import sendData from "../../libs/sendData";
 import { LoginIdForm } from "../../interface/porfile";
+import { useCommonForm } from "../../libs/useCommonForm";
 
 function LoginID() {
-  const { register, handleSubmit } = useForm<LoginIdForm>();
+  const { register, handleSubmit, reset, submitFormData } = useCommonForm();
   const navigate = useNavigate();
 
   const onValid = async (data: LoginIdForm) => {
     const dataCustomer = {
-      userId: data.userId,
+      userEmail: data.userEmail,
     };
-    const res = await sendData("http://localhost:4000/login/id", dataCustomer);
-    // navigate("/login-pw");
+    const res = await submitFormData(
+      "http://localhost:20492/login/id",
+      dataCustomer
+    );
+    if (res) navigate("/login-pw", { state: { userEmail: data.userEmail } });
+    else {
+      alert("아이디가 존재하지 않습니다.");
+      reset();
+      navigate("/join", { state: { userEmail: data.userEmail } });
+    }
   };
+  
   const onInvalid = (error: FieldErrors) => {};
   return (
     <div className="flex items-center justify-center w-screen h-screen">
@@ -26,9 +36,9 @@ function LoginID() {
         <form onSubmit={handleSubmit(onValid, onInvalid)} className="w-full">
           <div className="relative">
             <input
-              id="userId"
-              type="text"
-              {...register("userId")}
+              id="userEmail"
+              type="email"
+              {...register("userEmail")}
               className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer focus:border-2 "
               placeholder=" "
             />
