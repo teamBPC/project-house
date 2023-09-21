@@ -1,5 +1,4 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FieldErrors } from "react-hook-form";
 import { LoginPwForm } from "../../interface/porfile";
 import { useCommonForm } from "../../libs/useCommonForm";
 
@@ -23,9 +22,6 @@ function LoginPW() {
       reset();
     }
   };
-  
-  const onInvalid = (error: FieldErrors) => {};
-  
   return (
     <div className="flex items-center justify-center w-screen h-screen">
       <div className="flex flex-col items-center">

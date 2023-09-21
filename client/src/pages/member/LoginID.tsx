@@ -1,6 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FieldErrors, useForm } from "react-hook-form";
-import sendData from "../../libs/sendData";
 import { LoginIdForm } from "../../interface/porfile";
 import { useCommonForm } from "../../libs/useCommonForm";
 
@@ -23,8 +21,7 @@ function LoginID() {
       navigate("/join", { state: { userEmail: data.userEmail } });
     }
   };
-  
-  const onInvalid = (error: FieldErrors) => {};
+
   return (
     <div className="flex items-center justify-center w-screen h-screen">
       <div className="flex flex-col items-center">
@@ -33,7 +30,7 @@ function LoginID() {
             PROJECT HOUSE
           </span>
         </div>
-        <form onSubmit={handleSubmit(onValid, onInvalid)} className="w-full">
+        <form onSubmit={handleSubmit(onValid)} className="w-full">
           <div className="relative">
             <input
               id="userEmail"
