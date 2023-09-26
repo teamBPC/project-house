@@ -5,7 +5,7 @@ import Join from "./pages/member/Join";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Profile from "./pages/profile/Profile";
-import SideBar from "./components/SideBar";
+import SideBar from "./components/sidebar/SideBar";
 import Projects from "./pages/projects/Projects";
 import Board from "./pages/projects/BoardItem";
 import Boards from "./pages/projects/Boards";

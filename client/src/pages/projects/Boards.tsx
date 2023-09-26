@@ -7,7 +7,7 @@ import BoardsBtns from "../../components/BoardsBtns";
 import DeleteBoardsModal from "../../components/modal/boards/DeleteBoardsModal";
 import CreateBoardsModal from "../../components/modal/boards/CraeteBoardsModal";
 import EditBoardsModal from "../../components/modal/boards/EditBoardsModal";
-import { hoverModalHandle } from "./common";
+import { hoverModalHandle } from "./common/common";
 import { cls } from "../../libs/utils";
 
 function Boards() {

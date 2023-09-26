@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { cls } from "../libs/utils";
+import { cls } from "../../libs/utils";
 
 function SideBar() {
   const [activeTab, setActiveTab] = useState(false);
@@ -11,7 +11,13 @@ function SideBar() {
 
   const { pathname } = useLocation();
 
-  if (!(pathname.includes("projects") || pathname.includes("boards") || pathname.includes("board")))
+  if (
+    !(
+      pathname.includes("projects") ||
+      pathname.includes("boards") ||
+      pathname.includes("board")
+    )
+  )
     return null;
 
   return (
