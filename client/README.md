@@ -1,46 +1,6 @@
-# Getting Started with Create React App
+## project-house란?
+우리와 같이 취업 준비 중인 분들이 포트폴리오를 구축하기 위해 프로젝트를 진행하고 있는데, 이런 프로젝트들이 자주 Github에 방치되어 있어서 아쉬웠습니다. 그래서 저희는 "Project House"를 만들게 되었습니다. Project House는 프로젝트를 기획하고 진행할 때 역할 분담, 스케줄 관리, 일정 계획을 돕는 동시에, 완료한 프로젝트들을 게시하고 커뮤니티를 형성하여, 다른 취준생 분들에게 프로젝트 경험을 공유할 수 있는 플랫폼입니다. 이렇게 프로젝트 하우스는 취업 준비하는 분들에게 가치 있는 리소스가 될 것입니다.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## MVP 적용하여 진행중
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 진행 상황이 궁금하시다면 https://baek-si-hyun.github.io/project-house
