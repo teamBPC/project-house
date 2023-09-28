@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { cls } from "../../libs/utils";
+import SideTree from "./SideTree";
 
 function SideBar() {
   const [activeTab, setActiveTab] = useState(false);
@@ -63,7 +64,7 @@ function SideBar() {
             드라이브)
           </div>
         ) : (
-          <div className="truncate">프로젝트 구조 (ex. vscode 탐색기)</div>
+          <div className="truncate"><SideTree /></div>
         )}
       </div>
     </div>

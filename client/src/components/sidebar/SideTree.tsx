@@ -1,58 +1,40 @@
+import { ISideTreeData } from "../../interface/sidebar";
 import SideItem from "./SideItem";
 
 function SideTree() {
-  const data = [
+  const data: ISideTreeData[] = [
     {
-      id: 0,
-      title: "qwe",
+      id: 1,
+      title: "project house",
       children: [
         {
-          id: 0,
-          title: "qwe",
-        },
-        {
           id: 1,
-          title: "qwe",
+          title: "frontend",
+          children: [
+            { id: 1, title: "퍼블리싱" },
+            { id: 2, title: "디자인" },
+          ],
         },
         {
           id: 2,
-          title: "qwe",
-        },
-      ],
-    },
-    {
-      id: 1,
-      title: "qwe",
-      children: [
-        {
-          id: 3,
-          title: "qwe",
-        },
-        {
-          id: 4,
-          title: "qwe",
-        },
-        {
-          id: 5,
-          title: "qwe",
+          title: "backend",
+          children: [{ id: 1, title: "서버" }],
         },
       ],
     },
     {
       id: 2,
-      title: "qwe",
+      title: "visual coin",
       children: [
         {
-          id: 6,
-          title: "qwe",
+          id: 1,
+          title: "frontend",
+          children: [{ id: 1, title: "퍼블리싱" }],
         },
         {
-          id: 7,
-          title: "qwe",
-        },
-        {
-          id: 8,
-          title: "qwe",
+          id: 2,
+          title: "backend",
+          children: [{ id: 1, title: "서버" }],
         },
       ],
     },
@@ -60,7 +42,7 @@ function SideTree() {
   return (
     <div>
       {data.map((item, index) => (
-        <SideItem item={item} key={item.id} />
+        <SideItem key={index} data={item} />
       ))}
     </div>
   );
