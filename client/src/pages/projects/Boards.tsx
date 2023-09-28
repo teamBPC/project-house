@@ -35,14 +35,14 @@ function Boards() {
           {boards.map((item, index) => (
             <li
               key={item.id}
-              className="relative block p-2 bg-gray-100 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+              className="relative block p-2 bg-gray-100 border border-gray-200 rounded-lg shadow hover:bg-gray-100"
             >
               <div className="flex flex-col gap-4">
-                <div className="z-20 flex items-center justify-between p-1 transition duration-100 ease-in-out rounded-md hover:bg-gray-300 ">
+                <div className="z-20 flex items-center justify-between p-1 transition duration-100 ease-in-out rounded-md hover:bg-gray-300">
                   <span className="flex w-full truncate">
                     <Link
                       to=":boardId"
-                      className="flex-1 pl-1 text-2xl font-bold tracking-tight text-gray-900 truncate dark:text-white"
+                      className="flex-1 pl-1 text-2xl font-bold tracking-tight text-gray-900 truncate"
                     >
                       {item.title}
                     </Link>
@@ -52,7 +52,7 @@ function Boards() {
                 </div>
                 <div className="flex">
                   <span
-                    className="flex-1 p-2 font-normal text-gray-700 truncate dark:text-gray-400"
+                    className="flex-1 p-2 font-normal text-gray-700 truncate"
                     onMouseEnter={() =>
                       hoverModalHandle(isModalOpen, setIsModalOpen, index, true)
                     }
@@ -71,13 +71,13 @@ function Boards() {
                 <div className="absolute z-50 left-2 top-[100px]">
                   <div
                     className={cls(
-                      " text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 ",
+                      " text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow",
                       isModalOpen[index] ? "" : "hidden"
                     )}
                     id="user-dropdown"
                   >
                     <div className="px-4 py-3">
-                      <span className="block max-w-sm text-sm text-gray-900 break-words whitespace-pre-wrap dark:text-white ">
+                      <span className="block max-w-sm text-sm text-gray-900 break-words whitespace-pre-wrap">
                         {item.description}
                       </span>
                     </div>

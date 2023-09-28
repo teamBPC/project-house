@@ -9,6 +9,7 @@ import SideBar from "./components/sidebar/SideBar";
 import Projects from "./pages/projects/Projects";
 import Board from "./pages/projects/BoardItem";
 import Boards from "./pages/projects/Boards";
+import Post from "./pages/post/Post";
 
 function Router() {
   return (
@@ -18,6 +19,7 @@ function Router() {
         <SideBar />
         <Routes>
           <Route path="/" element={<Home />}></Route>
+          <Route path="post" element={<Post />}></Route>
           <Route path="projects" element={<Projects />}></Route>
           <Route path="Boards" element={<Boards />}></Route>
           <Route path="Board" element={<Board />}></Route>

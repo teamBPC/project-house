@@ -20,9 +20,7 @@ function DeleteProjectModal({ modalState, modalBtnRef }: IModalProps) {
         modalRef.current &&
         !modalRef.current.contains(event.target as Node) &&
         modalBtnRef.deleteProjectsBtnRef.current &&
-        !modalBtnRef.deleteProjectsBtnRef.current.contains(
-          event.target as Node
-        )
+        !modalBtnRef.deleteProjectsBtnRef.current.contains(event.target as Node)
       ) {
         modalHandle(dispatch, "deleteProjectsModalOpen", false, reset);
       }
@@ -47,13 +45,13 @@ function DeleteProjectModal({ modalState, modalBtnRef }: IModalProps) {
       )}
     >
       <div ref={modalRef} className="relative w-full max-w-md max-h-full">
-        <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div className="relative bg-white rounded-lg shadow">
           <button
             onClick={() =>
               modalHandle(dispatch, "deleteProjectsModalOpen", false, reset)
             }
             type="button"
-            className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
             data-modal-hide="authentication-modal"
           >
             <svg
@@ -74,7 +72,7 @@ function DeleteProjectModal({ modalState, modalBtnRef }: IModalProps) {
             <span className="sr-only">Close modal</span>
           </button>
           <div className="px-6 py-6 lg:px-8">
-            <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+            <h3 className="mb-4 text-xl font-medium text-gray-900">
               프로젝트 삭제하기
             </h3>
             <form
@@ -85,7 +83,7 @@ function DeleteProjectModal({ modalState, modalBtnRef }: IModalProps) {
               <div>
                 <label
                   htmlFor="boardName"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-sm font-medium text-gray-900"
                 >
                   삭제하시려면 아래에 ""을/를 입력하세요.
                 </label>
@@ -93,13 +91,13 @@ function DeleteProjectModal({ modalState, modalBtnRef }: IModalProps) {
                   type="text"
                   id="boardName"
                   {...register("boardName", { required: true })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5"
                   required
                 />
               </div>
               <button
                 type="submit"
-                className="w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4  focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                className="w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4  focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               >
                 삭제하기
               </button>

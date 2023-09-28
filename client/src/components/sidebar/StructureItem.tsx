@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ISideTreeData } from "../../interface/sidebar";
+import { IStructureTreeData } from "../../interface/sidebar";
 
-function SideItem({
+function StructureItem({
   data,
   depth = 0,
 }: {
-  data: ISideTreeData;
+  data: IStructureTreeData;
   depth?: number;
 }) {
   const [showTree, setShowTree] = useState(true);
@@ -38,14 +38,14 @@ function SideItem({
                 )}
               </button>
             )}
-            <div>
+            <div className="truncate w-full">
               <Link to="#">{data.title}</Link>
             </div>
           </div>
           <div>
             {showTree &&
               data.children?.map((child, index) => (
-                <SideItem key={index} data={child} depth={depth + 1} />
+                <StructureItem key={index} data={child} depth={depth + 1} />
               ))}
           </div>
         </div>
@@ -53,4 +53,4 @@ function SideItem({
     </>
   );
 }
-export default SideItem;
+export default StructureItem;

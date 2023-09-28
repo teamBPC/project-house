@@ -18,10 +18,10 @@ function Header() {
   if (pathname.includes("join") || pathname.includes("login")) return null;
 
   return (
-    <div className="sticky top-0 z-30 w-full bg-white border-b border-gray-200 dark:bg-gray-900">
+    <div className="sticky top-0 z-30 w-full bg-white border-b border-gray-200">
       <div className="flex flex-wrap items-center justify-between px-4 py-2">
         <Link to="/" className="flex items-center">
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+          <span className="self-center text-2xl font-semibold whitespace-nowrap">
             ProjectHouse
           </span>
         </Link>
@@ -34,9 +34,7 @@ function Header() {
             <img
               className={cls(
                 "w-8 h-8 bg-gray-200 rounded-full",
-                isModalOpen
-                  ? "ring-offset-2 ring-2 dark:ring-gray-600 ring-blue-500"
-                  : ""
+                isModalOpen ? "ring-offset-2 ring-2 ring-blue-500" : ""
               )}
               src={`https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/f7fa91bd-bd76-4274-5220-e796e1565100/avatar`}
               alt="avatar"
@@ -49,16 +47,16 @@ function Header() {
           >
             <div
               className={cls(
-                "my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600  ",
+                "my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow",
                 isModalOpen ? "" : "hidden"
               )}
               id="user-dropdown"
             >
               <div className="px-4 py-3">
-                <span className="block text-sm text-gray-900 dark:text-white">
+                <span className="block text-sm text-gray-900">
                   Bonnie Green
                 </span>
-                <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
+                <span className="block text-sm text-gray-500 truncate">
                   name@flowbite.com
                 </span>
               </div>
@@ -66,7 +64,7 @@ function Header() {
                 <li>
                   <Link
                     to="profile"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Dashboard
                   </Link>
@@ -74,7 +72,7 @@ function Header() {
                 <li>
                   <a
                     href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Settings
                   </a>
@@ -82,7 +80,7 @@ function Header() {
                 <li>
                   <a
                     href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Earnings
                   </a>
@@ -90,7 +88,7 @@ function Header() {
                 <li>
                   <a
                     href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Sign out
                   </a>

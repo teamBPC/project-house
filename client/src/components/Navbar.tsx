@@ -13,9 +13,7 @@ function Navbar() {
             to="/"
             className={cls(
               "block py-1 px-4  rounded hover:bg-gray-100 hover:bg-transparent hover:text-blue-700",
-              pathname === "/"
-                ? "md:text-blue-700  md:dark:text-blue-500"
-                : "text-gray-900"
+              pathname === "/" ? "md:text-blue-700" : "text-gray-900"
             )}
             aria-current="page"
           >
@@ -27,9 +25,7 @@ function Navbar() {
             to="projects"
             className={cls(
               "block py-1 px-4  rounded hover:bg-gray-100 hover:bg-transparent hover:text-blue-700 ",
-              pathname === "/projects"
-                ? "md:text-blue-700  md:dark:text-blue-500"
-                : "text-gray-900"
+              pathname === "/projects" ? "md:text-blue-700" : "text-gray-900"
             )}
           >
             Projects
@@ -40,9 +36,7 @@ function Navbar() {
             to="boards"
             className={cls(
               "block py-1 px-4 rounded hover:bg-gray-100 hover:bg-transparent hover:text-blue-700  ",
-              pathname === "/boards"
-                ? "md:text-blue-700  md:dark:text-blue-500"
-                : "text-gray-900"
+              pathname === "/boards" ? "md:text-blue-700" : "text-gray-900"
             )}
           >
             Boards

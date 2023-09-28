@@ -77,9 +77,7 @@ function Join() {
               htmlFor="userEmail"
               className={cls(
                 "block mb-2 text-sm font-semibold",
-                emailError
-                  ? "text-red-500 dark:text-red-500"
-                  : "text-gray-900 dark:text-white"
+                emailError ? "text-red-500" : "text-gray-900"
               )}
             >
               이메일
@@ -93,15 +91,15 @@ function Join() {
               })}
               defaultValue={userEmail}
               className={cls(
-                "bg-gray-50   border text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white",
+                "bg-gray-50   border text-gray-900 text-sm rounded-lg  block w-full p-2.5",
                 emailError
-                  ? "border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500 focus:ring-red-500 focus:border-red-500"
-                  : "border-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:ring-blue-500 focus:border-blue-500"
+                  ? "border-red-500 focus:ring-red-500 focus:border-red-500"
+                  : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               )}
               required
             />
             {emailError && (
-              <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+              <p className="mt-2 text-sm text-red-600">
                 <span className="font-medium">{emailError}</span>
               </p>
             )}
@@ -112,9 +110,7 @@ function Join() {
                 htmlFor="userNm"
                 className={cls(
                   "block mb-2 text-sm font-semibold",
-                  nameError
-                    ? "text-red-500 dark:text-red-500"
-                    : "text-gray-900 dark:text-white"
+                  nameError ? "text-red-500" : "text-gray-900"
                 )}
               >
                 이름
@@ -124,15 +120,15 @@ function Join() {
                 type="text"
                 {...register("userNm", { required: true, maxLength: 10 })}
                 className={cls(
-                  "bg-gray-50   border text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white",
+                  "bg-gray-50 border text-gray-900 text-sm rounded-lg  block w-full p-2.5",
                   nameError
-                    ? "border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500 focus:ring-red-500 focus:border-red-500"
-                    : "border-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500  focus:ring-blue-500 focus:border-blue-500"
+                    ? "border-red-500 focus:ring-red-500 focus:border-red-500"
+                    : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                 )}
                 required
               />
               {nameError && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                <p className="mt-2 text-sm text-red-600">
                   <span className="font-medium">{nameError}</span>
                 </p>
               )}
@@ -142,9 +138,7 @@ function Join() {
                 htmlFor="userPw"
                 className={cls(
                   "block mb-2 text-sm font-semibold",
-                  passwordError
-                    ? "text-red-500 dark:text-red-500"
-                    : "text-gray-900 dark:text-white"
+                  passwordError ? "text-red-500" : "text-gray-900"
                 )}
               >
                 비밀번호
@@ -158,10 +152,10 @@ function Join() {
                     maxLength: 30,
                   })}
                   className={cls(
-                    "bg-gray-50   border text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white",
+                    "bg-gray-50   border text-gray-900 text-sm rounded-lg  block w-full p-2.5",
                     passwordError
-                      ? "border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500 focus:ring-red-500 focus:border-red-500"
-                      : "border-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:ring-blue-500 focus:border-blue-500"
+                      ? "border-red-500 focus:ring-red-500 focus:border-red-500"
+                      : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                   )}
                   required
                 />
@@ -181,7 +175,7 @@ function Join() {
                   )}
                 </button>
                 {passwordError && (
-                  <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                  <p className="mt-2 text-sm text-red-600">
                     <span className="font-medium">{passwordError}</span>
                   </p>
                 )}
@@ -191,20 +185,20 @@ function Join() {
           <div className="mb-4">
             <label
               htmlFor="website"
-              className="block mb-2 text-sm font-semibold text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-semibold text-gray-900"
             >
-            개인 블로그 및 사이트
+              개인 블로그 및 사이트
             </label>
             <input
               type="url"
               id="website"
               {...register("website", { required: false })}
-              className="bg-gray-50 border text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white border-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500  focus:ring-blue-500 "
+              className="bg-gray-50 border text-gray-900 text-sm rounded-lg w-full p-2.5 border-gray-300 focus:ring-blue-500 "
             />
           </div>
           <button
             type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4  focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4  focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
           >
             가입하기
           </button>
