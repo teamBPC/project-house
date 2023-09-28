@@ -2,6 +2,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import Join from "../pages/member/Join";
 import { BrowserRouter } from "react-router-dom";
 
+jest.mock("../libs/sendData");
 describe("Join 테스트", () => {
   test("Join 컴포넌트들이 제대로 렌더링 되었는지 확인", () => {
     render(
@@ -95,12 +96,17 @@ describe("Join 테스트", () => {
     const nameInput = screen.getByLabelText("이름") as HTMLInputElement;
     const passwordInput = screen.getByLabelText("비밀번호") as HTMLInputElement;
     const submitButton = screen.getByText("가입하기") as HTMLButtonElement;
+    const alertSpy = jest.spyOn(window, "alert");
+    const mockSendData = require("../libs/sendData");
+    
     fireEvent.change(emailInput, { target: { value: "qwer@qwer.com" } });
     fireEvent.change(nameInput, { target: { value: "아무개" } });
     fireEvent.change(passwordInput, { target: { value: "q1234w" } });
     fireEvent.click(submitButton);
+    mockSendData.default.mockResolvedValue(true);
     await waitFor(() => {
-      expect(window.alert).toHaveBeenCalledWith("가입이 완료되었습니다.");
+      expect(alertSpy).toHaveBeenCalledWith("가입이 완료되었습니다.");
     });
+    alertSpy.mockRestore();
   });
 });
