@@ -1,8 +1,8 @@
-import { ISideTreeData } from "../../interface/sidebar";
-import SideItem from "./SideItem";
+import { IStructureTreeData } from "../../interface/sidebar";
+import StructureItem from "./StructureItem";
 
-function SideTree() {
-  const data: ISideTreeData[] = [
+function Structure() {
+  const data: IStructureTreeData[] = [
     {
       id: 1,
       title: "project house",
@@ -34,7 +34,7 @@ function SideTree() {
         {
           id: 2,
           title: "backend",
-          children: [{ id: 1, title: "서버" }],
+          children: [{ id: 1, title: "서버nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" }],
         },
       ],
     },
@@ -42,9 +42,9 @@ function SideTree() {
   return (
     <div>
       {data.map((item, index) => (
-        <SideItem key={index} data={item} />
+        <StructureItem key={index} data={item} />
       ))}
     </div>
   );
 }
-export default SideTree;
+export default Structure;

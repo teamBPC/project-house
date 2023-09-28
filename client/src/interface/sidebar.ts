@@ -1,5 +1,5 @@
-export interface ISideTreeData {
+export interface IStructureTreeData {
     id: number;
     title: string;
-    children?: ISideTreeData[]; 
+    children?: IStructureTreeData[]; 
   }

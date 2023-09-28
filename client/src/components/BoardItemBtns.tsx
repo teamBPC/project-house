@@ -43,7 +43,7 @@ function BoardBtns({
           className="flex"
         >
           <span className="p-1 transition duration-100 ease-in-out rounded-md material-symbols-outlined hover:bg-gray-300">
-            delete
+            delete_forever
           </span>
         </button>
       </div>

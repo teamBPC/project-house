@@ -16,7 +16,7 @@ function ProjectsBtns({ setModalBtnRef }: IBtnsProps) {
   }, [setModalBtnRef]);
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center ">
       <div>
         <button
           ref={editProjectsBtnRef}
@@ -35,7 +35,7 @@ function ProjectsBtns({ setModalBtnRef }: IBtnsProps) {
           className="flex"
         >
           <span className="p-1 transition duration-100 ease-in-out rounded-md material-symbols-outlined hover:bg-gray-100">
-            delete
+            delete_forever
           </span>
         </button>
       </div>
