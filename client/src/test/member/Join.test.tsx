@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import Join from "../pages/member/Join";
 import { BrowserRouter } from "react-router-dom";
+import Join from "../../pages/member/Join";
 
 jest.mock("../libs/sendData");
 describe("Join 테스트", () => {
