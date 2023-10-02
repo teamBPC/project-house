@@ -50,10 +50,9 @@ function Home() {
                       />
                       <span className="truncate">baek-si-hyun</span>
                     </div>
-
                     <div className="flex items-center gap-2 ">
                       <div className="flex items-center gap-[0.1rem]">
-                        <span className="material-symbols-outlined fill-white">
+                        <span className="material-symbols-outlined">
                           favorite
                         </span>
                         <span>12</span>

@@ -1,228 +1,119 @@
+import PostComment from "./PostComment";
+import PostSlide from "./PostSlide";
+
 function Post() {
   return (
-    <div className="flex flex-col items-center justify-center w-full py-20">
-      <div>
-        <div className="pb-10">
-          <span className="font-bold text-8xl">awwwards my app</span>
-        </div>
-        <div className="flex items-center pb-20">
-          <div className="flex justify-around w-full">
-            <div className="flex items-center justify-center gap-4 text-2xl font-bold">
-              <img
-                className="w-8 h-8 rounded-full"
-                src={`https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/f7fa91bd-bd76-4274-5220-e796e1565100/avatar`}
-                alt="avatar"
-              />
-              <span>baek-si-hyun</span>
+    <div className="flex flex-col items-center w-full">
+      <div className="flex flex-col gap-4 w-[1400px] max-h-fit">
+        <div className="flex items-center justify-between w-full pt-4">
+          <div className="flex items-center gap-2">
+            <img
+              className="w-10 h-10 rounded-full"
+              src={`https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/f7fa91bd-bd76-4274-5220-e796e1565100/avatar`}
+              alt="avatar"
+            />
+            <div className="flex flex-col">
+              <span className="text-xl font-bold">baek-si-hyun</span>
+              <span className="text-sm font-bold">2023-06-08</span>
             </div>
-            <span className="text-2xl font-bold">2023-06-08</span>
+          </div>
+          <div className="flex gap-2">
+            <button>
+              <span className="p-1 rounded-lg material-symbols-outlined hover:bg-blue-500 hover:text-white">
+                favorite
+              </span>
+            </button>
+            <button>
+              <span className="p-1 rounded-lg material-symbols-outlined hover:bg-blue-500 hover:text-white">
+                bookmark
+              </span>
+            </button>
+            <button>
+              <span className="p-1 rounded-lg material-symbols-outlined hover:bg-blue-500 hover:text-white">
+                share
+              </span>
+            </button>
           </div>
         </div>
-      </div>
-
-      <div className="flex flex-col w-[1100px] gap-4">
-        <div>
+        <div className="relative w-full">
           <img
             src="https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/9a3c9ee7-1f22-43ad-e386-35d840d5e700/public"
             alt="default"
-            className="object-cover"
+            className="object-cover w-full rounded-xl"
           />
-        </div>
-        <div className="flex flex-col gap-4 py-4">
-          <span className="text-4xl font-bold">사용 기술 스택</span>
-          <div className="flex gap-1">
-            <span>NextJS</span>
-            <span>NextJS</span>
-            <span>NextJS</span>
-            <span>NextJS</span>
-            <span>NextJS</span>
-            <span>NextJS</span>
+          <div className="absolute top-0 left-0 z-10 flex flex-col justify-end w-full h-full gap-2 p-8 opacity-100 bg-gradient-to-b from-transparent to-black/100 rounded-xl">
+            <span className="mb-4 font-bold text-white text-7xl">
+              awwwards my app
+            </span>
+            <div className="flex flex-wrap gap-1">
+              <img
+                src="https://img.shields.io/badge/React-fff?style=flat-square&logo=React&logoColor=black"
+                alt="default"
+                className="px-2 py-1 bg-white rounded-xl"
+              />
+              <img
+                src="https://img.shields.io/badge/kotlin-fff?style=flat-square&logo=kotlin&logoColor=black"
+                alt="default"
+                className="px-2 py-1 bg-white rounded-xl"
+              />
+              <img
+                src="https://img.shields.io/badge/Next.js-fff?style=flat-square&logo=nextdotjs&logoColor=black"
+                alt="default"
+                className="px-2 py-1 bg-white rounded-xl"
+              />
+            </div>
           </div>
         </div>
-        <div>
-          <img
-            src="https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/5a18aaac-83d3-4489-5993-3fd9e09a5100/public"
-            alt="default"
-            className="object-cover"
-          />
-        </div>
-        <div className="flex flex-col gap-4">
-          <span className="text-4xl font-bold">프로젝트 설명</span>
-          <span>
-            현대 사회에서 인공지능(AI)은 우리의 삶을 근본적으로 변화시키고
-            있습니다. AI 기술은 빠르게 발전하며, 다양한 산업 분야에서 혁신적인
-            변화를 가져오고 있습니다. 이 글에서는 인공지능의 현재와 미래에 대해
-            논의하고, 우리의 삶에 미치는 영향을 살펴보겠습니다. 인공지능의 현재
-            상황 인공지능 기술은 이미 우리 주변에 널리 적용되고 있습니다.
-            스마트폰 음성 비서, 자율 주행 자동차, 의료 진단 및 로봇 등 다양한
-            분야에서 AI 기술이 사용되고 있습니다. 머신러닝과 딥러닝 알고리즘의
-            발전은 대규모 데이터를 분석하고 예측하는 능력을 향상시켰습니다.
-            이로써 기업은 효율성을 높이고 소비자에게 더 나은 서비스를 제공할 수
-            있게 되었습니다. 인공지능의 미래 전망 인공지능의 미래는 매우
-            흥미로운 것으로 예측됩니다. 자율 주행 차량은 도로 안전과 교통
-            효율성을 향상시킬 것으로 기대됩니다. 의료 분야에서는 AI가 진단 및
-            치료 방법을 개선하고 환자 데이터를 분석하여 개별 맞춤형 치료를
-            제공할 것입니다. 또한, 교육, 금융, 엔터테인먼트 분야에서도 AI는
-            혁신적인 서비스와 경험을 제공할 것으로 전망됩니다. 인공지능의 도전과
-            과제 인공지능의 발전은 동시에 도전과 과제도 가져왔습니다. 개인 정보
-            보호와 데이터 무단 사용에 대한 우려, 일자리 변화 및 인간과 인공지능
-            간의 윤리적 문제가 있습니다. 이러한 도전에 대처하려면 정책 제정과
-            교육이 필요합니다. 결론적으로, 인공지능은 우리의 삶을 긍정적으로
-            변화시키고 있지만, 그에 따른 도전과 과제도 존재합니다. 우리는 적절한
-            규제와 윤리적 지침을 준수하면서 인공지능 기술을 발전시키고 활용해야
-            합니다. 이를 통해 미래에는 보다 스마트하고 지능적인 사회를 구축할 수
-            있을 것입니다.
+        <div className="flex flex-col p-10 tracking-widest ">
+          <span className="mb-10 text-2xl font-bold">간단소개</span>
+          <span className="">
+            21세기는 인공 지능(AI)의 급격한 발전과 함께 우리의 삶을 크게
+            변화시키고 있습니다. AI는 이미 우리의 일상생활에서 다양한 역할을
+            수행하며, 예측하기 어려운 과학적, 의학적, 경제적 문제를 해결하는
+            데도 활용되고 있습니다. 그러나 이러한 기술의 발전은 동시에 인간의
+            일자리와 개인정보 보호 등에 대한 우려도 불러일으키고 있습니다.
+            그래서 우리는 인간과 인공 지능 간의 협력이 미래를 향한 중요한 키가
+            될 것이라고 생각해야 합니다. 인간과 인공 지능은 각각의 강점과 약점을
+            가지고 있습니다. 인간은 창의성, 감정, 직관, 윤리적 판단과 같은
+            영역에서 뛰어나며, 사회적 상호작용과 커뮤니케이션 능력을 갖추고
+            있습니다.
           </span>
         </div>
-        <div>
-          <img
-            src="https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/782af772-bca9-407b-c5ec-fd02980f4000/public"
-            alt="default"
-            className="object-cover"
-          />
-        </div>
-        <div className="flex flex-col gap-4">
-          <span className="text-4xl font-bold">
-            프로젝트 설명 (넣고 싶으면)
-          </span>
-          <span>
-            현대 사회에서 인공지능(AI)은 우리의 삶을 근본적으로 변화시키고
-            있습니다. AI 기술은 빠르게 발전하며, 다양한 산업 분야에서 혁신적인
-            변화를 가져오고 있습니다. 이 글에서는 인공지능의 현재와 미래에 대해
-            논의하고, 우리의 삶에 미치는 영향을 살펴보겠습니다. 인공지능의 현재
-            상황 인공지능 기술은 이미 우리 주변에 널리 적용되고 있습니다.
-            스마트폰 음성 비서, 자율 주행 자동차, 의료 진단 및 로봇 등 다양한
-            분야에서 AI 기술이 사용되고 있습니다. 머신러닝과 딥러닝 알고리즘의
-            발전은 대규모 데이터를 분석하고 예측하는 능력을 향상시켰습니다.
-            이로써 기업은 효율성을 높이고 소비자에게 더 나은 서비스를 제공할 수
-            있게 되었습니다. 인공지능의 미래 전망 인공지능의 미래는 매우
-            흥미로운 것으로 예측됩니다. 자율 주행 차량은 도로 안전과 교통
-            효율성을 향상시킬 것으로 기대됩니다. 의료 분야에서는 AI가 진단 및
-            치료 방법을 개선하고 환자 데이터를 분석하여 개별 맞춤형 치료를
-            제공할 것입니다. 또한, 교육, 금융, 엔터테인먼트 분야에서도 AI는
-            혁신적인 서비스와 경험을 제공할 것으로 전망됩니다. 인공지능의 도전과
-            과제 인공지능의 발전은 동시에 도전과 과제도 가져왔습니다. 개인 정보
-            보호와 데이터 무단 사용에 대한 우려, 일자리 변화 및 인간과 인공지능
-            간의 윤리적 문제가 있습니다. 이러한 도전에 대처하려면 정책 제정과
-            교육이 필요합니다. 결론적으로, 인공지능은 우리의 삶을 긍정적으로
-            변화시키고 있지만, 그에 따른 도전과 과제도 존재합니다. 우리는 적절한
-            규제와 윤리적 지침을 준수하면서 인공지능 기술을 발전시키고 활용해야
-            합니다. 이를 통해 미래에는 보다 스마트하고 지능적인 사회를 구축할 수
-            있을 것입니다.
-          </span>
-        </div>
-        <div>
-          <img
-            src="https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/37239698-4c13-4cf2-f28f-bc58aa85c200/public"
-            alt="default"
-            className="object-cover"
-          />
-        </div>
-        <div className="flex flex-col gap-4">
-          <span className="text-4xl font-bold">
-            프로젝트 설명 (넣고 싶으면)
-          </span>
-          <span>
-            현대 사회에서 인공지능(AI)은 우리의 삶을 근본적으로 변화시키고
-            있습니다. AI 기술은 빠르게 발전하며, 다양한 산업 분야에서 혁신적인
-            변화를 가져오고 있습니다. 이 글에서는 인공지능의 현재와 미래에 대해
-            논의하고, 우리의 삶에 미치는 영향을 살펴보겠습니다. 인공지능의 현재
-            상황 인공지능 기술은 이미 우리 주변에 널리 적용되고 있습니다.
-            스마트폰 음성 비서, 자율 주행 자동차, 의료 진단 및 로봇 등 다양한
-            분야에서 AI 기술이 사용되고 있습니다. 머신러닝과 딥러닝 알고리즘의
-            발전은 대규모 데이터를 분석하고 예측하는 능력을 향상시켰습니다.
-            이로써 기업은 효율성을 높이고 소비자에게 더 나은 서비스를 제공할 수
-            있게 되었습니다. 인공지능의 미래 전망 인공지능의 미래는 매우
-            흥미로운 것으로 예측됩니다. 자율 주행 차량은 도로 안전과 교통
-            효율성을 향상시킬 것으로 기대됩니다. 의료 분야에서는 AI가 진단 및
-            치료 방법을 개선하고 환자 데이터를 분석하여 개별 맞춤형 치료를
-            제공할 것입니다. 또한, 교육, 금융, 엔터테인먼트 분야에서도 AI는
-            혁신적인 서비스와 경험을 제공할 것으로 전망됩니다. 인공지능의 도전과
-            과제 인공지능의 발전은 동시에 도전과 과제도 가져왔습니다. 개인 정보
-            보호와 데이터 무단 사용에 대한 우려, 일자리 변화 및 인간과 인공지능
-            간의 윤리적 문제가 있습니다. 이러한 도전에 대처하려면 정책 제정과
-            교육이 필요합니다. 결론적으로, 인공지능은 우리의 삶을 긍정적으로
-            변화시키고 있지만, 그에 따른 도전과 과제도 존재합니다. 우리는 적절한
-            규제와 윤리적 지침을 준수하면서 인공지능 기술을 발전시키고 활용해야
-            합니다. 이를 통해 미래에는 보다 스마트하고 지능적인 사회를 구축할 수
-            있을 것입니다.
-          </span>
-        </div>
-        <div>
-          <img
-            src="https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/4b52eb81-55ec-40ad-ae8c-96454a403c00/public"
-            alt="default"
-            className="object-cover"
-          />
-        </div>
-        <div className="flex flex-col gap-4">
-          <span className="text-4xl font-bold">
-            프로젝트 설명 (넣고 싶으면)
-          </span>
-          <span>
-            현대 사회에서 인공지능(AI)은 우리의 삶을 근본적으로 변화시키고
-            있습니다. AI 기술은 빠르게 발전하며, 다양한 산업 분야에서 혁신적인
-            변화를 가져오고 있습니다. 이 글에서는 인공지능의 현재와 미래에 대해
-            논의하고, 우리의 삶에 미치는 영향을 살펴보겠습니다. 인공지능의 현재
-            상황 인공지능 기술은 이미 우리 주변에 널리 적용되고 있습니다.
-            스마트폰 음성 비서, 자율 주행 자동차, 의료 진단 및 로봇 등 다양한
-            분야에서 AI 기술이 사용되고 있습니다. 머신러닝과 딥러닝 알고리즘의
-            발전은 대규모 데이터를 분석하고 예측하는 능력을 향상시켰습니다.
-            이로써 기업은 효율성을 높이고 소비자에게 더 나은 서비스를 제공할 수
-            있게 되었습니다. 인공지능의 미래 전망 인공지능의 미래는 매우
-            흥미로운 것으로 예측됩니다. 자율 주행 차량은 도로 안전과 교통
-            효율성을 향상시킬 것으로 기대됩니다. 의료 분야에서는 AI가 진단 및
-            치료 방법을 개선하고 환자 데이터를 분석하여 개별 맞춤형 치료를
-            제공할 것입니다. 또한, 교육, 금융, 엔터테인먼트 분야에서도 AI는
-            혁신적인 서비스와 경험을 제공할 것으로 전망됩니다. 인공지능의 도전과
-            과제 인공지능의 발전은 동시에 도전과 과제도 가져왔습니다. 개인 정보
-            보호와 데이터 무단 사용에 대한 우려, 일자리 변화 및 인간과 인공지능
-            간의 윤리적 문제가 있습니다. 이러한 도전에 대처하려면 정책 제정과
-            교육이 필요합니다. 결론적으로, 인공지능은 우리의 삶을 긍정적으로
-            변화시키고 있지만, 그에 따른 도전과 과제도 존재합니다. 우리는 적절한
-            규제와 윤리적 지침을 준수하면서 인공지능 기술을 발전시키고 활용해야
-            합니다. 이를 통해 미래에는 보다 스마트하고 지능적인 사회를 구축할 수
-            있을 것입니다.
-          </span>
-        </div>
-        <div>
-          <img
-            src="https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/00d3b975-1962-4945-23f7-c7e9002d2a00/public"
-            alt="default"
-            className="object-cover"
-          />
-        </div>
-        <div className="flex flex-col gap-4">
-          <span className="text-4xl font-bold">
-            프로젝트 설명 (넣고 싶으면)
-          </span>
-          <span>
-            현대 사회에서 인공지능(AI)은 우리의 삶을 근본적으로 변화시키고
-            있습니다. AI 기술은 빠르게 발전하며, 다양한 산업 분야에서 혁신적인
-            변화를 가져오고 있습니다. 이 글에서는 인공지능의 현재와 미래에 대해
-            논의하고, 우리의 삶에 미치는 영향을 살펴보겠습니다. 인공지능의 현재
-            상황 인공지능 기술은 이미 우리 주변에 널리 적용되고 있습니다.
-            스마트폰 음성 비서, 자율 주행 자동차, 의료 진단 및 로봇 등 다양한
-            분야에서 AI 기술이 사용되고 있습니다. 머신러닝과 딥러닝 알고리즘의
-            발전은 대규모 데이터를 분석하고 예측하는 능력을 향상시켰습니다.
-            이로써 기업은 효율성을 높이고 소비자에게 더 나은 서비스를 제공할 수
-            있게 되었습니다. 인공지능의 미래 전망 인공지능의 미래는 매우
-            흥미로운 것으로 예측됩니다. 자율 주행 차량은 도로 안전과 교통
-            효율성을 향상시킬 것으로 기대됩니다. 의료 분야에서는 AI가 진단 및
-            치료 방법을 개선하고 환자 데이터를 분석하여 개별 맞춤형 치료를
-            제공할 것입니다. 또한, 교육, 금융, 엔터테인먼트 분야에서도 AI는
-            혁신적인 서비스와 경험을 제공할 것으로 전망됩니다. 인공지능의 도전과
-            과제 인공지능의 발전은 동시에 도전과 과제도 가져왔습니다. 개인 정보
-            보호와 데이터 무단 사용에 대한 우려, 일자리 변화 및 인간과 인공지능
-            간의 윤리적 문제가 있습니다. 이러한 도전에 대처하려면 정책 제정과
-            교육이 필요합니다. 결론적으로, 인공지능은 우리의 삶을 긍정적으로
-            변화시키고 있지만, 그에 따른 도전과 과제도 존재합니다. 우리는 적절한
-            규제와 윤리적 지침을 준수하면서 인공지능 기술을 발전시키고 활용해야
-            합니다. 이를 통해 미래에는 보다 스마트하고 지능적인 사회를 구축할 수
-            있을 것입니다.
-          </span>
-        </div>
+        {[1, 2, 3, 4].map((list) => (
+          <div key={list}>
+            <div className="w-full">
+              <img
+                src="https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/9a3c9ee7-1f22-43ad-e386-35d840d5e700/public"
+                alt="default"
+                className="object-cover w-full rounded-xl"
+              />
+            </div>
+            <div className="flex flex-col p-10 tracking-widest">
+              <span className="mb-10 text-2xl font-bold">
+                인간-인공 지능 협력의 미래(자율)
+              </span>
+              <span className="">
+                21세기는 인공 지능(AI)의 급격한 발전과 함께 우리의 삶을 크게
+                변화시키고 있습니다. AI는 이미 우리의 일상생활에서 다양한 역할을
+                수행하며, 예측하기 어려운 과학적, 의학적, 경제적 문제를 해결하는
+                데도 활용되고 있습니다. 그러나 이러한 기술의 발전은 동시에
+                인간의 일자리와 개인정보 보호 등에 대한 우려도 불러일으키고
+                있습니다. 그래서 우리는 인간과 인공 지능 간의 협력이 미래를 향한
+                중요한 키가 될 것이라고 생각해야 합니다. 인간과 인공 지능은
+                각각의 강점과 약점을 가지고 있습니다. 인간은 창의성, 감정, 직관,
+                윤리적 판단과 같은 영역에서 뛰어나며, 사회적 상호작용과
+                커뮤니케이션 능력을 갖추고 있습니다. 반면 인공 지능은 대량의
+                데이터를 신속하게 분석하고 패턴을 발견하는 데 뛰어나며, 무한한
+                정보를 저장하고 검색할 수 있습니다. 따라서 인간과 인공 지능은
+                상호 보완적인 관계를 형성할 수 있습니다. 먼저, 인간과 인공
+                지능의 협력은 의료 분야에서 중요한 역할을 할 것입니다.
+              </span>
+            </div>
+          </div>
+        ))}
       </div>
+      <PostSlide />
+      <PostComment />
     </div>
   );
 }
