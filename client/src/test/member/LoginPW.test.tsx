@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import LoginPW from "../pages/member/LoginPW";
 import { BrowserRouter } from "react-router-dom";
+import LoginPW from "../../pages/member/LoginPW";
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
