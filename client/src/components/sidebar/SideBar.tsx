@@ -24,7 +24,7 @@ function SideBar() {
   return (
     <div
       id="logo-sidebar"
-      className="bg-white border-r border-gray-200 min-w-[20rem] max-w-[20rem] min-h-[calc(100vh-3.1rem)]"
+      className="bg-white border-r border-gray-200 min-w-[20rem] max-w-[20rem]  min-h-[calc(100vh-3.1rem)] max-h-[calc(100vh-3.1rem)] "
       aria-label="Sidebar"
     >
       <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200">
@@ -57,7 +57,7 @@ function SideBar() {
           </li>
         </ul>
       </div>
-      <div>
+      <div className="h-full overflow-y-scroll">
         {activeTab ? (
           <div className="truncate">
             프로젝트 별로 누가 언제 어던 프로젝트 수정했는지 (ex. 구글 공유

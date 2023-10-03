@@ -19,10 +19,13 @@ function Router() {
         <SideBar />
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="post" element={<Post />}></Route>
+          <Route path="post/:postId" element={<Post />}></Route>
           <Route path="projects" element={<Projects />}></Route>
-          <Route path="Boards" element={<Boards />}></Route>
-          <Route path="Board" element={<Board />}></Route>
+          <Route path="projects/:projectId" element={<Boards />}></Route>
+          <Route
+            path="projects/:projectId/board/:boardId"
+            element={<Board />}
+          ></Route>
           <Route path="profile" element={<Profile />}></Route>
           <Route path="login-id" element={<LoginID />}></Route>
           <Route path="login-pw" element={<LoginPW />}></Route>

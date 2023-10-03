@@ -1,49 +1,72 @@
+import { shallowEqual, useSelector } from "react-redux";
 import { IStructureTreeData } from "../../interface/sidebar";
 import StructureItem from "./StructureItem";
+import { IBoard, IBoards, IProjects } from "../../interface/kanban";
+import { useEffect, useState } from "react";
 
 function Structure() {
-  const data: IStructureTreeData[] = [
-    {
-      id: 1,
-      title: "project house",
-      children: [
-        {
-          id: 1,
-          title: "frontend",
-          children: [
-            { id: 1, title: "퍼블리싱" },
-            { id: 2, title: "디자인" },
-          ],
-        },
-        {
-          id: 2,
-          title: "backend",
-          children: [{ id: 1, title: "서버" }],
-        },
-      ],
-    },
-    {
-      id: 2,
-      title: "visual coin",
-      children: [
-        {
-          id: 1,
-          title: "frontend",
-          children: [{ id: 1, title: "퍼블리싱" }],
-        },
-        {
-          id: 2,
-          title: "backend",
-          children: [{ id: 1, title: "서버nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" }],
-        },
-      ],
-    },
-  ];
+  const [mergeData, setMergeData] = useState<IStructureTreeData[]>();
+  const { boardItem, boards, projects } = useSelector(
+    (state: {
+      boardsSlice: IBoards;
+      boardItemSlice: IBoard;
+      projectsSlice: IProjects;
+    }) => ({
+      boardItem: state.boardItemSlice.boardItem,
+      boards: state.boardsSlice.boards,
+      projects: state.projectsSlice.projects,
+    }),
+    shallowEqual
+  );
+
+  useEffect(() => {
+    const mergeData = async () => {
+      const mergedProjects = await Promise.all(
+        projects.map(async (projectData) => {
+          const mergedBoards = await Promise.all(
+            boards.map(async (boardData) => {
+              const boardItems = await Promise.all(
+                boardItem.map(async (boardItemData) => {
+                  const todos = boardItemData.todos.map((todo) => {
+                    return {
+                      id: todo.id,
+                      title: todo.title,
+                      parentId: [projectData.id, boardData.id],
+                    };
+                  });
+                  return {
+                    id: boardItemData.id,
+                    title: boardItemData.title,
+                    parentId: [projectData.id, boardData.id],
+                    children: todos,
+                  };
+                })
+              );
+              return {
+                id: boardData.id,
+                title: boardData.title,
+                parentId: [projectData.id],
+                children: boardItems,
+              };
+            })
+          );
+          return {
+            id: projectData.id,
+            title: projectData.title,
+            children: mergedBoards,
+          };
+        })
+      );
+      setMergeData(mergedProjects);
+    };
+    mergeData();
+  }, [boardItem, boards, projects]);
   return (
     <div>
-      {data.map((item, index) => (
-        <StructureItem key={index} data={item} />
-      ))}
+      {mergeData &&
+        mergeData.map((item, index) => (
+          <StructureItem key={index} data={item} />
+        ))}
     </div>
   );
 }

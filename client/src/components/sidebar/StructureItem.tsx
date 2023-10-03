@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IStructureTreeData } from "../../interface/sidebar";
+import { cls } from "../../libs/utils";
 
 function StructureItem({
   data,
@@ -9,23 +10,41 @@ function StructureItem({
   data: IStructureTreeData;
   depth?: number;
 }) {
-  const [showTree, setShowTree] = useState(true);
-
+  const [link, setLink] = useState("");
+  const [showTree, setShowTree] = useState(false);
   const toggleShowTree = () => {
     setShowTree((showTree) => !showTree);
   };
+
+  const generateLink = (depth: number, data: IStructureTreeData) => {
+    let to: string;
+    if (depth === 0) to = `projects/${data.id}`;
+    if (data.parentId && depth === 1)
+      to = `projects/${data.parentId[0]}/board/${data.id}`;
+    if (data.parentId && depth > 1)
+      to = `projects/${data.parentId[0]}/board/${data.parentId[1]}`;
+    setLink(() => to);
+  };
+  useEffect(() => {
+    generateLink(depth, data);
+  }, [data]);
   return (
     <>
       {data && (
         <div
-          style={{ paddingLeft: `${depth * 20}px` }}
-          className="flex flex-col"
+          style={{ paddingLeft: `${depth === 0 ? 0 : 12}px` }}
+          className="flex flex-col pl-4"
         >
-          <div className="flex items-center">
+          <div
+            className={cls(
+              "flex items-center focus:text-blue-700",
+              !data.children ? "pl-6" : ""
+            )}
+          >
             {data.children && (
               <button
                 onClick={() => toggleShowTree()}
-                className="rounded-md flex items-center"
+                className="flex items-center rounded-md"
               >
                 {showTree ? (
                   <span className="material-symbols-outlined">
@@ -38,8 +57,8 @@ function StructureItem({
                 )}
               </button>
             )}
-            <div className="truncate w-full">
-              <Link to="#">{data.title}</Link>
+            <div className="w-full truncate">
+              <Link to={link}>{data.title}</Link>
             </div>
           </div>
           <div>

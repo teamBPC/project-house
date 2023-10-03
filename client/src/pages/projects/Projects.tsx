@@ -53,7 +53,7 @@ function Projects() {
                 <div className="z-20 flex items-center justify-between p-1 transition duration-100 ease-in-out rounded-md hover:bg-gray-300 ">
                   <span className="flex w-full truncate">
                     <Link
-                      to="#"
+                      to={`${item.id}`}
                       className="flex-1 pl-1 text-2xl font-bold tracking-tight text-gray-900 truncate"
                     >
                       {item.title}
