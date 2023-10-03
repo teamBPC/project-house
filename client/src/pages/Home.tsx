@@ -16,7 +16,7 @@ function Home() {
             />
             <div className="absolute top-0 left-0 z-10 w-full h-full text-white transition-opacity opacity-0 bg-gradient-to-b from-transparent to-black/100 hover:opacity-100">
               <Link
-                to="post"
+                to={`post/${num}`}
                 className="flex flex-col justify-end w-full h-full"
               >
                 <div className="flex flex-col gap-2 p-6">

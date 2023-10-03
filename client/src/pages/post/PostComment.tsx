@@ -36,7 +36,7 @@ function PostComment() {
         </div>
         <div className="p-4">
           {[1, 2, 3, 4, 5].map((list) => (
-            <div className="flex items-start gap-2 mb-4">
+            <div key={list} className="flex items-start gap-2 mb-4">
               <img
                 className="w-10 h-10 rounded-full"
                 src={`https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/f7fa91bd-bd76-4274-5220-e796e1565100/avatar`}
@@ -51,7 +51,7 @@ function PostComment() {
                 </div>
               </div>
             </div>
-          ) )}
+          ))}
         </div>
       </div>
 

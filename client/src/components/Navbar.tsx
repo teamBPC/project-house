@@ -33,25 +33,6 @@ function Navbar() {
         </li>
         <li>
           <Link
-            to="boards"
-            className={cls(
-              "block py-1 px-4 rounded hover:bg-gray-100 hover:bg-transparent hover:text-blue-700  ",
-              pathname === "/boards" ? "md:text-blue-700" : "text-gray-900"
-            )}
-          >
-            Boards
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="board"
-            className="block px-4 py-1 rounded hover:bg-gray-100 hover:bg-transparent hover:text-blue-700 "
-          >
-            Board
-          </Link>
-        </li>
-        <li>
-          <Link
             to="#"
             className="block px-4 py-1 rounded hover:bg-gray-100 hover:bg-transparent hover:text-blue-700 "
           >
