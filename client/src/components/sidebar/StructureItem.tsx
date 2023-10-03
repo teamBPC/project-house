@@ -25,7 +25,7 @@ function StructureItem({
             {data.children && (
               <button
                 onClick={() => toggleShowTree()}
-                className="rounded-md flex items-center"
+                className="flex items-center rounded-md"
               >
                 {showTree ? (
                   <span className="material-symbols-outlined">
@@ -38,7 +38,7 @@ function StructureItem({
                 )}
               </button>
             )}
-            <div className="truncate w-full">
+            <div className="w-full truncate">
               <Link to="#">{data.title}</Link>
             </div>
           </div>
