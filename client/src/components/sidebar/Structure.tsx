@@ -24,13 +24,27 @@ function Structure() {
         projects.map(async (projectData) => {
           const mergedBoards = await Promise.all(
             boards.map(async (boardData) => {
-              const boardItems = boardItem.map((boardItemData) => ({
-                id: boardItemData.id,
-                title: boardItemData.title,
-              }));
+              const boardItems = await Promise.all(
+                boardItem.map(async (boardItemData) => {
+                  const todos = boardItemData.todos.map((todo) => {
+                    return {
+                      id: todo.id,
+                      title: todo.title,
+                      parentId: [projectData.id, boardData.id],
+                    };
+                  });
+                  return {
+                    id: boardItemData.id,
+                    title: boardItemData.title,
+                    parentId: [projectData.id, boardData.id],
+                    children: todos,
+                  };
+                })
+              );
               return {
                 id: boardData.id,
                 title: boardData.title,
+                parentId: [projectData.id],
                 children: boardItems,
               };
             })
@@ -42,7 +56,6 @@ function Structure() {
           };
         })
       );
-      console.log(mergedProjects);
       setMergeData(mergedProjects);
     };
     mergeData();

@@ -3,7 +3,6 @@ import { cls } from "../libs/utils";
 
 function Navbar() {
   const { pathname } = useLocation();
-  console.log(pathname);
   if (pathname.includes("join") || pathname.includes("login")) return null;
   return (
     <div className="flex w-auto " id="navbar-user">
