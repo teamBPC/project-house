@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 import { IStructureTreeData } from "../../interface/sidebar";
 import StructureItem from "./StructureItem";
 import { IBoard, IBoards, IProjects } from "../../interface/kanban";
@@ -15,7 +15,8 @@ function Structure() {
       boardItem: state.boardItemSlice.boardItem,
       boards: state.boardsSlice.boards,
       projects: state.projectsSlice.projects,
-    })
+    }),
+    shallowEqual
   );
 
   useEffect(() => {

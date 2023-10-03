@@ -18,13 +18,12 @@ function StructureItem({
 
   const generateLink = (depth: number, data: IStructureTreeData) => {
     let to: string;
-    if (data.parentId) {
-      if (depth === 0) to = `projects/${data.id}`;
-      if (depth === 1) to = `projects/${data.parentId[0]}/boards/${data.id}`;
-      if (depth > 1)
-        to = `projects/${data.parentId[0]}/boards/${data.parentId[1]}`;
-      setLink(() => to);
-    }
+    if (depth === 0) to = `projects/${data.id}`;
+    if (data.parentId && depth === 1)
+      to = `projects/${data.parentId[0]}/board/${data.id}`;
+    if (data.parentId && depth > 1)
+      to = `projects/${data.parentId[0]}/board/${data.parentId[1]}`;
+    setLink(() => to);
   };
   useEffect(() => {
     generateLink(depth, data);
