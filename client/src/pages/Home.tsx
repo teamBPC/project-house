@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 function Home() {
   return (
     <div className="flex flex-col items-center w-full">
-      <div className="grid w-full grid-cols-3 gap-12 p-12 ">
+      <div className="grid w-full grid-cols-3 gap-12 p-12 pt-16">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
           <div
             key={num}
-            className="relative overflow-hidden bg-gray-100 border rounded-lg shadow-md hover:border-gray-200 min-w-[24rem] "
+            className="relative overflow-hidden bg-gray-100 border rounded-lg shadow-md hover:border-gray-200 min-w-[24rem]"
           >
             <img
               src="https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/f5ab0fb1-5c42-400c-c8a2-50ab4bd61800/public"

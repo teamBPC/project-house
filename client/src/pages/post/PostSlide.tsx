@@ -1,7 +1,7 @@
 function PostSlide() {
   return (
     <div className="grid grid-cols-4 gap-8 p-12">
-      {[1, 2, 3, 4,5,6,7,8].map((list) => (
+      {[1, 2, 3, 4, 5, 6, 7, 8].map((list) => (
         <div key={list} className="flex flex-col gap-2">
           <div className="relative overflow-hidden rounded-lg">
             <img
@@ -26,7 +26,7 @@ function PostSlide() {
               alt="avatar"
             />
             <div>
-              <span className="text-sm font-bold">park he chan</span>
+              <span className="text-sm font-bold">park hae chan</span>
             </div>
           </div>
         </div>

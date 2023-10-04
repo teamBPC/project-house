@@ -5,14 +5,14 @@ function Navbar() {
   const { pathname } = useLocation();
   if (pathname.includes("join") || pathname.includes("login")) return null;
   return (
-    <div className="flex w-auto " id="navbar-user">
-      <ul className="flex items-center gap-2 p-0 mt-0 font-medium rounded-lg bg-gray-50 md:bg-white">
+    <div className="flex">
+      <ul className="flex items-center p-0 mt-0 font-medium bg-transparent bg-blue-400 rounded-lg bg-opacity-70">
         <li>
           <Link
             to="/"
             className={cls(
-              "block py-1 px-4  rounded hover:bg-gray-100 hover:bg-transparent hover:text-blue-700",
-              pathname === "/" ? "md:text-blue-700" : "text-gray-900"
+              "block py-1 px-4 rounded-lg hover:bg-gray-100 hover:bg-opacity-50",
+              pathname === "/" ? "text-blue-700 bg-gray-100" : "text-white"
             )}
             aria-current="page"
           >
@@ -23,19 +23,13 @@ function Navbar() {
           <Link
             to="projects"
             className={cls(
-              "block py-1 px-4  rounded hover:bg-gray-100 hover:bg-transparent hover:text-blue-700 ",
-              pathname === "/projects" ? "md:text-blue-700" : "text-gray-900"
+              "block py-1 px-4 rounded-lg hover:bg-gray-100 hover:bg-opacity-50  ",
+              pathname.includes("/projects")
+                ? "text-blue-700 bg-gray-100"
+                : "text-white"
             )}
           >
             Projects
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="#"
-            className="block px-4 py-1 rounded hover:bg-gray-100 hover:bg-transparent hover:text-blue-700 "
-          >
-            Contact
           </Link>
         </li>
       </ul>

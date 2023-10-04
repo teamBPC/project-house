@@ -64,8 +64,11 @@ function Structure() {
   return (
     <div>
       {mergeData &&
-        mergeData.map((item, index) => (
-          <StructureItem key={index} data={item} />
+        mergeData.map((item) => (
+          <StructureItem
+            key={item.id}
+            mapItem={item}
+          />
         ))}
     </div>
   );
