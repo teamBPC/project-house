@@ -30,7 +30,7 @@ function Boards() {
 
   return (
     <>
-      <div className="w-full p-4">
+      <div className="w-full p-4 pt-16">
         <ul className="grid grid-cols-4 gap-4">
           {boards.map((item, index) => (
             <li

@@ -4,10 +4,10 @@ import { IStructureTreeData } from "../../interface/sidebar";
 import { cls } from "../../libs/utils";
 
 function StructureItem({
-  data,
+  mapItem,
   depth = 0,
 }: {
-  data: IStructureTreeData;
+  mapItem: IStructureTreeData;
   depth?: number;
 }) {
   const [link, setLink] = useState("");
@@ -16,32 +16,33 @@ function StructureItem({
     setShowTree((showTree) => !showTree);
   };
 
-  const generateLink = (depth: number, data: IStructureTreeData) => {
+  const generateLink = (depth: number, mapItem: IStructureTreeData) => {
     let to: string;
-    if (depth === 0) to = `projects/${data.id}`;
-    if (data.parentId && depth === 1)
-      to = `projects/${data.parentId[0]}/board/${data.id}`;
-    if (data.parentId && depth > 1)
-      to = `projects/${data.parentId[0]}/board/${data.parentId[1]}`;
+    if (depth === 0) to = `projects/${mapItem.id}`;
+    if (mapItem.parentId && depth === 1)
+      to = `projects/${mapItem.parentId[0]}/board/${mapItem.id}`;
+    if (mapItem.parentId && depth > 1)
+      to = `projects/${mapItem.parentId[0]}/board/${mapItem.parentId[1]}`;
     setLink(() => to);
   };
   useEffect(() => {
-    generateLink(depth, data);
-  }, [data]);
+    generateLink(depth, mapItem);
+  }, [depth, mapItem]);
+
   return (
     <>
-      {data && (
+      {mapItem && (
         <div
-          style={{ paddingLeft: `${depth === 0 ? 0 : 12}px` }}
+          style={{ paddingLeft: `${depth === 0 ? 0 : 15}px` }}
           className="flex flex-col pl-4"
         >
           <div
             className={cls(
               "flex items-center focus:text-blue-700",
-              !data.children ? "pl-6" : ""
+              !mapItem.children ? "pl-6" : ""
             )}
           >
-            {data.children && (
+            {mapItem.children && (
               <button
                 onClick={() => toggleShowTree()}
                 className="flex items-center rounded-md"
@@ -58,13 +59,13 @@ function StructureItem({
               </button>
             )}
             <div className="w-full truncate">
-              <Link to={link}>{data.title}</Link>
+              <Link to={link}>{mapItem.title}</Link>
             </div>
           </div>
           <div>
             {showTree &&
-              data.children?.map((child, index) => (
-                <StructureItem key={index} data={child} depth={depth + 1} />
+              mapItem.children?.map((child, index) => (
+                <StructureItem key={index} mapItem={child} depth={depth + 1} />
               ))}
           </div>
         </div>

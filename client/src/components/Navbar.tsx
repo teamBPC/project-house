@@ -5,16 +5,15 @@ function Navbar() {
   const { pathname } = useLocation();
   if (pathname.includes("join") || pathname.includes("login")) return null;
   return (
-    <div className="flex w-auto " id="navbar-user">
-      <ul className="flex items-center gap-2 p-0 mt-0 font-medium rounded-lg bg-gray-50 md:bg-white">
+    <div className="relative flex">
+      <ul className="z-40 grid items-center grid-cols-2 p-0 mt-0 font-medium text-center bg-transparent bg-blue-400 rounded-lg bg-opacity-70">
         <li>
           <Link
             to="/"
             className={cls(
-              "block py-1 px-4  rounded hover:bg-gray-100 hover:bg-transparent hover:text-blue-700",
-              pathname === "/" ? "md:text-blue-700" : "text-gray-900"
+              "block px-4 py-1 rounded-l-lg hover:bg-gray-100",
+              pathname === "/" ? "text-blue-600" : "text-white hover:text-black"
             )}
-            aria-current="page"
           >
             Home
           </Link>
@@ -23,22 +22,26 @@ function Navbar() {
           <Link
             to="projects"
             className={cls(
-              "block py-1 px-4  rounded hover:bg-gray-100 hover:bg-transparent hover:text-blue-700 ",
-              pathname === "/projects" ? "md:text-blue-700" : "text-gray-900"
+              "block px-4 py-1 rounded-r-lg hover:bg-gray-100",
+              pathname.includes("/projects")
+                ? "text-blue-600"
+                : "text-white hover:text-black"
             )}
           >
             Projects
           </Link>
         </li>
-        <li>
-          <Link
-            to="#"
-            className="block px-4 py-1 rounded hover:bg-gray-100 hover:bg-transparent hover:text-blue-700 "
-          >
-            Contact
-          </Link>
-        </li>
-      </ul>
+      </ul>{" "}
+      <span
+        className={cls(
+          " w-1/2 h-full bg-gray-100 absolute top-0 left-0 transition-all z-30",
+          pathname.includes("/projects")
+            ? "rounded-r-lg translate-x-full"
+            : pathname === "/"
+            ? "rounded-l-lg translate-x-0"
+            : ""
+        )}
+      ></span>
     </div>
   );
 }

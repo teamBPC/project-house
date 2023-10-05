@@ -42,7 +42,7 @@ function CreateBoardsModal({ modalState }: IModalProps) {
           ref={btnRef}
           onClick={() => modalHandle(dispatch, "createBoardsModalOpen", true)}
         >
-          <span className="p-4 text-white bg-blue-600 rounded-full material-symbols-outlined">
+          <span className="p-4 text-white rounded-full shadow-lg bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 shadow-blue-500/50 material-symbols-outlined">
             add
           </span>
         </button>

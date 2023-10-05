@@ -136,7 +136,7 @@ function Boards() {
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
-              className="flex items-start justify-start gap-2 p-4 overflow-x-auto max-w"
+              className="flex items-start justify-start gap-2 p-4 pt-16 overflow-x-auto max-w"
             >
               {board.map((item, index) => (
                 <Draggable

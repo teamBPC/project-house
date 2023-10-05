@@ -3,4 +3,5 @@ export interface IStructureTreeData {
   title: string;
   parentId?: number[];
   children?: IStructureTreeData[];
+  showTree?: boolean;
 }
