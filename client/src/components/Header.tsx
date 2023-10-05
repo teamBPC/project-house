@@ -56,11 +56,9 @@ function Header() {
                 id="user-dropdown"
               >
                 <div className="px-4 py-3">
-                  <span className="block text-sm text-gray-900">
-                    Bonnie Green
-                  </span>
+                  <span className="block text-sm text-gray-900">백시현</span>
                   <span className="block text-sm text-gray-500 truncate">
-                    name@flowbite.com
+                    qwer@qwer.com
                   </span>
                 </div>
                 <ul className="py-2" aria-labelledby="user-menu-button">
@@ -69,7 +67,7 @@ function Header() {
                       to="profile/0/post"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
-                      Dashboard
+                      프로필
                     </Link>
                   </li>
                   <li>
@@ -77,7 +75,7 @@ function Header() {
                       href="#"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
-                      Settings
+                      설정
                     </a>
                   </li>
                   <li>
@@ -85,15 +83,7 @@ function Header() {
                       href="#"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
-                      Earnings
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Sign out
+                      로그아웃
                     </a>
                   </li>
                 </ul>

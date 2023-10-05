@@ -65,7 +65,6 @@ function Join() {
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-no-repeat bg-cover bg-login-bg">
-      {" "}
       <div className="flex items-center justify-center w-full h-full backdrop-blur-sm">
         <div className="flex flex-col items-center gap-4 p-12 bg-white rounded-xl">
           <div className="flex flex-col items-center justify-center gap-4 mb-4">
