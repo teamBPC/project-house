@@ -14,7 +14,6 @@ function Navbar() {
               "block py-1 px-4 rounded-lg hover:bg-gray-100 hover:bg-opacity-50",
               pathname === "/" ? "text-blue-700 bg-gray-100" : "text-white"
             )}
-            aria-current="page"
           >
             Home
           </Link>

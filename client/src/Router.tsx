@@ -10,6 +10,9 @@ import Projects from "./pages/projects/Projects";
 import Board from "./pages/projects/BoardItem";
 import Boards from "./pages/projects/Boards";
 import Post from "./pages/post/Post";
+import ProfileBookmark from "./pages/profile/ProfileBookmark";
+import ProfileLike from "./pages/profile/ProfileLike";
+import ProfilePost from "./pages/profile/ProfilePost";
 
 function Router() {
   return (
@@ -26,7 +29,20 @@ function Router() {
             path="projects/:projectId/board/:boardId"
             element={<Board />}
           ></Route>
-          <Route path="profile" element={<Profile />}></Route>
+          <Route path="profile/:userId" element={<Profile />}>
+            <Route
+              path="profile/:userId/post"
+              element={<ProfilePost />}
+            ></Route>
+            <Route
+              path="profile/:userId/like"
+              element={<ProfileLike />}
+            ></Route>
+            <Route
+              path="profile/:userId/bookmark"
+              element={<ProfileBookmark />}
+            ></Route>
+          </Route>
           <Route path="login-id" element={<LoginID />}></Route>
           <Route path="login-pw" element={<LoginPW />}></Route>
           <Route path="join" element={<Join />}></Route>

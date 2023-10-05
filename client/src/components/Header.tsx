@@ -66,7 +66,7 @@ function Header() {
                 <ul className="py-2" aria-labelledby="user-menu-button">
                   <li>
                     <Link
-                      to="profile"
+                      to="profile/0"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       Dashboard
