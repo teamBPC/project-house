@@ -31,15 +31,15 @@ function Router() {
           ></Route>
           <Route path="profile/:userId" element={<Profile />}>
             <Route
-              path="profile/:userId/post"
+              path="post"
               element={<ProfilePost />}
             ></Route>
             <Route
-              path="profile/:userId/like"
+              path="like"
               element={<ProfileLike />}
             ></Route>
             <Route
-              path="profile/:userId/bookmark"
+              path="bookmark"
               element={<ProfileBookmark />}
             ></Route>
           </Route>

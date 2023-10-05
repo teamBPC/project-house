@@ -48,7 +48,7 @@ function Profile() {
             <ul className="grid grid-cols-3 text-center border-b border-gray-200">
               <li className="flex justify-center">
                 <Link
-                  to="profile/0/post"
+                  to="post"
                   className={cls(
                     "px-8 py-4 ",
                     pathname.includes("post")
@@ -61,7 +61,7 @@ function Profile() {
               </li>
               <li className="flex justify-center">
                 <Link
-                  to="profile/0/like"
+                  to="like"
                   className={cls(
                     "px-8 py-4 ",
                     pathname.includes("like")
@@ -74,7 +74,7 @@ function Profile() {
               </li>
               <li className="flex justify-center">
                 <Link
-                  to="profile/0/bookmark"
+                  to="bookmark"
                   className={cls(
                     "px-8 py-4 ",
                     pathname.includes("bookmark")
