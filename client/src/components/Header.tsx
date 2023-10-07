@@ -79,6 +79,14 @@ function Header() {
                     </a>
                   </li>
                   <li>
+                    <Link
+                      to="/login-id"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      로그인
+                    </Link>
+                  </li>
+                  <li>
                     <a
                       href="#"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"

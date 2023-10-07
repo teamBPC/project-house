@@ -12,10 +12,12 @@ function Navbar() {
             to="/"
             className={cls(
               "block px-4 py-1 rounded-l-lg hover:bg-gray-100",
-              pathname === "/" ? "text-blue-600" : "text-white hover:text-black"
+              !pathname.includes("/projects")
+                ? "text-blue-600"
+                : "text-white hover:text-black"
             )}
           >
-            Home
+            Post
           </Link>
         </li>
         <li>
@@ -31,15 +33,13 @@ function Navbar() {
             Projects
           </Link>
         </li>
-      </ul>{" "}
+      </ul>
       <span
         className={cls(
-          " w-1/2 h-full bg-gray-100 absolute top-0 left-0 transition-all z-30",
+          " w-1/2 h-full bg-gray-100 absolute top-0 left-0 transition-all  duration-500",
           pathname.includes("/projects")
             ? "rounded-r-lg translate-x-full"
-            : pathname === "/"
-            ? "rounded-l-lg translate-x-0"
-            : ""
+            : "rounded-l-lg translate-x-0"
         )}
       ></span>
     </div>
