@@ -71,7 +71,8 @@ function Join() {
             <span className="p-2 text-4xl font-bold">PROJECT HOUSE</span>
             <span className="text-xl text-gray-600">반갑습니다!</span>
             <span className="text-sm text-gray-600">
-              저희의 목표는 여러분이 더 나은 프로젝트를 제작을 할 수 있게 돕는 겁니다.
+              저희의 목표는 여러분이 더 나은 프로젝트를 제작을 할 수 있게 돕는
+              겁니다.
             </span>
           </div>
           <form onSubmit={handleSubmit(onValid)} className="w-full">
@@ -206,7 +207,7 @@ function Join() {
               가입하기
             </button>
             <Link
-              to={`#`}
+              to="/login-id"
               className="text-sm font-semibold leading-6 text-blue-700 "
             >
               이미 아이디가 있으신가요?
