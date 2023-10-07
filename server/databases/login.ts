@@ -2,10 +2,9 @@ import { PrismaClient } from '@prisma/client'
 import { User } from "../model/userVO";
 import util from "util";
 import crypto from "crypto";
-
+const prisma = new PrismaClient();
 // 사용자 로그인 ID
 export async function loginCheckId(importUser: User) {
-    const prisma = new PrismaClient();
     const user = await prisma.user.findMany({
         where: {
             user_email: importUser.userEmail
@@ -19,7 +18,6 @@ export async function loginCheckId(importUser: User) {
 
 // 사용자 로그인 PW
 export async function loginCheckPw(importUser: User) {
-    const prisma = new PrismaClient();
     const user = await prisma.user.findMany({
         where: {
             user_email: importUser.userEmail
@@ -29,16 +27,15 @@ export async function loginCheckPw(importUser: User) {
     const vertified = await verifyPassword(importUser.userPw, user[0].user_pwHash, user[0].user_pw);
 
     if (vertified) {
-        return true;
+        return user;
     } else {
-        return false;
+        return null;
     }
 }
 
 // 사용자 회원 가입
 export async function joinUs(User: User) {
     const pwData = await createHashedPassword(User.userPw);
-    const prisma = new PrismaClient();
     const result = await prisma.user.create({
         data: {
             user_email: User.userEmail,
@@ -56,7 +53,6 @@ export async function joinUs(User: User) {
 // 비밀번호 변경
 export async function changePw(User: User) {
     const pwData = await createHashedPassword(User.userPw);
-    const prisma = new PrismaClient();
     const result = await prisma.user.update({
         where: {
             user_email: User.userEmail,
@@ -74,7 +70,6 @@ export async function changePw(User: User) {
 export async function changePwRan(User: User) {
     const ranPw = Math.random().toString(36).slice(2);
     const pwData = await createHashedPassword(ranPw);
-    const prisma = new PrismaClient();
     const result = await prisma.user.update({
         where: {
             user_email: User.userEmail,
@@ -92,7 +87,6 @@ export async function changePwRan(User: User) {
 }
 // 아이디 중복 확인
 export async function checkId(User: User) {
-    const prisma = new PrismaClient();
     const result = await prisma.user.findMany({
         where: {
             user_email: User.userEmail,
@@ -102,6 +96,22 @@ export async function checkId(User: User) {
     return false;
 }
 
+// 회원 정보 수정
+export async function changeInfo(User: User) {
+    const pwData = await createHashedPassword(User.userPw);
+    const result = await prisma.user.update({
+        where: {
+            user_email: User.userEmail,
+        },
+        data: {
+            user_nm: User.userNm != null ? User.userNm : undefined,
+            user_pw: pwData != null ? pwData.hashedPassword : undefined,
+            user_pwHash: pwData != null ? pwData.salt : undefined,
+        }
+    });
+    if (result) return true;
+    return false;
+}
 
 //비밀번호 암호화 생성
 const createHashedPassword = async (password: crypto.BinaryLike) => {

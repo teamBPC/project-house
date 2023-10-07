@@ -5,8 +5,8 @@ import { User } from "../model/userVO";
 // 로그인 ID 확인
 export async function loginId(req: Request, res: Response) {
     const user = new User(req.body);
-    const isCheck = await loginQuery.loginCheckId(user);
-    if (isCheck.length > 0) {
+    const users = await loginQuery.loginCheckId(user);
+    if (users.length > 0) {
         res.status(200).json({ "result": true });
     } else {
         res.status(202).json({ "result": false });
@@ -14,16 +14,49 @@ export async function loginId(req: Request, res: Response) {
     return res;
 }
 
+// 로그인 PW 확인
 export async function loginPw(req: Request, res: Response) {
     const user = new User(req.body);
-    const isCheck = await loginQuery.loginCheckPw(user);
-    if (isCheck) {
-        res.status(200);
+    const users = await loginQuery.loginCheckPw(user);
+    if (users != null) {
+        req.session.userEmail = req.body.userEmail;
+        req.session.isLogined = true;
+        console.log("okay")
+        res.redirect('/');
     } else {
-        res.status(202);
+        res.redirect('/login/login?msg=아이디 및 패스워드 불일치');
     }
-    return res.json({ "result": isCheck });
 }
+
+export async function logout(req: Request, res: Response) {
+    if (req.session.userEmail) {
+        console.log("로그아웃중입니다!");
+        req.session.destroy((err) => {
+            if (err) {
+                console.log("세션 삭제시에 에러가 발생했습니다.");
+                return;
+            }
+            res.clearCookie('sid');
+            res.send('logout');
+            console.log("세션이 삭제됐습니다.");
+            res.redirect("/login.html");
+        });
+    } else {
+        console.log("로그인이 안돼있으시네요?");
+        res.redirect("/login.html");
+    }
+    //return res.json({ "result": users });
+}
+
+export async function isLogin(req: Request, res: Response) {
+    console.log(req.session)
+    if (req.session.isLogined) {
+        return res.json({ message: 'user 있다' });
+    } else {
+        return res.json({ message: 'user 없음' });
+    }
+}
+
 
 // 회원가입
 export async function joinTo(req: Request, res: Response) {
@@ -65,6 +98,18 @@ export async function changePwRan(req: Request, res: Response) {
 export async function checkId(req: Request, res: Response) {
     const user = new User(req.body);
     const result = await loginQuery.checkId(user);
+    if (result) {
+        res.status(200);
+    } else {
+        res.status(202);
+    }
+    return res.json({ "result": result });
+}
+
+// 회원 정보 수정
+export async function changeInfo(req: Request, res: Response) {
+    const user = new User(req.body);
+    const result = await loginQuery.changeInfo(user);
     if (result) {
         res.status(200);
     } else {
