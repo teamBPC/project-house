@@ -1,4 +1,4 @@
-function ProfileBookmark() {
+function ProfileContentBookmark() {
   return (
     <div>
       <ul className="p-4">
@@ -43,4 +43,4 @@ function ProfileBookmark() {
   );
 }
 
-export default ProfileBookmark;
+export default ProfileContentBookmark;

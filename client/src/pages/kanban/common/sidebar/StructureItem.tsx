@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { IStructureTreeData } from "../../interface/sidebar";
-import { cls } from "../../libs/utils";
+import { IStructureTreeData } from "../../../../interface/sidebar";
+import { cls } from "../../../../libs/utils";
 
 function StructureItem({
   mapItem,

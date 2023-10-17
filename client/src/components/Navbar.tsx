@@ -22,7 +22,7 @@ function Navbar() {
         </li>
         <li>
           <Link
-            to="projects"
+            to="management/projects"
             className={cls(
               "block px-4 py-1 rounded-r-lg hover:bg-gray-100",
               pathname.includes("/projects")

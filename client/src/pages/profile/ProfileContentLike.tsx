@@ -1,4 +1,4 @@
-function ProfileLike() {
+function ProfileContentLike() {
   return (
     <div>
       <ul className="p-4">
@@ -27,4 +27,4 @@ function ProfileLike() {
   );
 }
 
-export default ProfileLike;
+export default ProfileContentLike;

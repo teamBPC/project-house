@@ -14,6 +14,7 @@ function LoginID() {
       "http://localhost:20492/login/id",
       dataCustomer
     );
+
     if (res) navigate("/login-pw", { state: { userEmail: data.userEmail } });
     else {
       alert("아이디가 존재하지 않습니다.");

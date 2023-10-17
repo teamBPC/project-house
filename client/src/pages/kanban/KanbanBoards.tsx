@@ -10,7 +10,7 @@ import EditBoardsModal from "../../components/modal/boards/EditBoardsModal";
 import { hoverModalHandle } from "./common/common";
 import { cls } from "../../libs/utils";
 
-function Boards() {
+function KanbanBoards() {
   const boards = useSelector(({ boardsSlice }: { boardsSlice: IBoards }) => {
     return boardsSlice.boards;
   });
@@ -95,4 +95,4 @@ function Boards() {
   );
 }
 
-export default Boards;
+export default KanbanBoards;
