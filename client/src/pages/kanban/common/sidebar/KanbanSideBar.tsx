@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { cls } from "../../libs/utils";
+import { cls } from "../../../../libs/utils";
 import Structure from "./Structure";
 
-function SideBar() {
+function KanbanSideBar() {
   const [activeTab, setActiveTab] = useState(false);
   const handleTabClick = (tab: boolean) => {
     setActiveTab(() => tab);
@@ -22,8 +22,7 @@ function SideBar() {
   return (
     <div
       id="logo-sidebar"
-      className="bg-white border-r border-gray-200 min-w-[20rem] max-w-[20rem]   "
-      aria-label="Sidebar"
+      className="bg-white border-r border-gray-200 min-w-[20rem] max-w-[20rem]   max-h-screen"
     >
       <div className="sticky top-0 text-sm font-medium text-center text-gray-500 bg-white border-b border-gray-200">
         <ul className="grid grid-cols-2 -mb-px">
@@ -55,7 +54,7 @@ function SideBar() {
           </li>
         </ul>
       </div>
-      <div className="min-h-[calc(100vh-54px)] max-h-[calc(100vh-54px)] overflow-y-scroll">
+      <div className="overflow-y-scroll max-h-[calc(100vh-54px)]">
         <div className={cls("truncate bg-white", activeTab ? "" : "hidden")}>
           프로젝트 별로 누가 언제 어던 프로젝트 수정했는지 (ex. 구글 공유
           드라이브)
@@ -68,4 +67,4 @@ function SideBar() {
   );
 }
 
-export default React.memo(SideBar);
+export default React.memo(KanbanSideBar);

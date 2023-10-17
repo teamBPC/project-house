@@ -5,49 +5,48 @@ import Join from "./pages/member/Join";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Profile from "./pages/profile/Profile";
-import SideBar from "./components/sidebar/SideBar";
-import Projects from "./pages/projects/Projects";
-import Board from "./pages/projects/BoardItem";
-import Boards from "./pages/projects/Boards";
 import Post from "./pages/post/Post";
-import ProfileBookmark from "./pages/profile/ProfileBookmark";
-import ProfileLike from "./pages/profile/ProfileLike";
-import ProfilePost from "./pages/profile/ProfilePost";
+import ProfileContentBookmark from "./pages/profile/ProfileContentBookmark";
+import ProfileContentLike from "./pages/profile/ProfileContentLike";
+import ProfileContentPost from "./pages/profile/ProfileContentPost";
+import ProfileSetting from "./pages/profile/ProfileSetting";
+import ProfileTeams from "./pages/profile/ProfileTeams";
+import ProfileAlarm from "./pages/profile/ProfileAlarm";
+import ProfileContent from "./pages/profile/ProfileContent";
+import Kanban from "./pages/kanban/Kanban";
+import KanbanProjects from "./pages/kanban/KanbanProjects";
+import KanbanBoards from "./pages/kanban/KanbanBoards";
+import KanbanBoardItem from "./pages/kanban/KanbanBoardItem";
 
 function Router() {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Header />
-      <div className="flex">
-        <SideBar />
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="post/:postId" element={<Post />}></Route>
-          <Route path="projects" element={<Projects />}></Route>
-          <Route path="projects/:projectId" element={<Boards />}></Route>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="post/:postId" element={<Post />}></Route>
+        <Route path="management" element={<Kanban />}>
+          <Route path="projects" element={<KanbanProjects />}></Route>
+          <Route path="projects/:projectId" element={<KanbanBoards />}></Route>
           <Route
             path="projects/:projectId/board/:boardId"
-            element={<Board />}
+            element={<KanbanBoardItem />}
           ></Route>
-          <Route path="profile/:userId" element={<Profile />}>
-            <Route
-              path="post"
-              element={<ProfilePost />}
-            ></Route>
-            <Route
-              path="like"
-              element={<ProfileLike />}
-            ></Route>
-            <Route
-              path="bookmark"
-              element={<ProfileBookmark />}
-            ></Route>
+        </Route>
+        <Route path="profile/:userId" element={<Profile />}>
+          <Route path="content" element={<ProfileContent />}>
+            <Route path="post" element={<ProfileContentPost />}></Route>
+            <Route path="like" element={<ProfileContentLike />}></Route>
+            <Route path="bookmark" element={<ProfileContentBookmark />}></Route>
           </Route>
-          <Route path="login-id" element={<LoginID />}></Route>
-          <Route path="login-pw" element={<LoginPW />}></Route>
-          <Route path="join" element={<Join />}></Route>
-        </Routes>
-      </div>
+          <Route path="alarm" element={<ProfileAlarm />}></Route>
+          <Route path="teams" element={<ProfileTeams />}></Route>
+          <Route path="setting" element={<ProfileSetting />}></Route>
+        </Route>
+        <Route path="login-id" element={<LoginID />}></Route>
+        <Route path="login-pw" element={<LoginPW />}></Route>
+        <Route path="join" element={<Join />}></Route>
+      </Routes>
     </BrowserRouter>
   );
 }

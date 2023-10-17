@@ -1,8 +1,8 @@
 import { shallowEqual, useSelector } from "react-redux";
-import { IStructureTreeData } from "../../interface/sidebar";
-import StructureItem from "./StructureItem";
-import { IBoard, IBoards, IProjects } from "../../interface/kanban";
+import { IStructureTreeData } from "../../../../interface/sidebar";
+import { IBoard, IBoards, IProjects } from "../../../../interface/kanban";
 import { useEffect, useState } from "react";
+import StructureItem from "./StructureItem";
 
 function Structure() {
   const [mergeData, setMergeData] = useState<IStructureTreeData[]>();
@@ -64,12 +64,7 @@ function Structure() {
   return (
     <div>
       {mergeData &&
-        mergeData.map((item) => (
-          <StructureItem
-            key={item.id}
-            mapItem={item}
-          />
-        ))}
+        mergeData.map((item) => <StructureItem key={item.id} mapItem={item} />)}
     </div>
   );
 }

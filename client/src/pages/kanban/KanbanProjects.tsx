@@ -10,7 +10,7 @@ import { hoverModalHandle } from "./common/common";
 import EditProjectModal from "../../components/modal/projects/EditProjectModal";
 import DeleteProjectModal from "../../components/modal/projects/DeleteProjectModal";
 
-function Projects() {
+function KanbanProjects() {
   const projects = useSelector(
     ({ projectsSlice }: { projectsSlice: IProjects }) => {
       return projectsSlice.projects;
@@ -42,7 +42,7 @@ function Projects() {
 
   return (
     <>
-      <div className="w-full p-8 pt-16">
+      <div className="w-full p-8 pt-16 ">
         <ul className="grid grid-cols-3 gap-4">
           {projects.map((item, index) => (
             <li
@@ -119,4 +119,4 @@ function Projects() {
   );
 }
 
-export default Projects;
+export default KanbanProjects;

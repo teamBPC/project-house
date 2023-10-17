@@ -1,4 +1,4 @@
-function ProfilePost() {
+function ProfileContentPost() {
   return (
     <div>
       <ul className="p-4">
@@ -31,4 +31,4 @@ function ProfilePost() {
   );
 }
 
-export default ProfilePost;
+export default ProfileContentPost;

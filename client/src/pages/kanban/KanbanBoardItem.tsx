@@ -11,7 +11,7 @@ import { IBoard } from "../../interface/kanban";
 import { cls } from "../../libs/utils";
 import { boardItemRedux } from "../../redux/boardItemSlice";
 import { useDispatch, useSelector } from "react-redux";
-import Tasks from "./Task";
+import KanbanTask from "./KanbanTask";
 import BoardItemBtns from "../../components/BoardItemBtns";
 import CreateTaskModal from "../../components/modal/boardItem/CreateTaskModal";
 import CreateBoardItemModal from "../../components/modal/boardItem/CreateBoardItemModal";
@@ -29,7 +29,7 @@ function getStyle(style: DraggingStyle | NotDraggingStyle) {
   return style;
 }
 
-function Boards() {
+function KanbanBoardItem() {
   const boardRefs = useRef<(HTMLElement | null)[]>([]);
   const [scrollPosition, setScrollPosition] = useState([
     { index: 0, toTop: false },
@@ -136,7 +136,7 @@ function Boards() {
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
-              className="flex items-start justify-start gap-2 p-4 pt-16 overflow-x-auto max-w"
+              className="flex items-start justify-start gap-2 p-4 pt-16 overflow-x-auto"
             >
               {board.map((item, index) => (
                 <Draggable
@@ -152,7 +152,7 @@ function Boards() {
                       }}
                       {...provided.draggableProps}
                       style={getStyle(provided.draggableProps.style!)}
-                      className="border hover:border-gray-200 bg-gray-100 max-h-[calc(100vh-6.1rem)] overflow-x-hidden rounded-lg shadow-md min-w-[24rem] max-w-[24rem]"
+                      className="border hover:border-gray-200 bg-gray-100 max-h-[calc(100vh-6.1rem)] rounded-lg shadow-md min-w-[24rem] max-w-[24rem]"
                     >
                       <div
                         className={cls(
@@ -176,7 +176,11 @@ function Boards() {
                           <span>수정: 2023년 12월 31일</span>
                         </div>
                       </div>
-                      <Tasks boardItem={item} index={index} key={item.id} />
+                      <KanbanTask
+                        boardItem={item}
+                        index={index}
+                        key={item.id}
+                      />
                     </div>
                   )}
                 </Draggable>
@@ -193,4 +197,4 @@ function Boards() {
   );
 }
 
-export default React.memo(Boards);
+export default React.memo(KanbanBoardItem);

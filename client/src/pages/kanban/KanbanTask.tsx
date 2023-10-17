@@ -2,7 +2,7 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 import { IBoardProps } from "../../interface/kanban";
 import { cls } from "../../libs/utils";
 
-function Tasks({ boardItem, index }: IBoardProps) {
+function KanbanTask({ boardItem, index }: IBoardProps) {
   return (
     <Droppable droppableId={"card-" + boardItem.id} type="card">
       {(provided, snapshot) => (
@@ -97,4 +97,4 @@ function Tasks({ boardItem, index }: IBoardProps) {
   );
 }
 
-export default Tasks;
+export default KanbanTask;

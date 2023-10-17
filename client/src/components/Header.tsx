@@ -15,15 +15,20 @@ function Header() {
   };
 
   const { pathname } = useLocation();
-  if (pathname.includes("join") || pathname.includes("login")) return null;
+  if (
+    pathname.includes("join") ||
+    pathname.includes("login") ||
+    pathname.includes("profile")
+  )
+    return null;
 
   return (
     <div className="fixed z-30 text-white transform -translate-x-1/2 rounded-lg shadow-sm-light top-2 left-1/2 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 shadow-blue-500/50">
       <div className="flex flex-wrap items-center justify-between gap-16 py-2 pl-4 pr-2">
         <Link to="/" className="flex items-center">
-          <span className="self-center text-2xl font-semibold whitespace-nowrap">
-            P<span className="text-sm">roject</span>H
-            <span className="text-sm">ouse</span>
+          <span className="text-2xl font-bold">
+            P<span className="text-xs">ROJECT</span>H
+            <span className="text-xs">OUSE</span>
           </span>
         </Link>
         <div>
@@ -64,19 +69,35 @@ function Header() {
                 <ul className="py-2" aria-labelledby="user-menu-button">
                   <li>
                     <Link
-                      to="profile/0/post"
+                      to="profile/0/content/post"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       프로필
                     </Link>
                   </li>
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      to="profile/0/alarm"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      알림
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="profile/0/teams"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      팀
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="profile/0/setting"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       설정
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <Link
@@ -87,12 +108,12 @@ function Header() {
                     </Link>
                   </li>
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      to="#"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       로그아웃
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
