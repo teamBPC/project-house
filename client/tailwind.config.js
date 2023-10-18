@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       transitionProperty: {
-        "width": "width",
-        "fill": "fill",
+        width: "width",
+        fill: "fill",
       },
       backgroundImage: {
         "login-bg":

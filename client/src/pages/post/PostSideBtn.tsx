@@ -1,6 +1,6 @@
 function PostSideBtn() {
   return (
-    <div className="sticky order-2 h-full space-y-6 text-white top-[15%] right-[10px]">
+    <div className="sticky order-2 h-full space-y-6 text-white top-[15%] right-[10px] pb-8">
       <div>
         <a
           href="https://baek-si-hyun.github.io/awwwards-my-app/"

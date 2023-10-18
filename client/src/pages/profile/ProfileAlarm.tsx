@@ -52,21 +52,21 @@ function ProfileAlarm() {
           >
             <div className="flex -space-x-6">
               <img
-                className="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
+                className="w-10 h-10 border-2 border-white rounded-full "
                 src={`https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/f7fa91bd-bd76-4274-5220-e796e1565100/avatar`}
                 alt="avartar"
               />
               <img
-                className="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
+                className="w-10 h-10 border-2 border-white rounded-full "
                 src={`https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/f7fa91bd-bd76-4274-5220-e796e1565100/avatar`}
                 alt="avartar"
               />
               <img
-                className="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
+                className="w-10 h-10 border-2 border-white rounded-full "
                 src={`https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/f7fa91bd-bd76-4274-5220-e796e1565100/avatar`}
                 alt="avartar"
               />
-              <span className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800">
+              <span className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 ">
                 +99
               </span>
             </div>
