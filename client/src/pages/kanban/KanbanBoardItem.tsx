@@ -136,7 +136,7 @@ function KanbanBoardItem() {
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
-              className="flex items-start justify-start gap-2 p-4 pt-16 "
+              className="flex items-start justify-start gap-2 p-4 pt-16 overflow-x-auto"
             >
               {board.map((item, index) => (
                 <Draggable
@@ -152,7 +152,7 @@ function KanbanBoardItem() {
                       }}
                       {...provided.draggableProps}
                       style={getStyle(provided.draggableProps.style!)}
-                      className="border hover:border-gray-200 bg-gray-100 max-h-[calc(100vh-6.1rem)] rounded-lg shadow-md min-w-[24rem] max-w-[24rem] overflow-y-scroll"
+                      className="border hover:border-gray-200 bg-gray-100 max-h-[calc(100vh-6.1rem)] rounded-lg shadow-md min-w-[24rem] max-w-[24rem]"
                     >
                       <div
                         className={cls(

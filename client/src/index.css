@@ -16,7 +16,7 @@
   }
   /* 스크롤바 트랙 색상 */
   ::-webkit-scrollbar {
-    width: 0.4rem;
+    width: 0.5rem;
   }
 
   /* 스크롤바 트랙 색상 */

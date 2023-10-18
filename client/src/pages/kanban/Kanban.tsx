@@ -5,7 +5,7 @@ function Kanban() {
   return (
     <div className="flex w-full h-screen">
       <KanbanSideBar />
-      <div className="w-full overflow-hidden overflow-x-scroll">
+      <div className="w-full overflow-hidden">
         <Outlet />
       </div>
     </div>
