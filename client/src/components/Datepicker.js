@@ -1,4 +1,4 @@
-import DateRangePicker from "flowbite-datepicker/DateRangePicker";
+import { DateRangePicker } from "flowbite-datepicker";
 import { useEffect } from "react";
 
 function DatePicker({ register }) {
@@ -12,10 +12,10 @@ function DatePicker({ register }) {
     }
   }, []);
   return (
-    <div id="dateRangePicker">
+    <div id="dateRangePicker" >
       <div
         datepicker-autohide="true"
-        className="flex items-end justify-between"
+        className="flex items-end justify-between gap-4"
       >
         <div className="relative">
           <div className="absolute left-0 flex items-center pl-3 pointer-events-none bottom-3.5">

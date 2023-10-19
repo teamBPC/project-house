@@ -1,5 +1,5 @@
 import PostComment from "./PostComment";
-import PostSideBtn from "./PostSideBtn";
+import PostSideBtns from "../../components/PostSideBtns";
 import PostOther from "./PostOther";
 
 function Post() {
@@ -7,7 +7,7 @@ function Post() {
     <div className="flex flex-col items-center">
       <div className="w-[1440px] ">
         <div className="flex gap-4">
-          <PostSideBtn />
+          <PostSideBtns />
           <div className="flex flex-col gap-4 mt-12">
             <div className="flex items-center justify-between w-full pt-4 ">
               <div className="flex items-center gap-2">

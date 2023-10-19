@@ -116,7 +116,6 @@ function CreateTaskModal({ modalState }: IModalProps) {
                     </select>
                   </div>
                 </div>
-
                 <DatePicker register={register} />
                 <div>
                   <label
