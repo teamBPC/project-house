@@ -8,31 +8,6 @@ function PostComment() {
             src={`https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/f7fa91bd-bd76-4274-5220-e796e1565100/avatar`}
             alt="avatar"
           />
-          <div className="w-full">
-            <form className="flex flex-col w-full">
-              <div className="pb-2">
-                <label
-                  htmlFor="comment"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Comment
-                </label>
-                <textarea
-                  id="comment"
-                  className="block p-1 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 min-h-[100px] resize-none"
-                  required
-                />
-              </div>
-              <div className="flex justify-end">
-                <button
-                  type="submit"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-                >
-                  작성
-                </button>
-              </div>
-            </form>
-          </div>
         </div>
         <div className="p-4">
           {[1, 2, 3, 4, 5].map((list) => (
@@ -102,7 +77,7 @@ function PostComment() {
             {[1, 2, 3, 4, 5, 6].map((list) => (
               <kbd
                 key={list}
-                className="px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 rounded-xl border border-gray-200 rounded-lg"
+                className="px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100  border border-gray-200 rounded-lg"
               >
                 개인 홈페이지
               </kbd>

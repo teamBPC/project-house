@@ -5,7 +5,7 @@ import { modalHandle } from "../../components/modal/common";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { IBtnRefState, IModalState } from "../../interface/modal";
-import TaskDetailModal from "../../components/modal/kanbanTask/TaskDetailModal";
+import TaskDetailModal from "../../components/modal/kanbanTask/taskDetailModal/TaskDetailModal";
 
 function KanbanTask({ boardItem, index }: IBoardProps) {
   const dispatch = useDispatch();
@@ -25,15 +25,15 @@ function KanbanTask({ boardItem, index }: IBoardProps) {
   };
   useEffect(() => {
     if (!modalState.taskDetailModalOpen) {
-      setSelectedTaskData(()=>null);
+      setSelectedTaskData(() => null);
     }
   }, [modalState.taskDetailModalOpen]);
-  
+
   useEffect(() => {
     setModalBtnRef({
       taskDetailBtnRef: taskDetailBtnRef,
     });
-  }, [setModalBtnRef]);
+  }, [taskDetailBtnRef]);
 
   return (
     <>
@@ -63,7 +63,7 @@ function KanbanTask({ boardItem, index }: IBoardProps) {
                         task.priority === "high"
                           ? "border-red-600"
                           : task.priority === "mid"
-                          ? "border-yellow-500"
+                          ? "border-yellow-400"
                           : task.priority === "low"
                           ? "border-green-500"
                           : "border-slate-500"
@@ -81,6 +81,7 @@ function KanbanTask({ boardItem, index }: IBoardProps) {
                           </div>
                           <button
                             onClick={() => sendTaskData(task)}
+                            ref={taskDetailBtnRef}
                             className="text-left truncate hover:whitespace-pre-wrap hover:break-words"
                           >
                             <span>{task.description}</span>
