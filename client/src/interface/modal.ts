@@ -1,4 +1,5 @@
 import { MutableRefObject } from "react";
+import { IToDo } from "./kanban";
 
 export interface CreateBoardItemForm {
   title: string;
@@ -32,6 +33,7 @@ export interface IModalStateItem {
   createProjectModalOpen?: boolean;
   editProjectsModalOpen?: boolean;
   deleteProjectsModalOpen?: boolean;
+  taskDetailModalOpen?: boolean;
 }
 export interface IModalState {
   modalState: IModalStateItem;
@@ -39,6 +41,7 @@ export interface IModalState {
 export interface IModalProps {
   modalState: IModalStateItem;
   modalBtnRef?: any;
+  isTask?: IToDo;
 }
 export interface IBtnRefState {
   deleteBoardItemBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
@@ -46,6 +49,7 @@ export interface IBtnRefState {
   deleteBoardsBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
   editProjectsBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
   deleteProjectsBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
+  taskDetailBtnRef?: MutableRefObject<HTMLButtonElement | null> | null;
 }
 
 export interface IHoverModalState {

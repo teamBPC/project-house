@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 import { IBoards } from "../../interface/kanban";
 import { Link } from "react-router-dom";
 import { IBtnRefState, IModalState } from "../../interface/modal";
 import BoardsBtns from "../../components/BoardsBtns";
-import DeleteBoardsModal from "../../components/modal/boards/DeleteBoardsModal";
-import CreateBoardsModal from "../../components/modal/boards/CraeteBoardsModal";
-import EditBoardsModal from "../../components/modal/boards/EditBoardsModal";
+import DeleteBoardsModal from "../../components/modal/kanbanBoards/DeleteBoardsModal";
+import CreateBoardsModal from "../../components/modal/kanbanBoards/CraeteBoardsModal";
+import EditBoardsModal from "../../components/modal/kanbanBoards/EditBoardsModal";
 import { hoverModalHandle } from "./common/common";
 import { cls } from "../../libs/utils";
 
@@ -17,7 +17,8 @@ function KanbanBoards() {
   const modalState = useSelector(
     ({ modalStateSlice }: { modalStateSlice: IModalState }) => {
       return modalStateSlice.modalState;
-    }
+    },
+    shallowEqual
   );
   const [modalBtnRef, setModalBtnRef] = useState<IBtnRefState>({
     editBoardsBtnRef: null,

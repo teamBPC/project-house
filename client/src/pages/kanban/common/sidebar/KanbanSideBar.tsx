@@ -10,14 +10,7 @@ function KanbanSideBar() {
   };
 
   const { pathname } = useLocation();
-  if (
-    !(
-      pathname.includes("projects") ||
-      pathname.includes("boards") ||
-      pathname.includes("board")
-    )
-  )
-    return null;
+  if (!pathname.includes("management")) return null;
 
   return (
     <div

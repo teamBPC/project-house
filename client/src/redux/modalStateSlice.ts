@@ -13,6 +13,7 @@ const modalStateSlice = createSlice({
       deleteBoardsModalOpen: false,
       editProfileModalOpen: false,
       createProjectModalOpen: false,
+      taskDetailModalOpen: false,
     },
   },
   reducers: {

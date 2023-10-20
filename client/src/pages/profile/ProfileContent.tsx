@@ -44,7 +44,7 @@ function ProfileContent() {
       <div className="my-8"></div>
       <div className="flex flex-col">
         <div>
-          <ul className="grid grid-cols-3 text-center border-b border-gray-200">
+          <ul className="grid grid-cols-2 text-center border-b border-gray-200">
             <li className="flex justify-center">
               <Link
                 to="post"
@@ -54,17 +54,6 @@ function ProfileContent() {
                 )}
               >
                 게시물
-              </Link>
-            </li>
-            <li className="flex justify-center">
-              <Link
-                to="like"
-                className={cls(
-                  "px-8 py-4 ",
-                  pathname.includes("like") ? "border-b-2 border-blue-500" : ""
-                )}
-              >
-                좋아요
               </Link>
             </li>
             <li className="flex justify-center">

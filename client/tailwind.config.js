@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       transitionProperty: {
         width: "width",
+        fill: "fill",
       },
       backgroundImage: {
         "login-bg":

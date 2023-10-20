@@ -13,9 +13,9 @@ import { boardItemRedux } from "../../redux/boardItemSlice";
 import { useDispatch, useSelector } from "react-redux";
 import KanbanTask from "./KanbanTask";
 import BoardItemBtns from "../../components/BoardItemBtns";
-import CreateTaskModal from "../../components/modal/boardItem/CreateTaskModal";
-import CreateBoardItemModal from "../../components/modal/boardItem/CreateBoardItemModal";
-import DeleteBoardItemModal from "../../components/modal/boardItem/DeleteBoardItemModal";
+import CreateTaskModal from "../../components/modal/kanbanTask/CreateTaskModal";
+import CreateBoardItemModal from "../../components/modal/kanbanBoardItem/CreateBoardItemModal";
+import DeleteBoardItemModal from "../../components/modal/kanbanBoardItem/DeleteBoardItemModal";
 import { IBtnRefState, IModalState } from "../../interface/modal";
 
 function getStyle(style: DraggingStyle | NotDraggingStyle) {

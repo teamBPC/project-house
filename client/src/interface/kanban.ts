@@ -1,15 +1,19 @@
 import { Dispatch, SetStateAction } from "react";
 import { DraggableProvided } from "react-beautiful-dnd";
 import { IBtnRefState } from "./modal";
-
+export interface ITaskModalData {
+  taskData: IToDo;
+}
 export interface IToDo {
   id: number;
   title: string;
-  manager: string;
+  maker: string;
+  manager: string[];
   priority: string;
   start: string;
   end: string;
   description: string;
+  createAt: string;
 }
 export interface IBoardsItem {
   id: number;

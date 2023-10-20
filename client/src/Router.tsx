@@ -7,7 +7,6 @@ import Home from "./pages/Home";
 import Profile from "./pages/profile/Profile";
 import Post from "./pages/post/Post";
 import ProfileContentBookmark from "./pages/profile/ProfileContentBookmark";
-import ProfileContentLike from "./pages/profile/ProfileContentLike";
 import ProfileContentPost from "./pages/profile/ProfileContentPost";
 import ProfileSetting from "./pages/profile/ProfileSetting";
 import ProfileTeams from "./pages/profile/ProfileTeams";
@@ -36,7 +35,6 @@ function Router() {
         <Route path="profile/:userId" element={<Profile />}>
           <Route path="content" element={<ProfileContent />}>
             <Route path="post" element={<ProfileContentPost />}></Route>
-            <Route path="like" element={<ProfileContentLike />}></Route>
             <Route path="bookmark" element={<ProfileContentBookmark />}></Route>
           </Route>
           <Route path="alarm" element={<ProfileAlarm />}></Route>

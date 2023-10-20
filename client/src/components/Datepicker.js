@@ -1,7 +1,12 @@
-import DateRangePicker from "flowbite-datepicker/DateRangePicker";
+import { DateRangePicker } from "flowbite-datepicker";
 import { useEffect } from "react";
 
-function DatePicker({ register }) {
+function DatePicker({
+  register,
+  startDate = "",
+  endDate = "",
+  editToggle = false,
+}) {
   useEffect(() => {
     const dateRangePickerEl = document.getElementById("dateRangePicker");
 
@@ -11,11 +16,13 @@ function DatePicker({ register }) {
       });
     }
   }, []);
+
+
   return (
     <div id="dateRangePicker">
       <div
         datepicker-autohide="true"
-        className="flex items-end justify-between"
+        className="flex items-end justify-between gap-4"
       >
         <div className="relative">
           <div className="absolute left-0 flex items-center pl-3 pointer-events-none bottom-3.5">
@@ -37,9 +44,10 @@ function DatePicker({ register }) {
           </label>
           <input
             name="start"
-            {...register("start", { required: true })}
+            {...register("start", { required: true, disabled: editToggle })}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 outline-blue-500"
             placeholder="Select date start"
+            defaultValue={startDate}
           />
         </div>
         <span className="mb-2.5">부터</span>
@@ -63,9 +71,10 @@ function DatePicker({ register }) {
           </label>
           <input
             name="end"
-            {...register("end", { required: true })}
+            {...register("end", { required: true, disabled: editToggle })}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 outline-blue-500"
             placeholder="Select date end"
+            defaultValue={endDate}
           />
         </div>
         <span className="mb-2.5">까지</span>
