@@ -15,6 +15,12 @@ function TaskDetailModalContent({ taskData }: { taskData: IToDo | null }) {
   const handleSelect = (e: { target: { value: SetStateAction<string> } }) => {
     setSelected(e.target.value);
   };
+
+  const [editToggle, setEditToggle] = useState(true);
+
+  const editToggleHandle = () => {
+    setEditToggle((toggle) => !toggle);
+  };
   return (
     <>
       {taskData && (
@@ -34,7 +40,7 @@ function TaskDetailModalContent({ taskData }: { taskData: IToDo | null }) {
               <input
                 type="text"
                 id="title"
-                {...register("title", { required: true })}
+                {...register("title", { required: true, disabled: editToggle })}
                 className="bg-gray-50 border w-full  border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 outline-blue-500 text-xl"
                 required
                 defaultValue={taskData.title}
@@ -53,7 +59,10 @@ function TaskDetailModalContent({ taskData }: { taskData: IToDo | null }) {
                     <input
                       type="text"
                       id="maker"
-                      {...register("maker", { required: true })}
+                      {...register("maker", {
+                        required: true,
+                        disabled: editToggle,
+                      })}
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 outline-blue-500"
                       required
                       defaultValue={taskData.maker}
@@ -68,9 +77,12 @@ function TaskDetailModalContent({ taskData }: { taskData: IToDo | null }) {
                     </label>
                     <select
                       id="priority"
-                      {...register("priority", { required: true })}
+                      {...register("priority", {
+                        required: true,
+                        disabled: editToggle,
+                      })}
                       className={cls(
-                        "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 outline-blue-500",
+                        "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 outline-blue-500 font-bold",
                         selected
                           ? selected === "high"
                             ? "text-red-600 border-red-600 outline-red-500 focus:border-red-500 focus:ring-red-500"
@@ -110,6 +122,7 @@ function TaskDetailModalContent({ taskData }: { taskData: IToDo | null }) {
                   register={register}
                   startDate={taskData.start}
                   endDate={taskData.end}
+                  editToggle={editToggle}
                 />
                 <div className="gap-4 my-4 text-sm font-medium text-gray-900 ">
                   <span className="block mb-2 ">담당 팀원 추가</span>
@@ -160,7 +173,10 @@ function TaskDetailModalContent({ taskData }: { taskData: IToDo | null }) {
                   </label>
                   <textarea
                     id="description"
-                    {...register("description", { required: true })}
+                    {...register("description", {
+                      required: true,
+                      disabled: editToggle,
+                    })}
                     className="bg-gray-50 border max-h-72 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 outline-blue-500"
                     required
                     rows={8}
@@ -178,12 +194,19 @@ function TaskDetailModalContent({ taskData }: { taskData: IToDo | null }) {
                     <button
                       type="submit"
                       className=" bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-sm  px-5 py-2.5 "
+                      onClick={() => editToggleHandle()}
                     >
                       수정
                     </button>
                     <button
                       type="submit"
-                      className=" bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-sm  px-5 py-2.5 "
+                      className={cls(
+                        " bg-blue-700  rounded-lg text-sm  px-5 py-2.5 ",
+                        editToggle
+                          ? "opacity-50"
+                          : "hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+                      )}
+                      disabled={editToggle}
                     >
                       저장
                     </button>

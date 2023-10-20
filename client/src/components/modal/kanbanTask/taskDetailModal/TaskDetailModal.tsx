@@ -15,9 +15,8 @@ function TaskDetailModal({
   selectedTaskData,
 }: IModalProps & { selectedTaskData: IToDo | null }) {
   const dispatch = useDispatch();
-
   const modalRef = useRef<HTMLDivElement | null>(null);
-  
+
   useEffect(() => {
     const outsideClickHandle = (event: MouseEvent) => {
       if (
@@ -36,6 +35,7 @@ function TaskDetailModal({
       document.removeEventListener("mousedown", outsideClickHandle);
     };
   }, [modalState.taskDetailModalOpen, dispatch, modalBtnRef.taskDetailBtnRef]);
+
 
   return (
     <div
