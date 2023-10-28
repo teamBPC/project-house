@@ -72,24 +72,33 @@ function KanbanTask({ boardItem, index }: IBoardProps) {
                       <div className="flex flex-col">
                         <div className="flex flex-col gap-4">
                           <div className="grid items-start justify-between max-w-full grid-cols-4">
-                            <span className="w-full col-span-3 text-lg font-bold break-all whitespace-pre-wrap text-clip">
+                            <span className="w-full col-span-2 text-lg font-bold break-all whitespace-pre-wrap text-clip">
                               {task.title}
                             </span>
-                            <span className="col-span-1 text-sm font-light text-end">
-                              {task.end}
+                            <span className="col-span-2 text-sm font-light text-end">
+                              마감일: {task.end}
                             </span>
                           </div>
-                          <button
-                            onClick={() => sendTaskData(task)}
-                            ref={taskDetailBtnRef}
-                            className="text-left truncate hover:whitespace-pre-wrap hover:break-words"
-                          >
+                          <div className="text-left truncate ">
                             <span>{task.description}</span>
-                          </button>
-                          <div className="flex items-end justify-between font-bold">
-                            <span>{task.maker}</span>
-                            <div className="flex gap-2 text-gray-500">
-                              <div className="flex items-center gap-1">
+                          </div>
+                          <div className="flex items-end justify-between font-bold ">
+                            <div className="flex flex-wrap h-auto -space-x-2 ">
+                              {[1, 2, 3, 4, 5, 6].map((list) => (
+                                <img
+                                  className="border-2 border-white rounded-full h-7 w-7"
+                                  src={`https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/f7fa91bd-bd76-4274-5220-e796e1565100/avatar`}
+                                  alt="avartar"
+                                  key={list}
+                                />
+                              ))}
+                            </div>
+                            <button
+                              onClick={() => sendTaskData(task)}
+                              ref={taskDetailBtnRef}
+                              className="flex gap-2 p-1 text-gray-500 rounded-lg hover:bg-gray-200"
+                            >
+                              <div className="flex items-center gap-1 ">
                                 <span>
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +112,6 @@ function KanbanTask({ boardItem, index }: IBoardProps) {
                                 </span>
                                 <span className="text-xs font-bold">7</span>
                               </div>
-
                               <div className="flex items-center ">
                                 <span>
                                   <svg
@@ -118,7 +126,7 @@ function KanbanTask({ boardItem, index }: IBoardProps) {
                                 </span>
                                 <span className="text-xs font-bold">7</span>
                               </div>
-                            </div>
+                            </button>
                           </div>
                         </div>
                       </div>
