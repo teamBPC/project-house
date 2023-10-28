@@ -2,7 +2,7 @@ import { cls } from "../../libs/utils";
 
 function PostOther() {
   return (
-    <div className="grid grid-cols-3 gap-8 py-12 ">
+    <div className="grid clear-both grid-cols-3 gap-8 py-12">
       {[1, 2, 3, 4, 5, 6].map((list) => (
         <div key={list} className="flex flex-col gap-2 ">
           <div className="relative overflow-hidden rounded-lg">
