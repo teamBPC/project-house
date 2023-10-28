@@ -34,7 +34,7 @@ function StructureItem({
       {mapItem && (
         <div
           style={{ paddingLeft: `${depth === 0 ? 0 : 15}px` }}
-          className="flex flex-col pl-4"
+          className="flex flex-col pl-4 "
         >
           <div
             className={cls(
@@ -58,7 +58,7 @@ function StructureItem({
                 )}
               </button>
             )}
-            <div className="w-full truncate">
+            <div className="w-full font-semibold truncate hover:text-blue-500">
               <Link to={link}>{mapItem.title}</Link>
             </div>
           </div>
