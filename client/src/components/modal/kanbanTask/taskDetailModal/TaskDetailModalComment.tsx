@@ -1,9 +1,9 @@
 function TaskDetailModalComment() {
   return (
-    <div className="flex flex-col justify-end col-span-4 px-8 pt-5 pb-6 border-l">
+    <div className="flex flex-col justify-between col-span-4 px-8 pt-5 pb-6 border-l h-full min-h-[calc(100vh-2rem)] max-h-[calc(100vh-2rem)] ">
       <span className="py-1 text-sm font-medium text-gray-900">전달사항</span>
-      <div className="flex flex-col py-2 pr-1 overflow-hidden overflow-y-scroll border-y max-h-[calc(100vh-30rem)]">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((list) => (
+      <div className="flex flex-col-reverse h-full py-2 pr-1 overflow-hidden overflow-y-scroll border-y ">
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((list) => (
           <div key={list} className="flex items-start gap-2 mt-2">
             <img
               className="rounded-full h-7 w-7"

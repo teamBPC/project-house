@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { modalHandle } from "../../common";
 import { cls } from "../../../../libs/utils";
 import { useDispatch } from "react-redux";
@@ -36,7 +36,6 @@ function TaskDetailModal({
     };
   }, [modalState.taskDetailModalOpen, dispatch, modalBtnRef.taskDetailBtnRef]);
 
-
   return (
     <div
       className={cls(
@@ -46,7 +45,7 @@ function TaskDetailModal({
     >
       <div
         ref={modalRef}
-        className="relative grid grid-cols-10 bg-white rounded-lg shadow"
+        className="relative grid grid-cols-10 bg-white rounded-lg shadow "
       >
         <button
           type="button"
