@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { cls } from "../../../libs/utils";
 import { IModalProps } from "../../../interface/modal";
-import { modalHandle } from "../common";
+import { modalHandle } from "../modalHandle";
 import { useDispatch } from "react-redux";
 import { useCommonForm } from "../../../libs/useCommonForm";
 import { FieldErrors } from "react-hook-form";

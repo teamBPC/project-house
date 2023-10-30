@@ -1,10 +1,11 @@
 import { useRef, useEffect } from "react";
 import { cls } from "../../../libs/utils";
 import { IModalProps } from "../../../interface/modal";
-import { modalHandle } from "../common";
+import { modalHandle } from "../modalHandle";
 import { useDispatch } from "react-redux";
 import { useCommonForm } from "../../../libs/useCommonForm";
 import { FieldErrors } from "react-hook-form";
+import { modalOutsideClick } from "../modalOutsideClick";
 
 function CreateProjectModal({ modalState }: IModalProps) {
   const dispatch = useDispatch();
@@ -16,22 +17,16 @@ function CreateProjectModal({ modalState }: IModalProps) {
   const btnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const outsideClickHandle = (event: MouseEvent) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target as Node) &&
-        btnRef.current &&
-        !btnRef.current.contains(event.target as Node)
-      ) {
-        modalHandle(dispatch, "createProjectModalOpen", false, reset);
-      }
-    };
-    if (modalState.createProjectModalOpen) {
-      document.addEventListener("mousedown", outsideClickHandle);
-    }
-    return () => {
-      document.removeEventListener("mousedown", outsideClickHandle);
-    };
+    const modalClose = modalOutsideClick(
+      modalState.createProjectModalOpen,
+      modalRef,
+      btnRef,
+      dispatch,
+      "createProjectModalOpen",
+      false,
+      reset
+    );
+    return modalClose;
   }, [dispatch, modalState.createProjectModalOpen, reset]);
   return (
     <>

@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
-import { cls } from "../libs/utils";
 import { useState } from "react";
+import { cls } from "../../libs/utils";
 
 function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);

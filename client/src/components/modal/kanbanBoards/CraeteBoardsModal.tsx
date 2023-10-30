@@ -1,10 +1,11 @@
 import { useRef, useEffect } from "react";
 import { cls } from "../../../libs/utils";
-import { modalHandle } from "../common";
+import { modalHandle } from "../modalHandle";
 import { IModalProps } from "../../../interface/modal";
 import { useDispatch } from "react-redux";
 import { useCommonForm } from "../../../libs/useCommonForm";
 import { FieldErrors } from "react-hook-form";
+import { modalOutsideClick } from "../modalOutsideClick";
 
 function CreateBoardsModal({ modalState }: IModalProps) {
   const dispatch = useDispatch();
@@ -16,24 +17,18 @@ function CreateBoardsModal({ modalState }: IModalProps) {
   const btnRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
-    const outsideClickHandle = (event: MouseEvent) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target as Node) &&
-        btnRef.current &&
-        !btnRef.current.contains(event.target as Node)
-      ) {
-        modalHandle(dispatch, "createBoardsModalOpen", false, reset);
-      }
-    };
-    if (modalState.createBoardsModalOpen) {
-      document.addEventListener("mousedown", outsideClickHandle);
-    }
-    return () => {
-      document.removeEventListener("mousedown", outsideClickHandle);
-    };
+    const modalClose = modalOutsideClick(
+      modalState.createBoardsModalOpen,
+      modalRef,
+      btnRef,
+      dispatch,
+      "createBoardsModalOpen",
+      false,
+      reset
+    );
+    return modalClose;
   }, [dispatch, modalState.createBoardsModalOpen, reset]);
-
+  
   return (
     <>
       <div className="fixed z-40 bottom-4 right-4">

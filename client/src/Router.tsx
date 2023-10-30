@@ -2,7 +2,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import LoginID from "./pages/member/LoginID";
 import LoginPW from "./pages/member/LoginPW";
 import Join from "./pages/member/Join";
-import Header from "./components/Header";
+import Header from "./components/header/Header";
 import Home from "./pages/Home";
 import Profile from "./pages/profile/Profile";
 import Post from "./pages/post/Post";
@@ -16,6 +16,7 @@ import Kanban from "./pages/kanban/Kanban";
 import KanbanProjects from "./pages/kanban/KanbanProjects";
 import KanbanBoards from "./pages/kanban/KanbanBoards";
 import KanbanBoardItem from "./pages/kanban/KanbanBoardItem";
+import Footer from "./components/footer/Footer";
 
 function Router() {
   return (
@@ -45,6 +46,7 @@ function Router() {
         <Route path="login-pw" element={<LoginPW />}></Route>
         <Route path="join" element={<Join />}></Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

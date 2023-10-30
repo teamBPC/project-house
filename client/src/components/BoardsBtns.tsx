@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { IBtnsProps } from "../interface/kanban";
-import { modalHandle } from "./modal/common";
+import { modalHandle } from "./modal/modalHandle";
 import { useDispatch } from "react-redux";
 
 function BoardsBtns({ setModalBtnRef }: IBtnsProps) {
@@ -24,7 +24,7 @@ function BoardsBtns({ setModalBtnRef }: IBtnsProps) {
           className="flex"
         >
           <span className="p-1 transition duration-100 ease-in-out rounded-md material-symbols-outlined hover:bg-gray-100">
-          edit
+            edit
           </span>
         </button>
       </div>
@@ -35,7 +35,7 @@ function BoardsBtns({ setModalBtnRef }: IBtnsProps) {
           className="flex"
         >
           <span className="p-1 transition duration-100 ease-in-out rounded-md material-symbols-outlined hover:bg-gray-100">
-          delete_forever
+            delete_forever
           </span>
         </button>
       </div>

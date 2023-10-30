@@ -1,12 +1,9 @@
 import { useRef, useEffect } from "react";
 import { IBtnsProps } from "../interface/kanban";
-import { modalHandle } from "./modal/common";
+import { modalHandle } from "./modal/modalHandle";
 import { useDispatch } from "react-redux";
 
-function BoardBtns({
-  setModalBtnRef,
-  provided,
-}: IBtnsProps) {
+function BoardBtns({ setModalBtnRef, provided }: IBtnsProps) {
   const dispatch = useDispatch();
   const deleteBoardItemBtnRef = useRef<HTMLButtonElement>(null);
 

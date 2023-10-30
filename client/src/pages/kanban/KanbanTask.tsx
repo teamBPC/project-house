@@ -1,7 +1,7 @@
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { IBoardProps, IToDo } from "../../interface/kanban";
 import { cls } from "../../libs/utils";
-import { modalHandle } from "../../components/modal/common";
+import { modalHandle } from "../../components/modal/modalHandle";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { IBtnRefState, IModalState } from "../../interface/modal";

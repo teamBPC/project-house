@@ -1,10 +1,11 @@
 import { useRef, useEffect } from "react";
 import { cls } from "../../../libs/utils";
 import { IModalProps } from "../../../interface/modal";
-import { modalHandle } from "../common";
+import { modalHandle } from "../modalHandle";
 import { useDispatch } from "react-redux";
 import { useCommonForm } from "../../../libs/useCommonForm";
 import { FieldErrors } from "react-hook-form";
+import { modalOutsideClick } from "../modalOutsideClick";
 
 function DeleteProjectModal({ modalState, modalBtnRef }: IModalProps) {
   const dispatch = useDispatch();
@@ -15,28 +16,17 @@ function DeleteProjectModal({ modalState, modalBtnRef }: IModalProps) {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const outsideClickHandle = (event: MouseEvent) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target as Node) &&
-        modalBtnRef.deleteProjectsBtnRef.current &&
-        !modalBtnRef.deleteProjectsBtnRef.current.contains(event.target as Node)
-      ) {
-        modalHandle(dispatch, "deleteProjectsModalOpen", false, reset);
-      }
-    };
-    if (modalState.deleteProjectsModalOpen) {
-      document.addEventListener("mousedown", outsideClickHandle);
-    }
-    return () => {
-      document.removeEventListener("mousedown", outsideClickHandle);
-    };
-  }, [
-    modalState.deleteProjectsModalOpen,
-    reset,
-    dispatch,
-    modalBtnRef.deleteProjectsBtnRef,
-  ]);
+    const modalClose = modalOutsideClick(
+      modalState.deleteProjectsModalOpen,
+      modalRef,
+      modalBtnRef.deleteProjectsBtnRef,
+      dispatch,
+      "deleteProjectsModalOpen",
+      false,
+      reset
+    );
+    return modalClose;
+  }, [dispatch, modalBtnRef.deleteProjectsBtnRef, modalState.deleteProjectsModalOpen, reset]);
   return (
     <div
       className={cls(

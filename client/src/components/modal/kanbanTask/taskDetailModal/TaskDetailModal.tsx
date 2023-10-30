@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { modalHandle } from "../../common";
+import { modalHandle } from "../../modalHandle";
 import { cls } from "../../../../libs/utils";
 import { useDispatch } from "react-redux";
 import { IModalProps } from "../../../../interface/modal";
@@ -8,6 +8,7 @@ import { IToDo } from "../../../../interface/kanban";
 
 import TaskDetailModalContent from "./TaskDetailModalContent";
 import TaskDetailModalComment from "./TaskDetailModalComment";
+import { modalOutsideClick } from "../../modalOutsideClick";
 
 function TaskDetailModal({
   modalState,
@@ -18,24 +19,16 @@ function TaskDetailModal({
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const outsideClickHandle = (event: MouseEvent) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target as Node) &&
-        modalBtnRef.taskDetailBtnRef.current &&
-        !modalBtnRef.taskDetailBtnRef.current.contains(event.target as Node)
-      ) {
-        modalHandle(dispatch, "taskDetailModalOpen", false);
-      }
-    };
-    if (modalState.taskDetailModalOpen) {
-      document.addEventListener("mousedown", outsideClickHandle);
-    }
-    return () => {
-      document.removeEventListener("mousedown", outsideClickHandle);
-    };
-  }, [modalState.taskDetailModalOpen, dispatch, modalBtnRef.taskDetailBtnRef]);
-
+    const modalClose = modalOutsideClick(
+      modalState.taskDetailModalOpen,
+      modalRef,
+      modalBtnRef.taskDetailBtnRef,
+      dispatch,
+      "taskDetailModalOpen",
+      false
+    );
+    return modalClose;
+  }, [dispatch, modalBtnRef.taskDetailBtnRef, modalState.taskDetailModalOpen]);
   return (
     <div
       className={cls(
