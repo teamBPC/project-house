@@ -7,7 +7,7 @@ import BoardsBtns from "../../components/BoardsBtns";
 import DeleteBoardsModal from "../../components/modal/kanbanBoards/DeleteBoardsModal";
 import CreateBoardsModal from "../../components/modal/kanbanBoards/CraeteBoardsModal";
 import EditBoardsModal from "../../components/modal/kanbanBoards/EditBoardsModal";
-import { hoverModalHandle } from "./common/common";
+import { hoverModalHandle } from "./common/hoverModalHandle";
 import { cls } from "../../libs/utils";
 
 function KanbanBoards() {

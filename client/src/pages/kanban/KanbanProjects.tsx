@@ -6,7 +6,7 @@ import { IProjects } from "../../interface/kanban";
 import { Link } from "react-router-dom";
 import ProjectsBtns from "../../components/ProjectsBtns";
 import { cls } from "../../libs/utils";
-import { hoverModalHandle } from "./common/common";
+import { hoverModalHandle } from "./common/hoverModalHandle";
 import EditProjectModal from "../../components/modal/kanbanProjects/EditProjectModal";
 import DeleteProjectModal from "../../components/modal/kanbanProjects/DeleteProjectModal";
 
