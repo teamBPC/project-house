@@ -1,10 +1,11 @@
 import { useRef, useEffect } from "react";
 import { cls } from "../../../libs/utils";
 import { IModalProps } from "../../../interface/modal";
-import { modalHandle } from "../common";
+import { modalHandle } from "../modalHandle";
 import { useDispatch } from "react-redux";
 import { useCommonForm } from "../../../libs/useCommonForm";
 import { FieldErrors } from "react-hook-form";
+import { modalOutsideClick } from "../modalOutsideClick";
 
 function EditBoardsModal({ modalState, modalBtnRef }: IModalProps) {
   const dispatch = useDispatch();
@@ -15,24 +16,23 @@ function EditBoardsModal({ modalState, modalBtnRef }: IModalProps) {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const outsideClickHandle = (event: MouseEvent) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target as Node) &&
-        modalBtnRef.editBoardsBtnRef.current &&
-        !modalBtnRef.editBoardsBtnRef.current.contains(event.target as Node)
-      ) {
-        modalHandle(dispatch, "editBoardsModalOpen", false, reset);
-      }
-    };
-    if (modalState.editBoardsModalOpen) {
-      document.addEventListener("mousedown", outsideClickHandle);
-    }
-    return () => {
-      document.removeEventListener("mousedown", outsideClickHandle);
-    };
-  }, [modalState, reset, dispatch, modalBtnRef.editBoardsBtnRef]);
-
+    const modalClose = modalOutsideClick(
+      modalState.editBoardsModalOpen,
+      modalRef,
+      modalBtnRef.editBoardsBtnRef,
+      dispatch,
+      "createBoardsModalOpen",
+      false,
+      reset
+    );
+    return modalClose;
+  }, [
+    dispatch,
+    modalBtnRef.editBoardsBtnRef,
+    modalState.createBoardsModalOpen,
+    modalState.editBoardsModalOpen,
+    reset,
+  ]);
   return (
     <div
       className={cls(

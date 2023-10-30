@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { IBtnsProps } from "../interface/kanban";
-import { modalHandle } from "./modal/common";
+import { modalHandle } from "./modal/modalHandle";
 import { useDispatch } from "react-redux";
 
 function ProjectsBtns({ setModalBtnRef }: IBtnsProps) {

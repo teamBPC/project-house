@@ -1,10 +1,11 @@
 import { useRef, useEffect } from "react";
 import { cls } from "../../../libs/utils";
 import { IModalProps } from "../../../interface/modal";
-import { modalHandle } from "../common";
+import { modalHandle } from "../modalHandle";
 import { useDispatch } from "react-redux";
 import { useCommonForm } from "../../../libs/useCommonForm";
 import { FieldErrors } from "react-hook-form";
+import { modalOutsideClick } from "../modalOutsideClick";
 
 function DeleteBoardsModal({ modalState, modalBtnRef }: IModalProps) {
   const dispatch = useDispatch();
@@ -15,28 +16,17 @@ function DeleteBoardsModal({ modalState, modalBtnRef }: IModalProps) {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const outsideClickHandle = (event: MouseEvent) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target as Node) &&
-        modalBtnRef.deleteBoardsBtnRef.current &&
-        !modalBtnRef.deleteBoardsBtnRef.current.contains(event.target as Node)
-      ) {
-        modalHandle(dispatch, "deleteBoardsModalOpen", false, reset);
-      }
-    };
-    if (modalState.deleteBoardsModalOpen) {
-      document.addEventListener("mousedown", outsideClickHandle);
-    }
-    return () => {
-      document.removeEventListener("mousedown", outsideClickHandle);
-    };
-  }, [
-    modalState.deleteBoardsModalOpen,
-    reset,
-    dispatch,
-    modalBtnRef.deleteBoardsBtnRef,
-  ]);
+    const modalClose = modalOutsideClick(
+      modalState.deleteBoardsModalOpen,
+      modalRef,
+      modalBtnRef.deleteBoardsBtnRef,
+      dispatch,
+      "deleteBoardsModalOpen",
+      false,
+      reset
+    );
+    return modalClose;
+  }, [dispatch, modalBtnRef.deleteBoardsBtnRef, modalState.deleteBoardsModalOpen, reset]);
 
   return (
     <div
