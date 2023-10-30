@@ -28,6 +28,7 @@ function CreateBoardsModal({ modalState }: IModalProps) {
     );
     return modalClose;
   }, [dispatch, modalState.createBoardsModalOpen, reset]);
+  
   return (
     <>
       <div className="fixed z-40 bottom-4 right-4">

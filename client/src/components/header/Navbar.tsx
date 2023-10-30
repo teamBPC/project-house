@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { cls } from "../libs/utils";
+import { cls } from "../../libs/utils";
 
 function Navbar() {
   const { pathname } = useLocation();
