@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import { useState } from "react";
 import { cls } from "../../libs/utils";
+import ShareProjectBtn from "../btns/ShareProjectBtn";
 
 function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,7 +24,7 @@ function Header() {
     return null;
 
   return (
-    <div className="fixed z-30 text-white transform -translate-x-1/2 rounded-lg shadow-sm-light top-2 left-1/2 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 shadow-blue-500/50">
+    <header className="fixed z-30 text-white transform -translate-x-1/2 rounded-lg shadow-sm-light top-2 left-1/2 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 shadow-blue-500/50">
       <div className="flex flex-wrap items-center justify-between gap-16 py-2 pl-4 pr-2">
         <Link to="/" className="flex items-center">
           <span className="text-2xl font-bold">
@@ -118,10 +119,11 @@ function Header() {
                 </ul>
               </div>
             </div>
+            <ShareProjectBtn />
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 }
 

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import EditProfileModal from "../../components/modal/profile/EditProfileModal";
+import EditProfileModal from "../../components/modal/profile-modal/EditProfileModal";
 import { IModalState } from "../../interface/modal";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { cls } from "../../libs/utils";

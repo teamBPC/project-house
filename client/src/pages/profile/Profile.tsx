@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import ProfileSidebar from "./common/sidebar/ProfileSidebar";
+import ProfileSidebar from "../../components/sidebar/profile-sidebar/ProfileSidebar";
 
 function Profile() {
   return (

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div className="flex flex-col items-center w-full">
+    <main className="relative flex flex-col items-center w-full">
       <div className="grid w-full grid-cols-3 gap-12 p-12 pt-16">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
           <div
@@ -71,7 +71,7 @@ function Home() {
           </div>
         ))}
       </div>
-    </div>
+    </main>
   );
 }
 
