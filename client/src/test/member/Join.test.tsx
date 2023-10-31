@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import Join from "../../pages/member/Join";
+import Join from "../../pages/join/Join";
 
 jest.mock("../libs/sendData");
 describe("Join 테스트", () => {
@@ -98,7 +98,7 @@ describe("Join 테스트", () => {
     const submitButton = screen.getByText("가입하기") as HTMLButtonElement;
     const alertSpy = jest.spyOn(window, "alert");
     const mockSendData = require("../libs/sendData");
-    
+
     fireEvent.change(emailInput, { target: { value: "qwer@qwer.com" } });
     fireEvent.change(nameInput, { target: { value: "아무개" } });
     fireEvent.change(passwordInput, { target: { value: "q1234w" } });

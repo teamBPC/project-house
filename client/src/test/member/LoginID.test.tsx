@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import LoginID from "../../pages/member/LoginID";
+import LoginID from "../../pages/login/LoginID";
 
 describe("LoginID 테스트", () => {
   test("LoginID 컴포넌트들이 제대로 렌더링 되었는지 확인", () => {

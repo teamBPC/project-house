@@ -1,7 +1,5 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import LoginID from "./pages/member/LoginID";
-import LoginPW from "./pages/member/LoginPW";
-import Join from "./pages/member/Join";
+import Join from "./pages/join/Join";
 import Header from "./components/header/Header";
 import Home from "./pages/Home";
 import Profile from "./pages/profile/Profile";
@@ -12,11 +10,14 @@ import ProfileSetting from "./pages/profile/ProfileSetting";
 import ProfileTeams from "./pages/profile/ProfileTeams";
 import ProfileAlarm from "./pages/profile/ProfileAlarm";
 import ProfileContent from "./pages/profile/ProfileContent";
-import Kanban from "./pages/kanban/Kanban";
-import KanbanProjects from "./pages/kanban/KanbanProjects";
-import KanbanBoards from "./pages/kanban/KanbanBoards";
-import KanbanBoardItem from "./pages/kanban/KanbanBoardItem";
+import KanbanBoard from "./pages/kanban-board/KanbanBoard";
+import ProjectCollection from "./pages/kanban-board/project-collection/ProjectCollection";
+import BoardCollection from "./pages/kanban-board/board-collection/BoardCollection";
+import Board from "./pages/kanban-board/board/Board";
 import Footer from "./components/footer/Footer";
+import PostUpload from "./pages/post-upload/PostUpload";
+import LoginID from "./pages/login/LoginID";
+import LoginPW from "./pages/login/LoginPW";
 
 function Router() {
   return (
@@ -24,13 +25,17 @@ function Router() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />}></Route>
+        <Route path="post-upload" element={<PostUpload />}></Route>
         <Route path="post/:postId" element={<Post />}></Route>
-        <Route path="management" element={<Kanban />}>
-          <Route path="projects" element={<KanbanProjects />}></Route>
-          <Route path="projects/:projectId" element={<KanbanBoards />}></Route>
+        <Route path="kanban-board" element={<KanbanBoard />}>
+          <Route path="project-collection" element={<ProjectCollection />}></Route>
           <Route
-            path="projects/:projectId/board/:boardId"
-            element={<KanbanBoardItem />}
+            path="project-collection/:projectId"
+            element={<BoardCollection />}
+          ></Route>
+          <Route
+            path="project-collection/:projectId/board-collection/:boardId"
+            element={<Board />}
           ></Route>
         </Route>
         <Route path="profile/:userId" element={<Profile />}>

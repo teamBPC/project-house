@@ -1,5 +1,5 @@
+import PostSideBtns from "../../components/btns/PostSideBtns";
 import PostComment from "./PostComment";
-import PostSideBtns from "../../components/PostSideBtns";
 import PostOther from "./PostOther";
 
 function Post() {

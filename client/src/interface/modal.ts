@@ -1,5 +1,5 @@
 import { MutableRefObject } from "react";
-import { IToDo } from "./kanban";
+import { IToDo } from "./kanbanBoard";
 
 export interface CreateBoardItemForm {
   title: string;
