@@ -1,15 +1,55 @@
 import MDEditor from "@uiw/react-md-editor";
-import rehypeSanitize from "rehype-sanitize";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, ChangeEvent } from "react";
 import { useCommonForm } from "../../libs/useCommonForm";
 import { FieldErrors } from "react-hook-form";
+import Cropper from "react-easy-crop";
+import { ICrop, ICroppedArea, ICroppedAreaPixels } from "../../interface/crop";
 
 function PostUpload() {
   const { register, handleSubmit, reset, submitFormData } = useCommonForm();
   const onValid = async () => {};
   const onInvalid = (error: FieldErrors) => {};
-  const [mdValue, setMdValue] = useState<string | undefined>(``);
+  const [mdValue, setMdValue] = useState<
+    string | undefined
+  >(`<h1 style="color:red">사용 방법</h1> <a href="#">링크</a> <br />
+  <img
+    src="https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/f5ab0fb1-5c42-400c-c8a2-50ab4bd61800/public"
+    width="320"
+  />
+  <div style="display:flex; flexDirection:column">
+    <span>사용할수 있는 태그</span>
+    <span>
+      "h1", "h2", "h3", "h4", "h5", "h6", "p", "a", "span", "br", "div",
+      "img",
+    </span>
+    <span>속성은 반드시 영어로 입력하세요</span>
+  </div>`);
 
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [cropImg, setCropImg] = useState<ICrop>();
+
+  const onCropComplete = useCallback(
+    (croppedArea: ICroppedArea, croppedAreaPixels: ICroppedAreaPixels) => {
+      setCropImg({ area: croppedArea, areaPixels: croppedAreaPixels });
+    },
+    []
+  );
+
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
+    const flie = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(flie);
+    reader.onload = () => {
+      setSelectedImage(reader.result as string);
+    };
+  };
+  useEffect(() => {
+    console.log(cropImg);
+  }, [cropImg]);
+  
   return (
     <div className="p-24 px-72">
       <div className="flex flex-col justify-center">
@@ -18,24 +58,38 @@ function PostUpload() {
         </div>
         <form onSubmit={handleSubmit(onValid, onInvalid)} className="space-y-6">
           <div className="flex gap-4">
-            <div className="flex items-center flex-1 border border-black rounded-md">
-              <div className="flex items-center justify-center flex-1 aspect-video">
-                <label
-                  htmlFor="thumbnail"
-                  className="px-3 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md shadow-sm cursor-pointer hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-                >
-                  프로젝트 게시물의 썸네일로 사용할 사진을 올려주세요.
-                  <input
-                    name="thumbnail"
-                    id="thumbnail"
-                    type="file"
-                    className="hidden"
-                    accept="image/*"
-                  />
-                </label>
+            <div className="flex items-center flex-1 border border-black rounded-md aspect-video">
+              <div className="relative flex items-center justify-center w-full h-full">
+                {selectedImage ? (
+                  <div className="absolute inset-0">
+                    <Cropper
+                      image={selectedImage}
+                      crop={crop}
+                      zoom={zoom}
+                      aspect={16 / 9}
+                      onCropChange={setCrop}
+                      onZoomChange={setZoom}
+                      onCropComplete={onCropComplete}
+                    />
+                  </div>
+                ) : (
+                  <label
+                    htmlFor="thumbnail"
+                    className="px-3 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md shadow-sm cursor-pointer hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                  >
+                    프로젝트 게시물의 썸네일로 사용할 사진을 올려주세요.
+                    <input
+                      name="thumbnail"
+                      id="thumbnail"
+                      type="file"
+                      className="hidden"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                    />
+                  </label>
+                )}
               </div>
             </div>
-
             <div className="flex flex-col flex-1 gap-2">
               <div>
                 <label
@@ -52,7 +106,6 @@ function PostUpload() {
                   required
                 />
               </div>
-
               <div>
                 <label
                   htmlFor="githubLink"
@@ -126,7 +179,20 @@ function PostUpload() {
               onChange={setMdValue}
               preview="live"
               previewOptions={{
-                rehypePlugins: [[rehypeSanitize]],
+                allowedElements: [
+                  "h1",
+                  "h2",
+                  "h3",
+                  "h4",
+                  "h5",
+                  "h6",
+                  "p",
+                  "a",
+                  "span",
+                  "br",
+                  "div",
+                  "img",
+                ],
               }}
             />
           </div>
