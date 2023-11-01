@@ -5,7 +5,6 @@ function Footer() {
   if (
     pathname.includes("kanban-board") ||
     pathname.includes("profile") ||
-    pathname.includes("post-upload") ||
     pathname.includes("login") ||
     pathname.includes("join")
   )
