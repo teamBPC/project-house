@@ -4,10 +4,35 @@ import { FieldErrors } from "react-hook-form";
 import SearchSkills from "./SearchSkills";
 import Crop from "./Crop";
 import Editer from "./Editor";
+import { ISkill } from "../../interface/skill";
 
 function PostUpload() {
   const { register, handleSubmit, reset, submitFormData } = useCommonForm();
-  const onValid = async () => {};
+  const [skills, setSkills] = useState<(ISkill | null)[]>([]);
+  const [description, setDescription] = useState<
+    string | undefined
+  >(`<h1 style="color:red">사용 방법</h1> <a href="#">링크</a> <br />
+<img
+  src="https://imagedelivery.net/4aEUbX05h6IovGOQjgkfSw/f5ab0fb1-5c42-400c-c8a2-50ab4bd61800/public"
+  width="320"
+/>
+<div style="display:flex; flexDirection:column">
+  <span>사용할수 있는 태그</span>
+  <span>
+    "h1", "h2", "h3", "h4", "h5", "h6", "p", "a", "span", "br", "div",
+    "img",
+  </span>
+  <span>속성은 반드시 영어로 입력하세요</span>
+</div>`);
+
+  const onValid = async (data: any) => {
+    const dataCustomer = {
+      ...data,
+      skills: skills,
+      description: description,
+    };
+    console.log(dataCustomer);
+  };
   const onInvalid = (error: FieldErrors) => {};
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -93,10 +118,10 @@ function PostUpload() {
                   required
                 />
               </div>
-              <SearchSkills />
+              <SearchSkills skills={skills} setSkills={setSkills} />
             </div>
           </div>
-          <Editer />
+          <Editer description={description} setDescription={setDescription} />
           <div>
             <button
               type="submit"

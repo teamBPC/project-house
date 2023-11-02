@@ -1,7 +1,14 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, Dispatch, SetStateAction } from "react";
 import { ISkill } from "../../interface/skill";
 import { cls } from "../../libs/utils";
-function SearchSkills() {
+
+function SearchSkills({
+  skills,
+  setSkills,
+}: {
+  skills: (ISkill | null)[];
+  setSkills: Dispatch<SetStateAction<(ISkill | null)[]>>;
+}) {
   const skillList = [
     { id: "firebase", value: "firebase" },
     { id: "React", value: "react" },
@@ -63,8 +70,6 @@ function SearchSkills() {
     setShowBox(searching.length > 0);
   };
 
-  const [skills, setSkills] = useState<(ISkill | null)[]>([]);
-
   const addSkills = (data: ISkill | null) => {
     const duplication = skills.findIndex((item) => item?.id === data?.id);
     if (duplication === -1) {
@@ -97,7 +102,6 @@ function SearchSkills() {
           id="skills"
           autoComplete="off"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 outline-blue-500"
-          required
           onChange={searchSkills}
         />
         <div
@@ -113,7 +117,10 @@ function SearchSkills() {
                 className="p-2 transition-colors hover:bg-blue-600 hover:text-white"
               >
                 <button
-                  onClick={() => addSkills(data)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    addSkills(data);
+                  }}
                   className="w-full h-full"
                 >
                   <span>{data?.id}</span>
@@ -127,11 +134,13 @@ function SearchSkills() {
         <ul className="flex flex-wrap gap-1">
           {skills &&
             skills.map((data) => (
-              <li className="flex items-center px-2 py-1 bg-blue-700 rounded-lg">
+              <li
+                key={data?.id}
+                className="flex items-center px-2 py-1 bg-blue-700 rounded-lg"
+              >
                 <img
                   src={`https://img.shields.io/badge/${data?.id}-1a56db?style=flat-square&logo=${data?.value}&logoColor=white`}
                   alt="default"
-                  key={data?.id}
                 />
                 <button onClick={() => deleteSkill(data)}>
                   <svg
