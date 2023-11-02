@@ -16,3 +16,4 @@ export interface ICroppedAreaPixels {
   x: number;
   y: number;
 }
+
