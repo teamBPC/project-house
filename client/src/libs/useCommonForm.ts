@@ -7,7 +7,6 @@ export const useCommonForm = () => {
   const submitFormData = async (url: string | null, data: any) => {
     if (url) {
       const res = await sendData(url, data);
-
       return res;
     }
   };
