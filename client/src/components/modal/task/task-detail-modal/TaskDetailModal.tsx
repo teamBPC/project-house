@@ -16,17 +16,17 @@ function TaskDetailModal({
   const dispatch = useDispatch();
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const modalClose = modalOutsideClick(
-      modalState.taskDetailModalOpen,
-      modalRef,
-      modalBtnRef.taskDetailBtnRef,
-      dispatch,
-      "taskDetailModalOpen",
-      false
-    );
-    return modalClose;
-  }, [dispatch, modalBtnRef.taskDetailBtnRef, modalState.taskDetailModalOpen]);
+  // useEffect(() => {
+  //   const modalClose = modalOutsideClick(
+  //     modalState.taskDetailModalOpen,
+  //     modalRef,
+  //     modalBtnRef.taskDetailBtnRef,
+  //     dispatch,
+  //     "taskDetailModalOpen",
+  //     false
+  //   );
+  //   return modalClose;
+  // }, [dispatch, modalBtnRef.taskDetailBtnRef, modalState.taskDetailModalOpen]);
   return (
     <div
       className={cls(

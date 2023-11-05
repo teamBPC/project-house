@@ -1,8 +1,3 @@
-export interface ICrop {
-  area: ICroppedArea;
-  areaPixels: ICroppedAreaPixels;
-}
-
 export interface ICroppedArea {
   x: number;
   y: number;
@@ -15,5 +10,12 @@ export interface ICroppedAreaPixels {
   height: number;
   x: number;
   y: number;
+}
+
+export interface ICropData {
+  imageSrc: string;
+  pixelCrop: any;
+  rotation?: number;
+  flip?: { horizontal: boolean; vertical: boolean };
 }
 

@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import { useCommonForm } from "../../libs/useCommonForm";
 import { FieldErrors } from "react-hook-form";
 import SearchSkills from "./SearchSkills";
@@ -45,6 +45,9 @@ function PostUpload() {
       setSelectedImage(reader.result as string);
     };
   };
+  useEffect(() => {
+    console.log(selectedImage);
+  }, [selectedImage]);
   return (
     <div className="p-24 px-72">
       <div className="flex flex-col justify-center">
