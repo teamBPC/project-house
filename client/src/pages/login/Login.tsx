@@ -1,7 +1,3 @@
-import { Link, useNavigate } from "react-router-dom";
-import { LoginIdForm } from "../../interface/porfile";
-import { useCommonForm } from "../../libs/useCommonForm";
-
 function LoginID() {
   return (
     <div className="w-screen h-screen bg-no-repeat bg-cover bg-login-bg ">
