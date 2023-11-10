@@ -5,11 +5,18 @@ import SearchSkills from "./SearchSkills";
 import Crop from "./Crop";
 import Editer from "./Editor";
 import { ISkill } from "../../interface/skill";
-import View from "./View";
 import { cls } from "../../libs/utils";
 import { createBrowserHistory, Transition } from "history";
+import { useSelector } from "react-redux";
+import { IModalState } from "../../interface/modal";
+import PrevCropImgModal from "../../components/modal/post-upload/PrevCropImgModal";
 
 function PostUpload() {
+  const modalState = useSelector(
+    ({ modalStateSlice }: { modalStateSlice: IModalState }) => {
+      return modalStateSlice.modalState;
+    }
+  );
   const {
     register,
     handleSubmit,
@@ -182,7 +189,7 @@ function PostUpload() {
           </div>
         </form>
       </div>
-      <View croppedImage={croppedImage} />
+      <PrevCropImgModal croppedImage={croppedImage} modalState={modalState} />
     </div>
   );
 }

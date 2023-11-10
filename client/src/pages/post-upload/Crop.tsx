@@ -3,6 +3,8 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { ICroppedArea, ICroppedAreaPixels } from "../../interface/crop";
 import getCroppedImg from "./getCroppedImg";
 import { UseFormResetField } from "react-hook-form";
+import { modalHandle } from "../../libs/modalHandle";
+import { useDispatch } from "react-redux";
 
 function Crop({
   resetField,
@@ -15,6 +17,7 @@ function Crop({
   setSelectedImage: Dispatch<SetStateAction<string>>;
   setCroppedImage: Dispatch<SetStateAction<string>>;
 }) {
+  const dispatch = useDispatch();
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
 
@@ -79,6 +82,7 @@ function Crop({
               onClick={(e) => {
                 e.preventDefault();
                 showCroppedImage();
+                modalHandle(dispatch, "prevCropImgModalOpen", true);
               }}
               className="relative z-50 px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-800 "
             >
