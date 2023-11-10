@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import { ICropData, ICroppedAreaPixels } from "../../interface/crop";
+import { ICroppedAreaPixels } from "../../interface/crop";
 
 const createImage = (url: string) =>
   new Promise((resolve, reject) => {
@@ -65,17 +65,19 @@ export default async function getCroppedImg(
   ctx.scale(flip.horizontal ? -1 : 1, flip.vertical ? -1 : 1);
   ctx.translate(-image.width / 2, -image.height / 2);
 
-  const croppedCanvas = document.createElement("canvas");
+  ctx.drawImage(image, 0, 0);
 
-  const croppedCtx = croppedCanvas.getContext("2d");
+  const croppedCanvas = document.createElement('canvas')
+
+  const croppedCtx = croppedCanvas.getContext('2d')
 
   if (!croppedCtx) {
-    return null;
+    return null
   }
 
   // Set the size of the cropped canvas
-  croppedCanvas.width = pixelCrop.width;
-  croppedCanvas.height = pixelCrop.height;
+  croppedCanvas.width = pixelCrop.width
+  croppedCanvas.height = pixelCrop.height
 
   // Draw the cropped image onto the new canvas
   croppedCtx.drawImage(
@@ -83,15 +85,22 @@ export default async function getCroppedImg(
     pixelCrop.x,
     pixelCrop.y,
     pixelCrop.width,
+    pixelCrop.height,
+    0,
+    0,
+    pixelCrop.width,
     pixelCrop.height
-  );
+  )
   // As Base64 string
   // return croppedCanvas.toDataURL('image/jpeg');
 
   // As a blob
   return new Promise((resolve, reject) => {
     croppedCanvas.toBlob((file) => {
-      resolve(URL.createObjectURL(file as Blob | MediaSource));
+      if (!file) return;
+      resolve(URL.createObjectURL(file));
     }, "image/jpeg");
+    // ?????
+    console.log(reject);
   });
 }

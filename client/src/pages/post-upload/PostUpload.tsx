@@ -5,9 +5,19 @@ import SearchSkills from "./SearchSkills";
 import Crop from "./Crop";
 import Editer from "./Editor";
 import { ISkill } from "../../interface/skill";
+import View from "./View";
+import { cls } from "../../libs/utils";
+import { createBrowserHistory, Transition } from "history";
 
 function PostUpload() {
-  const { register, handleSubmit, reset, submitFormData } = useCommonForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    submitFormData,
+    resetField,
+  } = useCommonForm();
+  const [croppedImage, setCroppedImage] = useState<string>("");
   const [skills, setSkills] = useState<(ISkill | null)[]>([]);
   const [description, setDescription] = useState<
     string | undefined
@@ -35,19 +45,43 @@ function PostUpload() {
   };
   const onInvalid = (error: FieldErrors) => {};
 
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string>("");
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
-    const flie = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(flie);
-    reader.onload = () => {
-      setSelectedImage(reader.result as string);
-    };
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const imageUrl = e.target?.result as string;
+        setSelectedImage(imageUrl);
+      };
+
+      reader.readAsDataURL(file);
+    }
   };
+
+  const history = createBrowserHistory();
   useEffect(() => {
-    console.log(selectedImage);
-  }, [selectedImage]);
+    // 뒤로가기시에 block되지 않는 문제
+    const unblock = history.block((tx: Transition) => {
+      if (tx.action === "POP") {
+        const answer = window.confirm(
+          "입력하신 데이터들이 초기화 됩니다. 뒤로 가시겠습니까?"
+        );
+        if (!answer) {
+          tx.retry();
+        }
+      }
+    });
+    return () => {
+      unblock();
+    };
+  }, [history]);
+
+  // useBeforeUnload(()=>{
+  //   localStorage.setItem =
+  // })
   return (
     <div className="p-24 px-72">
       <div className="flex flex-col justify-center">
@@ -56,18 +90,31 @@ function PostUpload() {
         </div>
         <form onSubmit={handleSubmit(onValid, onInvalid)} className="space-y-6">
           <div className="flex gap-4">
-            <div className="flex items-center flex-1 border border-black rounded-md aspect-video">
-              <div className="relative flex items-center justify-center w-full h-full">
-                <Crop selectedImage={selectedImage} />
+            <div
+              className={cls(
+                "flex items-center flex-1  rounded-md aspect-video",
+                selectedImage ? "" : "border border-black"
+              )}
+            >
+              <div className="relative flex flex-col items-center justify-center w-full h-full">
+                <Crop
+                  resetField={resetField}
+                  selectedImage={selectedImage}
+                  setSelectedImage={setSelectedImage}
+                  setCroppedImage={setCroppedImage}
+                />
                 <label
                   htmlFor="thumbnail"
-                  className="px-3 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md shadow-sm cursor-pointer hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                  className={cls(
+                    "px-3 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md shadow-sm cursor-pointer hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:ring-orange-500",
+                    selectedImage ? "hidden" : ""
+                  )}
                 >
                   프로젝트 게시물의 썸네일로 사용할 사진을 올려주세요.
                   <input
-                    name="thumbnail"
                     id="thumbnail"
                     type="file"
+                    {...register("thumbnail", { required: true })}
                     className="hidden"
                     accept="image/*"
                     onChange={handleImageChange}
@@ -135,6 +182,7 @@ function PostUpload() {
           </div>
         </form>
       </div>
+      <View croppedImage={croppedImage} />
     </div>
   );
 }

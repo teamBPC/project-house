@@ -5,6 +5,7 @@ import Router from "./Router";
 
 function App() {
   const queryClient = new QueryClient();
+
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
