@@ -34,6 +34,7 @@ export interface IModalStateItem {
   editProjectsModalOpen?: boolean;
   deleteProjectsModalOpen?: boolean;
   taskDetailModalOpen?: boolean;
+  prevCropImgModalOpen?: boolean;
 }
 export interface IModalState {
   modalState: IModalStateItem;

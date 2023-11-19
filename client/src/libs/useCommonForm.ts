@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import sendData from "./sendData";
 
 export const useCommonForm = () => {
-  const { register, handleSubmit, reset } = useForm<any>();
+  const { register, handleSubmit, reset, resetField } = useForm<any>();
 
   const submitFormData = async (url: string | null, data: any) => {
     if (url) {
@@ -11,5 +11,5 @@ export const useCommonForm = () => {
     }
   };
 
-  return { register, handleSubmit, reset, submitFormData };
+  return { register, handleSubmit, reset, resetField, submitFormData };
 };

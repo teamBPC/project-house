@@ -16,8 +16,7 @@ import BoardCollection from "./pages/kanban-board/board-collection/BoardCollecti
 import Board from "./pages/kanban-board/board/Board";
 import Footer from "./components/footer/Footer";
 import PostUpload from "./pages/post-upload/PostUpload";
-import LoginID from "./pages/login/LoginID";
-import LoginPW from "./pages/login/LoginPW";
+import Login from "./pages/login/Login";
 
 function Router() {
   return (
@@ -28,7 +27,10 @@ function Router() {
         <Route path="post-upload" element={<PostUpload />}></Route>
         <Route path="post/:postId" element={<Post />}></Route>
         <Route path="kanban-board" element={<KanbanBoard />}>
-          <Route path="project-collection" element={<ProjectCollection />}></Route>
+          <Route
+            path="project-collection"
+            element={<ProjectCollection />}
+          ></Route>
           <Route
             path="project-collection/:projectId"
             element={<BoardCollection />}
@@ -47,8 +49,7 @@ function Router() {
           <Route path="teams" element={<ProfileTeams />}></Route>
           <Route path="setting" element={<ProfileSetting />}></Route>
         </Route>
-        <Route path="login-id" element={<LoginID />}></Route>
-        <Route path="login-pw" element={<LoginPW />}></Route>
+        <Route path="login" element={<Login />}></Route>
         <Route path="join" element={<Join />}></Route>
       </Routes>
       <Footer />

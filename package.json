@@ -4,8 +4,11 @@
   "description": "",
   "scripts": {
     "start": "cd client && npm start",
-    "restart": "cd server && npm start"
+    "restart": "cd server && npm run dev"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "history": "^5.3.0"
+  }
 }

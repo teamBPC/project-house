@@ -102,18 +102,10 @@ function Header() {
                   </li>
                   <li>
                     <Link
-                      to="/login-id"
+                      to="/login"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       로그인
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      로그아웃
                     </Link>
                   </li>
                 </ul>

@@ -10,23 +10,11 @@ import { modalOutsideClick } from "../../../../libs/modalOutsideClick";
 
 function TaskDetailModal({
   modalState,
-  modalBtnRef,
   selectedTaskData,
 }: IModalProps & { selectedTaskData: IToDo | null }) {
   const dispatch = useDispatch();
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  // useEffect(() => {
-  //   const modalClose = modalOutsideClick(
-  //     modalState.taskDetailModalOpen,
-  //     modalRef,
-  //     modalBtnRef.taskDetailBtnRef,
-  //     dispatch,
-  //     "taskDetailModalOpen",
-  //     false
-  //   );
-  //   return modalClose;
-  // }, [dispatch, modalBtnRef.taskDetailBtnRef, modalState.taskDetailModalOpen]);
   return (
     <div
       className={cls(
